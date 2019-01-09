@@ -32,7 +32,6 @@ public class JogadorDAO {
         return false;
         
     }
-    
-    teste
+   
     
 }
