@@ -15,16 +15,32 @@ public class Jogador extends Pessoa {
     private double mediaGols;
     private String categoria;
     private String nomeEmpresario;
+    private String posicao;
+    private double peso;
+    private double altura;
     
     public Jogador(){
     }
 
-    public Jogador( int assistencia, double mediaGols, String categoria, String nomeEmpresario) {
+    public Jogador( int assistencia, double mediaGols, String categoria, String nomeEmpresario, String posicao,
+                    double peso, double altura) {
         this.assistencia = assistencia;
         this.mediaGols = mediaGols;
         this.categoria = categoria;
         this.nomeEmpresario = nomeEmpresario;
+        this.posicao=posicao;
+        this.peso=peso;
+        this.altura=altura;
     }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(double altura) {
+        this.altura = altura;
+    }
+    
     
     public void setAssistencia(int assistencia) {
         this.assistencia = assistencia;
@@ -41,7 +57,14 @@ public class Jogador extends Pessoa {
     public void setNomeEmpresario(String nomeEmpresario) {
         this.nomeEmpresario = nomeEmpresario;
     }
-
+    
+    public void setPosicao(String posisao){
+        this.posicao = posicao;
+    }
+    
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
     public int getAssistencia() {
         return assistencia;
     }
@@ -57,9 +80,19 @@ public class Jogador extends Pessoa {
     public String getNomeEmpresario() {
         return nomeEmpresario;
     }
+    
+    public String getPosicao(){
+        return posicao;
+    }
+    
+    public double getPeso() {
+        return peso;
+    }
 
     @Override
     public String toString() {
-        return "Jogador{" + "assistencia=" + assistencia + ", mediaGols=" + mediaGols + ", categoria=" + categoria + ", nomeEmpresario=" + nomeEmpresario + '}';
+        return "Jogador{" + "assistencia=" + assistencia + ", mediaGols=" + mediaGols + 
+                ", categoria=" + categoria + ", nomeEmpresario=" + nomeEmpresario +", posicao= "+posicao +
+                ", peso= "+peso +", altura="+altura +'}';
     }
 }

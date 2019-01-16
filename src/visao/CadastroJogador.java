@@ -92,7 +92,7 @@ public class CadastroJogador extends javax.swing.JFrame {
         categoria = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         nomeEmpresario = new javax.swing.JTextField();
-        dataNascimento = new datechooser.beans.DateChooserCombo();
+        dataNascimeto = new datechooser.beans.DateChooserCombo();
         InformacoesMedicas = new javax.swing.JButton();
         Contrato = new javax.swing.JButton();
 
@@ -279,7 +279,7 @@ public class CadastroJogador extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(dataNascimeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel4)
@@ -438,10 +438,10 @@ public class CadastroJogador extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
+                        .addGap(8, 8, 8)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
-                            .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dataNascimeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -584,7 +584,7 @@ public class CadastroJogador extends javax.swing.JFrame {
         Jogador p = new Jogador();
         p.setNome(nome.getText());
         p.setSobreNome(sobreNome.getText());
-        p.setDataNascimento(dataNascimento.getText());
+        p.setDataNascimento(dataNascimeto.getText());
         p.setRg(indentidade.getText());
         p.setCpf(cpf.getText());
         p.setNacionalidade(nacionalidade.getText());
@@ -595,10 +595,11 @@ public class CadastroJogador extends javax.swing.JFrame {
         p.setNomeEmpresario(nomeEmpresario.getText());
         p.setContato(new Contato( telefoneFixo.getText(),celular.getText(), email.getText()));
         p.setConta(new Conta());
-        
-        
-          
-        
+        p.setCategoria(categoria.getText());
+        p.setNomeEmpresario(nomeEmpresario.getText());
+        p.setPosicao(posicao.getText());
+        p.setPeso(Double.parseDouble(peso.getText()));
+        p.setAltura(Double.parseDouble(altura.getText()));        
     }//GEN-LAST:event_SalvarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -674,7 +675,7 @@ public class CadastroJogador extends javax.swing.JFrame {
     private javax.swing.JTextField cidade;
     private javax.swing.JTextField complemento;
     private javax.swing.JTextField cpf;
-    private datechooser.beans.DateChooserCombo dataNascimento;
+    private datechooser.beans.DateChooserCombo dataNascimeto;
     private javax.swing.JTextField dddCelular;
     private javax.swing.JTextField dddFixo;
     private javax.swing.JTextField email;
