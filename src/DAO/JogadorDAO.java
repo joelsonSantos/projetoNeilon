@@ -25,9 +25,21 @@ public class JogadorDAO {
             st.execute("insert into pessoa(nome, sobrenome, "
                     + "nascionalidade, rg, cpf, dataNascimento, escolaridade,"
                     + "instituicao) "
-                    + "values('" + jogador+ "'+'"
+                    + "values('" + jogador.getNome()+ "','"
+                            + jogador.getSobreNome() +"','"
+                            + jogador.getNacionalidade() +"'+'"
+                            + jogador.getRg() +"'+'"
+                            + jogador.getCpf() +"'+'"
+                            + jogador.getDataNascimento() +"'+'"
+                            + jogador.getEscolaridade() +"'+'"
+                            + jogador.getInstituicao() +"'+'"
+                    
                     +"')");
             
+        } catch (Exception e){
+            System.out.println("Problemas Ocorreram");
+            e.printStackTrace();
+            throw new Exception ("Erro ao Salvar Dados!");
         }
         return false;
         
