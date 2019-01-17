@@ -23,7 +23,7 @@ public class JogadorDAO {
         try{
             Conexao conect = new Conexao();
             Statement st = (Statement) conect.getSt();
-            st.execute("insert into pessoa(nome, sobrenome,  "
+            st.execute("insert into pessoa(nome, sobrenome,"
                     + "nascionalidade, rg, cpf, dataNascimento, escolaridade,"
                     + "instituicao) "
                     + "values('" + jogador.getNome()+ "','"

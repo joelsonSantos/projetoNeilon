@@ -146,29 +146,30 @@ public class CadastroJogador extends javax.swing.JFrame {
 
         jLabel6.setText("E-mail:");
 
-        email.setText("jTextField3");
-
         estado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Minas Gerais", "São Paulo", "Rio de Janeiro", "Espeito Santo" }));
 
         jLabel9.setText("Estado:");
 
         jLabel24.setText("Indentidade:");
 
-        indentidade.setText("jTextField16");
-
-        escolaridade.setText("jTextField18");
+        indentidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indentidadeActionPerformed(evt);
+            }
+        });
 
         jLabel26.setText("Escolaridade:");
 
-        instituicao.setText("jTextField19");
-
-        cpf.setText("jTextField17");
+        cpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cpfActionPerformed(evt);
+            }
+        });
 
         jLabel25.setText("CPF:");
 
         jLabel27.setText("Intituição:");
 
-        cidade.setText("jTextField7");
         cidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cidadeActionPerformed(evt);
@@ -179,53 +180,34 @@ public class CadastroJogador extends javax.swing.JFrame {
 
         jLabel11.setText("Rua:");
 
-        rua.setText("jTextField8");
-
         sexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculono", "Feminino" }));
 
         jLabel4.setText("Sexo:");
 
         jLabel2.setText("Sobrenome:");
 
-        sobreNome.setText("jTextField1");
-
-        nacionalidade.setText("jTextField2");
-
         jLabel5.setText("Nasionalidade:");
 
         jLabel7.setText("Telefone:");
 
-        dddFixo.setText("jTextField4");
-
-        telefoneFixo.setText("jTextField5");
-
         jLabel12.setText("Numero:");
 
-        numero.setText("jTextField9");
-
-        peso.setText("jTextField20");
+        numero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numeroActionPerformed(evt);
+            }
+        });
 
         jLabel28.setText("Peso:");
 
         jLabel29.setText("Posição:");
 
-        posicao.setText("jTextField21");
-
         jLabel13.setText("Bairro:");
-
-        bairro.setText("jTextField10");
 
         jLabel8.setText("Celular:");
 
-        altura.setText("jTextField22");
-
         jLabel30.setText("Altura:");
 
-        dddCelular.setText("jTextField13");
-
-        celular.setText("jTextField6");
-
-        complemento.setText("jTextField11");
         complemento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 complementoActionPerformed(evt);
@@ -235,8 +217,6 @@ public class CadastroJogador extends javax.swing.JFrame {
         jLabel14.setText("Complemento:");
 
         jLabel15.setText("CEP:");
-
-        cep.setText("jTextField12");
 
         jButton3.setText("Voltar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -259,10 +239,13 @@ public class CadastroJogador extends javax.swing.JFrame {
         jLabel17.setText("Categoria:");
 
         categoria.setText("jTextField1");
+        categoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoriaActionPerformed(evt);
+            }
+        });
 
         jLabel18.setText("Empresario:");
-
-        nomeEmpresario.setText("jTextField1");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -342,7 +325,7 @@ public class CadastroJogador extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -637,6 +620,22 @@ public class CadastroJogador extends javax.swing.JFrame {
     private void complementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_complementoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_complementoActionPerformed
+
+    private void numeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_numeroActionPerformed
+
+    private void indentidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indentidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_indentidadeActionPerformed
+
+    private void cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cpfActionPerformed
+
+    private void categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoriaActionPerformed
 
     /**
      * @param args the command line arguments
