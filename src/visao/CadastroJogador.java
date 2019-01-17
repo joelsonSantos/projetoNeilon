@@ -5,6 +5,7 @@
  */
 package visao;
 
+import Controller.CadastroJogadorController;
 import DAO.JogadorDAO;
 import controle.Conta;
 import controle.Pessoa;
@@ -13,6 +14,7 @@ import controle.Contato;
 import controle.Endereco;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -581,23 +583,34 @@ public class CadastroJogador extends javax.swing.JFrame {
 
     private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
         // TODO add your handling code here:
-        Jogador p = new Jogador();
-        p.setNome(nome.getText());
-        p.setSobreNome(sobreNome.getText());
-        p.setNacionalidade(nacionalidade.getText());
-        p.setRg(indentidade.getText());
-        p.setCpf(cpf.getText());
-        p.setDataNascimento(dataNascimeto.getText());
-        p.setEscolaridade(escolaridade.getText());
-        p.setInstituicao(instituicao.getText());
-        p.setEndereco(new Endereco(rua.getText(), numero.getText(), bairro.getText(), cidade.getText(), ((String)(estado.getSelectedItem())), ((String)(jComboBox1.getSelectedItem())), complemento.getText(), cep.getText() ));
-        p.setCategoria(categoria.getText());
-        p.setNomeEmpresario(nomeEmpresario.getText());
-        p.setContato(new Contato( telefoneFixo.getText(),celular.getText(), email.getText()));
-        //p.setConta(new Conta());
-        p.setPosicao(posicao.getText());
-        p.setPeso(Double.parseDouble(peso.getText()));
-        p.setAltura(Double.parseDouble(altura.getText()));        
+        try {
+            Jogador p = new Jogador();
+            p.setNome(nome.getText());
+            p.setSobreNome(sobreNome.getText());
+            p.setNacionalidade(nacionalidade.getText());
+            p.setRg(indentidade.getText());
+            p.setCpf(cpf.getText());
+            p.setDataNascimento(dataNascimeto.getText());
+            p.setEscolaridade(escolaridade.getText());
+            p.setInstituicao(instituicao.getText());
+            p.setEndereco(new Endereco(rua.getText(), numero.getText(), bairro.getText(), cidade.getText(), ((String)(estado.getSelectedItem())), ((String)(jComboBox1.getSelectedItem())), complemento.getText(), cep.getText() ));
+            p.setCategoria(categoria.getText());
+            p.setNomeEmpresario(nomeEmpresario.getText());
+            p.setContato(new Contato( telefoneFixo.getText(),celular.getText(), email.getText()));
+            //p.setConta(new Conta());
+            p.setPosicao(posicao.getText());
+            p.setPeso(Double.parseDouble(peso.getText()));
+            p.setAltura(Double.parseDouble(altura.getText()));
+
+        
+            if (CadastroJogadorController.persistir(p)==true){
+                JOptionPane.showMessageDialog(this, "Jogador gravado com sucesso");
+                dispose();
+            }
+            
+        } catch (Exception ex) {
+            Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_SalvarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
