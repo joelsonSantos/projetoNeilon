@@ -198,6 +198,12 @@ public class CadastroJogador extends javax.swing.JFrame {
             }
         });
 
+        peso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesoActionPerformed(evt);
+            }
+        });
+
         jLabel28.setText("Peso:");
 
         jLabel29.setText("Posição:");
@@ -238,7 +244,6 @@ public class CadastroJogador extends javax.swing.JFrame {
 
         jLabel17.setText("Categoria:");
 
-        categoria.setText("jTextField1");
         categoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categoriaActionPerformed(evt);
@@ -636,6 +641,10 @@ public class CadastroJogador extends javax.swing.JFrame {
     private void categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_categoriaActionPerformed
+
+    private void pesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pesoActionPerformed
 
     /**
      * @param args the command line arguments

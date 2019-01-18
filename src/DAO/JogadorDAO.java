@@ -23,7 +23,7 @@ public class JogadorDAO {
         try{
             Conexao conect = new Conexao();
             Statement st = (Statement) conect.getSt();
-            st.execute("insert into pessoa(nome, sobrenome,"
+            st.execute("insert into pessoa (nome, sobrenome,"
                     + "nascionalidade, rg, cpf, dataNascimento, escolaridade,"
                     + "instituicao) "
                     + "values('" + jogador.getNome()+ "','"
@@ -37,7 +37,7 @@ public class JogadorDAO {
                     
                     +"')");
             
-            st.execute("insert into endereco(rua, numero, bairro, cidade, "
+            /*st.execute("insert into endereco(rua, numero, bairro, cidade, "
                     + "estado, pais, complemento, cep)"
                     + " values('"+jogador.getEndereco().getRua()+"','"
                         +jogador.getEndereco().getNumero() +"','"
@@ -62,7 +62,7 @@ public class JogadorDAO {
                     + "values('"+jogador.getContato().getTelefoneResidencial() +"','"
                         + jogador.getContato().getCelular()+"','"
                         +jogador.getContato().getEmail()+"','"
-                    +"')");
+                    +"')");*/
             
             
         } catch (Exception e){
