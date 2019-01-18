@@ -12,32 +12,33 @@ import java.sql.Statement;
 import persistencia.Conexao;
 import visao.TelaJogador;
 
+
 /**
  *
  * @author laiendercamargos
  */
 public class JogadorDAO {
     
-    public static boolean pesrsistir(Jogador jogador) throws Exception{
+    public static boolean persistir(Jogador jogador) throws Exception{
       
         try{
             Conexao conect = new Conexao();
-            Statement st = (Statement) conect.getSt();
-            st.execute("insert into pessoa (nome, sobrenome,"
+            Statement st = conect.getSt();
+            st.execute("insert into pessoa(nome, sobrenome,"
                     + "nascionalidade, rg, cpf, dataNascimento, escolaridade,"
                     + "instituicao) "
                     + "values('" + jogador.getNome()+ "','"
                             + jogador.getSobreNome() +"','"
-                            + jogador.getNacionalidade() +"'+'"
-                            + jogador.getRg() +"'+'"
-                            + jogador.getCpf() +"'+'"
-                            + jogador.getDataNascimento() +"'+'"
-                            + jogador.getEscolaridade() +"'+'"
-                            + jogador.getInstituicao() +"'+'"
+                            + jogador.getNacionalidade() +"','"
+                            + jogador.getRg() +"','"
+                            + jogador.getCpf() +"','"
+                            + jogador.getDataNascimento() +"','"
+                            + jogador.getEscolaridade() +"','"
+                            + jogador.getInstituicao()
                     
                     +"')");
             
-            /*st.execute("insert into endereco(rua, numero, bairro, cidade, "
+            st.execute("insert into endereco(rua, numero, bairro, cidade, "
                     + "estado, pais, complemento, cep)"
                     + " values('"+jogador.getEndereco().getRua()+"','"
                         +jogador.getEndereco().getNumero() +"','"
@@ -46,7 +47,7 @@ public class JogadorDAO {
                         +jogador.getEndereco().getEstado() +"','"
                         +jogador.getEndereco().getPais() +"','"
                         +jogador.getEndereco().getComplemento() +"','"
-                        +jogador.getEndereco().getCep() + "','"
+                        +jogador.getEndereco().getCep() 
                     +"')");
             
             st.execute("insert into jogador (categoria, nomeEmpresario, posicao"
@@ -55,14 +56,14 @@ public class JogadorDAO {
                         +jogador.getNomeEmpresario() +"','"
                         +jogador.getPosicao() +"','"
                         +jogador.getPeso() +"','"
-                        +jogador.getAltura() +"','"
+                        +jogador.getAltura()
                     +"')");
             
             st.execute("insert into contatos (telefoneResidencial, celular, email)"
                     + "values('"+jogador.getContato().getTelefoneResidencial() +"','"
-                        + jogador.getContato().getCelular()+"','"
-                        +jogador.getContato().getEmail()+"','"
-                    +"')");*/
+                        + jogador.getContato().getCelular() +"','"
+                        +jogador.getContato().getEmail()
+                    +"')");
             
             
         } catch (Exception e){

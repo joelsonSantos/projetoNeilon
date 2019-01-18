@@ -7,6 +7,7 @@ package Controller;
 
 import DAO.JogadorDAO;
 import controle.Jogador;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,6 +15,7 @@ import controle.Jogador;
  */
 public class CadastroJogadorController {
     public static boolean persistir(Jogador jogador) throws Exception{
-        return JogadorDAO.pesrsistir(jogador);
+        JOptionPane.showMessageDialog(null, "Comtroler");
+        return JogadorDAO.persistir(jogador);
     }
 }
