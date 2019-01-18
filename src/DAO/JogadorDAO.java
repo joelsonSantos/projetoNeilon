@@ -63,7 +63,7 @@ public class JogadorDAO {
                     + "values('"+jogador.getContato().getTelefoneResidencial() +"','"
                         + jogador.getContato().getCelular() +"','"
                         +jogador.getContato().getEmail()
-                    +"')");
+                    +"')")  ;
             
             
         } catch (Exception e){
