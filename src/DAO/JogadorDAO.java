@@ -50,7 +50,7 @@ public class JogadorDAO {
                         +jogador.getEndereco().getCep() 
                     +"')");
             
-            st.execute("insert into jogador (categoria, nomeEmpresario, posicao"
+            st.execute("insert into jogador (categoria, nomeEmpresario, posicao,"
                     + "peso, altura) "
                     + "value ('"+jogador.getCategoria() +"','"
                         +jogador.getNomeEmpresario() +"','"
