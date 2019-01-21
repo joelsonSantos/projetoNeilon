@@ -10,6 +10,7 @@ package controle;
  * @author joelson
  */
 public class Pessoa {
+      private int idPessoa;
       private String nome;
       private String sobreNome;
       private String nacionalidade;
@@ -25,7 +26,8 @@ public class Pessoa {
       public Pessoa(){
       }
      
-      public Pessoa(String nome, String sobreNome, String nacionalidade, String rg, String cpf, String dataNascimento, Contato contato, Conta conta, Endereco endereco, String escolaridade, String instituicao) {
+      public Pessoa(int idPessoa, String nome, String sobreNome, String nacionalidade, String rg, String cpf, String dataNascimento, Contato contato, Conta conta, Endereco endereco, String escolaridade, String instituicao) {
+        this.idPessoa=idPessoa;
         this.nome = nome;
         this.sobreNome = sobreNome;
         this.rg = rg;
@@ -36,6 +38,10 @@ public class Pessoa {
         this.endereco = endereco;
         this.escolaridade= escolaridade;
         this.instituicao= instituicao;
+    }
+    
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
     }
 
     public void setNome(String nome) {
@@ -81,7 +87,11 @@ public class Pessoa {
     public void setInstituicao(String instituicao) {
         this.instituicao = instituicao;
     }
-
+    
+    public int getIdPessoa() {
+        return idPessoa;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -131,6 +141,9 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" + "nome=" + nome + ", sobreNome=" + sobreNome + ", nacionalidade=" + nacionalidade + ", rg=" + rg + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", contato=" + contato + ", conta=" + conta + ", endereco=" + endereco +", escolaridade=" + escolaridade +"instituicao="+ instituicao+'}';
+        return "Pessoa{" + "idPessoa" + "nome=" + nome + ", sobreNome=" + sobreNome + ", nacionalidade=" + nacionalidade + ", rg=" + rg + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", contato=" + contato + ", conta=" + conta + ", endereco=" + endereco +", escolaridade=" + escolaridade +"instituicao="+ instituicao+'}';
     }
+
+
+    
 }

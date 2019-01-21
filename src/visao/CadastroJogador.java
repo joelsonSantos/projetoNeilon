@@ -89,7 +89,7 @@ public class CadastroJogador extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         Salvar = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        pais = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         categoria = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
@@ -240,7 +240,7 @@ public class CadastroJogador extends javax.swing.JFrame {
 
         jLabel16.setText("Pais:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        pais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel17.setText("Categoria:");
 
@@ -394,7 +394,7 @@ public class CadastroJogador extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -451,7 +451,7 @@ public class CadastroJogador extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -581,7 +581,7 @@ public class CadastroJogador extends javax.swing.JFrame {
             p.setDataNascimento(dataNascimeto.getText());
             p.setEscolaridade(escolaridade.getText());
             p.setInstituicao(instituicao.getText());
-            p.setEndereco(new Endereco(rua.getText(), numero.getText(), bairro.getText(), cidade.getText(), ((String)(estado.getSelectedItem())), ((String)(jComboBox1.getSelectedItem())), complemento.getText(), cep.getText() ));
+            p.setEndereco(new Endereco(rua.getText(), numero.getText(), bairro.getText(), cidade.getText(), ((String)(estado.getSelectedItem())), ((String)(pais.getSelectedItem())), complemento.getText(), cep.getText() ));
             p.setCategoria(categoria.getText());
             p.setNomeEmpresario(nomeEmpresario.getText());
             p.setContato(new Contato( telefoneFixo.getText(),celular.getText(), email.getText()));
@@ -703,7 +703,6 @@ public class CadastroJogador extends javax.swing.JFrame {
     private javax.swing.JTextField indentidade;
     private javax.swing.JTextField instituicao;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -736,6 +735,7 @@ public class CadastroJogador extends javax.swing.JFrame {
     private javax.swing.JTextField nome;
     private javax.swing.JTextField nomeEmpresario;
     private javax.swing.JTextField numero;
+    private javax.swing.JComboBox<String> pais;
     private javax.swing.JTextField peso;
     private javax.swing.JTextField posicao;
     private javax.swing.JTextField rua;
