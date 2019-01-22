@@ -10,7 +10,8 @@ package controle;
  * @author joelson
  */
 public class Jogador extends Pessoa {
-   
+    
+    private int idJogador;
     private int assistencia; // contador de assistências dadas em jogo?
     private double mediaGols;
     private String categoria;
@@ -22,8 +23,9 @@ public class Jogador extends Pessoa {
     public Jogador(){
     }
 
-    public Jogador( int assistencia, double mediaGols, String categoria, String nomeEmpresario, String posicao,
+    public Jogador(int idJogador, int assistencia, double mediaGols, String categoria, String nomeEmpresario, String posicao,
                     double peso, double altura) {
+        this.idJogador = idJogador;
         this.assistencia = assistencia;
         this.mediaGols = mediaGols;
         this.categoria = categoria;
@@ -31,6 +33,14 @@ public class Jogador extends Pessoa {
         this.posicao=posicao;
         this.peso=peso;
         this.altura=altura;
+    }
+    
+    public int getIdJogador(){
+        return idJogador;
+    }
+    
+    public void setIdJogador(int idJogador){
+        this.idJogador = idJogador;
     }
 
     public double getAltura() {
@@ -91,7 +101,7 @@ public class Jogador extends Pessoa {
 
     @Override
     public String toString() {
-        return "Jogador{" + "assistencia=" + assistencia + ", mediaGols=" + mediaGols + 
+        return "Jogador{" + "idjogador" + "assistencia=" + assistencia + ", mediaGols=" + mediaGols + 
                 ", categoria=" + categoria + ", nomeEmpresario=" + nomeEmpresario +", posicao= "+posicao +
                 ", peso= "+peso +", altura="+altura +'}';
     }

@@ -10,6 +10,7 @@ package controle;
  * @author joelson
  */
 public class Contato {
+    private int idContato;
     private String telefoneResidencial;
     private String telefoneComercial;
     private String celular;
@@ -32,6 +33,15 @@ public class Contato {
         this.email = email;
     }
 
+    public int getIdContato() {
+        return idContato;
+    }
+
+    public void setIdContato(int idContato) {
+        this.idContato = idContato;
+    }
+    
+    
     public void setTelefoneResidencial(String telefoneResidencial) {
         this.telefoneResidencial = telefoneResidencial;
     }
@@ -66,7 +76,7 @@ public class Contato {
 
     @Override
     public String toString() {
-        return "Contato{" + "telefoneResidencial=" + telefoneResidencial + ", telefoneComercial=" + telefoneComercial + ", celular=" + celular + ", email=" + email + '}';
+        return "Contato{" + "idContato= " + idContato + "telefoneResidencial=" + telefoneResidencial + ", telefoneComercial=" + telefoneComercial + ", celular=" + celular + ", email=" + email + '}';
     }
    
 }

@@ -11,6 +11,7 @@ package controle;
  */
 public class Endereco {
     
+    private int idEndereco;
     private String rua;
     private String numero;
     private String bairro;
@@ -23,7 +24,8 @@ public class Endereco {
     public Endereco() {
     }
 
-    public Endereco(String rua, String numero, String bairro, String cidade, String estado, String pais, String complemento, String cep) {
+    public Endereco(/*int idEndereco,*/String rua, String numero, String bairro, String cidade, String estado, String pais, String complemento, String cep) {
+        //this.idEndereco = idEndereco;
         this.rua = rua;
         this.numero = numero;
         this.bairro = bairro;
@@ -33,6 +35,16 @@ public class Endereco {
         this.complemento = complemento;
         this.cep = cep;
     }
+
+    public int getIdEndereco() {
+        return idEndereco;
+    }
+
+    public void setIdEndereco(int idEndereco) {
+        this.idEndereco = idEndereco;
+    }
+    
+    
  
     public void setRua(String rua) {
         this.rua = rua;
@@ -100,6 +112,6 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return "Endereco{" + "rua=" + rua + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", pais=" + pais + ", complemento=" + complemento + ", cep=" + cep + '}';
+        return "Endereco{" + "idEndereco"+ idEndereco + "rua=" + rua + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", pais=" + pais + ", complemento=" + complemento + ", cep=" + cep + '}';
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 19-Jan-2019 às 04:10
+-- Generation Time: 22-Jan-2019 às 21:13
 -- Versão do servidor: 10.1.37-MariaDB
 -- versão do PHP: 7.2.12
 
@@ -78,20 +78,21 @@ CREATE TABLE `contatos` (
   `telefoneResidencial` varchar(20) NOT NULL,
   `celular` varchar(20) NOT NULL,
   `email` varchar(20) NOT NULL,
-  `telefoneComercial` varchar(20) DEFAULT NULL
+  `telefoneComercial` varchar(20) DEFAULT NULL,
+  `idPessoa_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `contatos`
 --
 
-INSERT INTO `contatos` (`idContatos`, `telefoneResidencial`, `celular`, `email`, `telefoneComercial`) VALUES
-(1, '87897', '98798798', 'uyiuyiu', NULL),
-(2, '87897', '98798798', 'uyiuyiu', NULL),
-(3, '87897', '98798798', 'uyiuyiu', NULL),
-(4, '0998098', '9009', 'kljlkjlkj', NULL),
-(5, '0998098', '9009', 'kljlkjlkj', NULL),
-(6, '0998098', '9009', 'kljlkjlkj', NULL);
+INSERT INTO `contatos` (`idContatos`, `telefoneResidencial`, `celular`, `email`, `telefoneComercial`, `idPessoa_fk`) VALUES
+(1, '87897', '98798798', 'uyiuyiu', NULL, 0),
+(2, '87897', '98798798', 'uyiuyiu', NULL, 0),
+(3, '87897', '98798798', 'uyiuyiu', NULL, 0),
+(4, '0998098', '9009', 'kljlkjlkj', NULL, 0),
+(5, '0998098', '9009', 'kljlkjlkj', NULL, 0),
+(6, '0998098', '9009', 'kljlkjlkj', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -115,37 +116,39 @@ CREATE TABLE `contrato` (
 CREATE TABLE `endereco` (
   `idEndereco` int(11) NOT NULL,
   `rua` varchar(30) NOT NULL,
-  `numero` int(11) NOT NULL,
+  `numero` varchar(30) NOT NULL,
   `bairro` varchar(30) NOT NULL,
   `cidade` varchar(30) NOT NULL,
   `estado` varchar(30) NOT NULL,
   `pais` varchar(30) NOT NULL,
   `complemento` varchar(30) NOT NULL,
-  `cep` int(11) NOT NULL
+  `cep` varchar(30) NOT NULL,
+  `idPessoa_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `endereco`
 --
 
-INSERT INTO `endereco` (`idEndereco`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `pais`, `complemento`, `cep`) VALUES
-(1, '203', 264, 'marroca', 'ibia', 'Minas Gerais', 'Item 3', '-', 38950000),
-(2, 'kjdfk', 323, 'akjakjd', 'ima,dkj', 'Minas Gerais', 'Item 1', '', 832983),
-(3, 'jakjdak', 898, 'hjhkh', 'isdjiaj', 'Minas Gerais', 'Item 1', '', 78897),
-(4, 'jkhk', 1231, 'jkhkj', 'jkjk', 'Minas Gerais', 'Item 1', 'jkkhk', 8987),
-(5, 'jhjk', 8988, 'jhkj', 'jhjkh', 'Minas Gerais', 'Item 1', 'jhkjh', 78979),
-(6, 'uyjkh', 987, 'kjhkh', 'hkh', 'Minas Gerais', 'Item 1', 'hkh', 89879),
-(7, 'ewewr', 43432, 'gfghg', 'trefdg', 'Minas Gerais', 'Item 1', 'fgdgd', 35434),
-(8, 'jhkh', 897, 'jkjhk', 'jhkh', 'Minas Gerais', 'Item 1', 'jkhk', 8970),
-(9, 'kjhkh', 87, 'jhkj', 'jhkh', 'Minas Gerais', 'Item 1', 'kjhkj', 89879),
-(10, 'kjhkh', 87, 'jhkj', 'jhkh', 'Minas Gerais', 'Item 1', 'kjhkj', 89879),
-(11, 'kjhkh', 87, 'jhkj', 'jhkh', 'Minas Gerais', 'Item 1', 'kjhkj', 89879),
-(12, 'kjhkh', 87, 'jhkj', 'jhkh', 'Minas Gerais', 'Item 1', 'kjhkj', 89879),
-(13, 'kjkj', 989, 'jkjkj', 'kjkj', 'Minas Gerais', 'Item 1', '', 9898),
-(14, 'hkhkj', 8989, 'jhkjh', 'jkhkhl', 'Minas Gerais', 'Item 1', 'jhkjh', 89800),
-(15, 'kjljl', 9809, 'kljlkj', 'kljlj', 'Minas Gerais', 'Item 1', '', 808),
-(16, 'kjljl', 9809, 'kljlkj', 'kljlj', 'Minas Gerais', 'Item 1', '', 808),
-(17, 'kjljl', 9809, 'kljlkj', 'kljlj', 'Minas Gerais', 'Item 1', '', 10808);
+INSERT INTO `endereco` (`idEndereco`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `pais`, `complemento`, `cep`, `idPessoa_fk`) VALUES
+(1, '203', '264', 'marroca', 'ibia', 'Minas Gerais', 'Item 3', '-', '38950000', 0),
+(2, 'kjdfk', '323', 'akjakjd', 'ima,dkj', 'Minas Gerais', 'Item 1', '', '832983', 0),
+(3, 'jakjdak', '898', 'hjhkh', 'isdjiaj', 'Minas Gerais', 'Item 1', '', '78897', 0),
+(4, 'jkhk', '1231', 'jkhkj', 'jkjk', 'Minas Gerais', 'Item 1', 'jkkhk', '8987', 0),
+(5, 'jhjk', '8988', 'jhkj', 'jhjkh', 'Minas Gerais', 'Item 1', 'jhkjh', '78979', 0),
+(6, 'uyjkh', '987', 'kjhkh', 'hkh', 'Minas Gerais', 'Item 1', 'hkh', '89879', 0),
+(7, 'ewewr', '43432', 'gfghg', 'trefdg', 'Minas Gerais', 'Item 1', 'fgdgd', '35434', 0),
+(8, 'jhkh', '897', 'jkjhk', 'jhkh', 'Minas Gerais', 'Item 1', 'jkhk', '8970', 0),
+(9, 'kjhkh', '87', 'jhkj', 'jhkh', 'Minas Gerais', 'Item 1', 'kjhkj', '89879', 0),
+(10, 'kjhkh', '87', 'jhkj', 'jhkh', 'Minas Gerais', 'Item 1', 'kjhkj', '89879', 0),
+(11, 'kjhkh', '87', 'jhkj', 'jhkh', 'Minas Gerais', 'Item 1', 'kjhkj', '89879', 0),
+(12, 'kjhkh', '87', 'jhkj', 'jhkh', 'Minas Gerais', 'Item 1', 'kjhkj', '89879', 0),
+(13, 'kjkj', '989', 'jkjkj', 'kjkj', 'Minas Gerais', 'Item 1', '', '9898', 0),
+(14, 'hkhkj', '8989', 'jhkjh', 'jkhkhl', 'Minas Gerais', 'Item 1', 'jhkjh', '89800', 0),
+(15, 'kjljl', '9809', 'kljlkj', 'kljlj', 'Minas Gerais', 'Item 1', '', '808', 0),
+(16, 'kjljl', '9809', 'kljlkj', 'kljlj', 'Minas Gerais', 'Item 1', '', '808', 0),
+(17, 'kjljl', '9809', 'kljlkj', 'kljlj', 'Minas Gerais', 'Item 1', '', '10808', 0),
+(18, '322', '2141', 'kllj', 'kkjlkj', 'Minas Gerais', 'Item 1', '', '34242', 0);
 
 -- --------------------------------------------------------
 
@@ -176,17 +179,19 @@ CREATE TABLE `jogador` (
   `peso` double NOT NULL,
   `altura` double NOT NULL,
   `assistencia` int(11) DEFAULT NULL,
-  `mediaGols` int(11) DEFAULT NULL
+  `mediaGols` int(11) DEFAULT NULL,
+  `idPessoa_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `jogador`
 --
 
-INSERT INTO `jogador` (`idJogador`, `categoria`, `nomeEmpresario`, `posicao`, `peso`, `altura`, `assistencia`, `mediaGols`) VALUES
-(6, 'kjlkj', 'jlkj', 'null', 44.44, 444.4, NULL, NULL),
-(7, 'kjlkj', 'jlkj', 'null', 44.44, 444.4, NULL, NULL),
-(8, 'kjlkj', 'jlkj', 'null', 44.44, 444.4, NULL, NULL);
+INSERT INTO `jogador` (`idJogador`, `categoria`, `nomeEmpresario`, `posicao`, `peso`, `altura`, `assistencia`, `mediaGols`, `idPessoa_fk`) VALUES
+(6, 'kjlkj', 'jlkj', 'null', 44.44, 444.4, NULL, NULL, 0),
+(7, 'kjlkj', 'jlkj', 'null', 44.44, 444.4, NULL, NULL, 0),
+(8, 'kjlkj', 'jlkj', 'null', 44.44, 444.4, NULL, NULL, 0),
+(9, 'ljl', 'ljlj', 'null', 11.2, 221.1, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -213,7 +218,7 @@ CREATE TABLE `pessoa` (
   `idPessoa` int(11) NOT NULL,
   `nome` varchar(30) NOT NULL,
   `sobrenome` varchar(30) NOT NULL,
-  `nascionalidade` varchar(20) NOT NULL,
+  `nacionalidade` varchar(20) NOT NULL,
   `rg` varchar(15) NOT NULL,
   `cpf` varchar(15) NOT NULL,
   `dataNascimento` varchar(11) NOT NULL,
@@ -225,7 +230,7 @@ CREATE TABLE `pessoa` (
 -- Extraindo dados da tabela `pessoa`
 --
 
-INSERT INTO `pessoa` (`idPessoa`, `nome`, `sobrenome`, `nascionalidade`, `rg`, `cpf`, `dataNascimento`, `escolaridade`, `instituicao`) VALUES
+INSERT INTO `pessoa` (`idPessoa`, `nome`, `sobrenome`, `nacionalidade`, `rg`, `cpf`, `dataNascimento`, `escolaridade`, `instituicao`) VALUES
 (1, 'laiedner', 'camargos', 'br', '1231', '41442', '20/01/1993', '2C', 'ufv'),
 (2, 'laiedner', 'camargos', 'br', '1231', '41442', '20/01/1993', '2C', 'ufv'),
 (3, 'laiender', 'camargos', 'pt', '2456', '0983', '20/09/2003', '2c', 'ufc'),
@@ -246,7 +251,14 @@ INSERT INTO `pessoa` (`idPessoa`, `nome`, `sobrenome`, `nascionalidade`, `rg`, `
 (18, 'dadaada', 'asdasda', 'llj', 'jkhkjh', 'jhkjh', '19/01/19', 'jkjhk', 'jhjhk'),
 (19, 'kjdalkj', 'lkjsakljd', 'kjlkj', '08089', '908098', '19/01/19', 'kjlj', '9098'),
 (20, 'laiednerrrr', 'lkjsakljd', 'kjlkj', '08089', '908098', '19/01/19', 'kjlj', '9098'),
-(21, 'laiednerrrr', 'lkjsakljd', 'kjlkj', '08089', '908098', '19/01/19', 'kjlj', '9098');
+(21, 'laiednerrrr', 'lkjsakljd', 'kjlkj', '08089', '908098', '19/01/19', 'kjlj', '9098'),
+(22, 'jaljdlakj', 'kljlkjlkjas', 'br', '3242', '43242', '22/01/19', 'kjl', 'ljl'),
+(23, 'fdssd', 'hhkhk', 'jhk', '897987', '89798', '22/01/19', 'hkkh', 'kkjhkj'),
+(24, 'fdssd', 'hhkhk', 'jhk', '897987', '89798', '22/01/19', 'hkkh', 'kkjhkj'),
+(25, 'Digite o seu nome', 'hjhkj', 'jhk', '778', '8778', '22/01/19', 'gjgj', 'gjgj'),
+(26, 'Digite o seu nome', 'hjhkj', 'jhk', '778', '8778', '22/01/19', 'gjgj', 'gjgj'),
+(27, 'Digite o seu nome', 'kjhkjh', 'kjjhk', '8997', '9797', '22/01/19', 'kjjh', 'jkhkh'),
+(28, 'daa', 'jlj', 'ljl', '7889', '98898', '22/01/19', 'kjhkj', 'kjhk');
 
 -- --------------------------------------------------------
 
@@ -258,7 +270,8 @@ CREATE TABLE `socioTorcedor` (
   `idSocioTorcedor` int(11) NOT NULL,
   `modalidadeTorcedor` varchar(30) NOT NULL,
   `dataFiliacao` date NOT NULL,
-  `formaPagamento` varchar(30) NOT NULL
+  `formaPagamento` varchar(30) NOT NULL,
+  `idPessoa_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -288,7 +301,7 @@ ALTER TABLE `conta`
 --
 ALTER TABLE `contatos`
   ADD PRIMARY KEY (`idContatos`),
-  ADD UNIQUE KEY `idContatos` (`idContatos`);
+  ADD KEY `idPessoa_fk` (`idPessoa_fk`);
 
 --
 -- Indexes for table `contrato`
@@ -300,7 +313,8 @@ ALTER TABLE `contrato`
 -- Indexes for table `endereco`
 --
 ALTER TABLE `endereco`
-  ADD PRIMARY KEY (`idEndereco`);
+  ADD PRIMARY KEY (`idEndereco`),
+  ADD KEY `idPessoa_fk` (`idPessoa_fk`);
 
 --
 -- Indexes for table `informacoesMedicas`
@@ -312,7 +326,8 @@ ALTER TABLE `informacoesMedicas`
 -- Indexes for table `jogador`
 --
 ALTER TABLE `jogador`
-  ADD PRIMARY KEY (`idJogador`);
+  ADD PRIMARY KEY (`idJogador`),
+  ADD KEY `idPessoa_fk` (`idPessoa_fk`);
 
 --
 -- Indexes for table `patrocinador`
@@ -370,7 +385,7 @@ ALTER TABLE `contrato`
 -- AUTO_INCREMENT for table `endereco`
 --
 ALTER TABLE `endereco`
-  MODIFY `idEndereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idEndereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `informacoesMedicas`
@@ -382,7 +397,7 @@ ALTER TABLE `informacoesMedicas`
 -- AUTO_INCREMENT for table `jogador`
 --
 ALTER TABLE `jogador`
-  MODIFY `idJogador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idJogador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `patrocinador`
@@ -394,7 +409,7 @@ ALTER TABLE `patrocinador`
 -- AUTO_INCREMENT for table `pessoa`
 --
 ALTER TABLE `pessoa`
-  MODIFY `idPessoa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idPessoa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `socioTorcedor`

@@ -5,12 +5,14 @@
  */
 package DAO;
 
+import com.mysql.jdbc.CharsetMapping;
 import com.sun.org.apache.xalan.internal.xsltc.cmdline.getopt.GetOpt;
 import controle.Jogador;
 import controle.Pessoa;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import persistencia.Conexao;
 import visao.TelaJogador;
 
@@ -38,10 +40,10 @@ public class JogadorDAO {
                             + jogador.getEscolaridade() +"','"
                             + jogador.getInstituicao()
                     
-                    +"')");
+                    +"')");  
             
-            st.execute("insert into endereco(rua, numero, bairro, cidade, "
-                    + "estado, pais, complemento, cep)"
+            /*st.execute("insert into endereco(rua, numero, bairro, cidade, "
+                    + "estado, pais, complemento, cep, idPessoa_fk)"
                     + " values('"+jogador.getEndereco().getRua()+"','"
                         +jogador.getEndereco().getNumero() +"','"
                         +jogador.getEndereco().getBairro() +"','" 
@@ -49,29 +51,45 @@ public class JogadorDAO {
                         +jogador.getEndereco().getEstado() +"','"
                         +jogador.getEndereco().getPais() +"','"
                         +jogador.getEndereco().getComplemento() +"','"
-                        +jogador.getEndereco().getCep() 
-                    +"')");
+                        +jogador.getEndereco().getCep() +"','"
+                        +jogador.getIdPessoa()
+                    +"')", st.RETURN_GENERATED_KEYS);
             
             st.execute("insert into jogador (categoria, nomeEmpresario, posicao,"
-                    + "peso, altura) "
+                    + "peso, altura, idPessoa_fk) "
                     + "value ('"+jogador.getCategoria() +"','"
                         +jogador.getNomeEmpresario() +"','"
                         +jogador.getPosicao() +"','"
                         +jogador.getPeso() +"','"
-                        +jogador.getAltura()
-                    +"')");
+                        +jogador.getAltura() +"','"
+                        +jogador.getIdPessoa()
+                    +"')", st.RETURN_GENERATED_KEYS);
             
-            st.execute("insert into contatos (telefoneResidencial, celular, email)"
+            st.execute("insert into contatos (telefoneResidencial, celular, email, idPesooa_fk)"
                     + "values('"+jogador.getContato().getTelefoneResidencial() +"','"
                         + jogador.getContato().getCelular() +"','"
-                        +jogador.getContato().getEmail()
-                    +"')")  ;
+                        +jogador.getContato().getEmail() +"','"
+                        +jogador.getIdPessoa()
+                    +"')", st.RETURN_GENERATED_KEYS)  ;*/
             
             
         } catch (Exception e){
-            System.out.println("Problemas Ocorreram");
+            System.out.println("Problemas Ocorreram ao salvar");
             e.printStackTrace();
             throw new Exception ("Erro ao Salvar Dados!");
+        }
+        
+        try{
+            Conexao conect = new Conexao();
+            PreparedStatement st = conect.getConnection().prepareStatement("SELECT idPessoa FROM pessoa where idPessoa = ? ");
+            //st.setInt(1, idPessoa);
+            ResultSet rs = st.executeQuery();
+            jogador.setIdPessoa(rs.getInt("idPessoa"));
+            JOptionPane.showMessageDialog(null, "idPessao"+jogador.getIdPessoa());
+        }catch(Exception e){
+            System.out.println("Problemas Ocorreram ao pesquisar");
+            e.printStackTrace();
+            throw  new Exception("Erro ao pesquisar dados");
         }
         return false;
         
