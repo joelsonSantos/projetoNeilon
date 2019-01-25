@@ -20,12 +20,13 @@ public class Endereco {
     private String pais;
     private String complemento;
     private String cep;
+    private int idPessoaFK;
 
     public Endereco() {
     }
 
     public Endereco(/*int idEndereco,*/String rua, String numero, String bairro, String cidade, String estado, String pais, String complemento, String cep) {
-        //this.idEndereco = idEndereco;
+        this.idPessoaFK = idPessoaFK;
         this.rua = rua;
         this.numero = numero;
         this.bairro = bairro;
@@ -109,6 +110,16 @@ public class Endereco {
     public String getCep() {
         return cep;
     }
+
+    public int getIdPessoaFK() {
+        return idPessoaFK;
+    }
+
+    public void setIdPessoaFK(int idPessoaFK) {
+        this.idPessoaFK = idPessoaFK;
+    }
+    
+    
 
     @Override
     public String toString() {
