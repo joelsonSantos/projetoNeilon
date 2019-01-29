@@ -29,7 +29,7 @@ public class JogadorDAO {
             Conexao conect = new Conexao();
             Statement st = conect.getSt();
             
-            st.execute("insert into pessoa(nome, sobrenome,"
+            st.executeUpdate("insert into pessoa(nome, sobrenome,"
                     + "nacionalidade, rg, cpf, dataNascimento, escolaridade,"
                     + "instituicao) "
                     + "values('" + jogador.getNome()+ "','"
@@ -40,48 +40,15 @@ public class JogadorDAO {
                             + jogador.getDataNascimento() +"','"
                             + jogador.getEscolaridade() +"','"
                             + jogador.getInstituicao()
-                    +"')");  
-                
-        } catch (Exception e){
-            System.out.println("Problemas Ocorreram ao salvar");
-            e.printStackTrace();
-            throw new Exception ("Erro ao Salvar Dados!");
-        }
-        JOptionPane.showMessageDialog(null, "pessoa gravada...  ");
-        
-        JOptionPane.showMessageDialog(null, "pesquisa do ID 1" );
-        
-        try{
-            JOptionPane.showMessageDialog(null, "pesquisa do ID 2" );
-            int idPessoa = 0;
-            Conexao conect = new Conexao();
-            PreparedStatement st = conect.getConnection().prepareStatement("SELECT * FROM pessoa where idPessoa = ? ");
-            st.setInt(1, idPessoa);
-            ResultSet rs = st.executeQuery();
-            JOptionPane.showMessageDialog(null, "pesquisa do ID 3" );
+                    +"')", Statement.RETURN_GENERATED_KEYS);  
+            JOptionPane.showMessageDialog(null, "pessoa gravada...  ");
+            final ResultSet rs = st.getGeneratedKeys();
+            
             if (rs.next()){
-                JOptionPane.showMessageDialog(null, "pesquisa do ID 4" );
-                int result = rs.getInt("idPessoa");
-                jogador.setIdPessoa(result);
-                int idreslt = jogador.getIdPessoa();
-                //int idresult = jogador.getIdPessoa();
-            JOptionPane.showMessageDialog(null, "idPessao "+idreslt);
+                ///final int idResult = rs.getInt(1);
+                jogador.setIdPessoa(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "idPessao "+jogador.getIdPessoa());
             }
-            JOptionPane.showMessageDialog(null, "pesquisa do ID 5" );
-            rs.close();
-            st.close();
-            
-        }catch(Exception e){
-            System.out.println("Problemas Ocorreram ao pesquisar");
-            e.printStackTrace();
-            throw  new Exception("Erro ao pesquisar dados");
-        }
-        JOptionPane.showMessageDialog(null, "pesquisa do ID 6" );
-        
-        try{
-            Conexao conect = new Conexao();
-            Statement st = conect.getSt();
-            
             st.execute("insert into endereco(rua, numero, bairro, cidade, "
                     + "estado, pais, complemento, cep, idPessoa_fk)"
                     + " values('"+jogador.getEndereco().getRua()+"','"
@@ -113,13 +80,14 @@ public class JogadorDAO {
                         +jogador.getContato().getEmail() +"','"
                         +jogador.getIdPessoa()
                     +"')")  ;
-            
-            
+                
         } catch (Exception e){
             System.out.println("Problemas Ocorreram ao salvar");
             e.printStackTrace();
             throw new Exception ("Erro ao Salvar Dados!");
         }
+        
+        
         
         return false;
         
@@ -145,10 +113,8 @@ public class JogadorDAO {
                 jogador.setDataNascimento(rs.getString("dataNascimento"));
                 jogador.setEscolaridade(rs.getString("escolaridade"));
                 jogador.setInstituicao(rs.getString("instituicao"));
-                
-                
-                
             }
+            
         }catch (Exception e) {
             System.out.println("Problemas Ocorreram");
             e.printStackTrace();

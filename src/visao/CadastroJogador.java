@@ -589,8 +589,9 @@ public class CadastroJogador extends javax.swing.JFrame {
             p.setPosicao(posicao.getText());
             p.setPeso(Double.parseDouble(peso.getText()));
             p.setAltura(Double.parseDouble(altura.getText()));
+            
 
-        
+            LimparCampos();
             if (CadastroJogadorController.persistir(p)==true){
                 JOptionPane.showMessageDialog(this, "Jogador gravado com sucesso");
                 dispose();
@@ -601,6 +602,30 @@ public class CadastroJogador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SalvarActionPerformed
 
+    public void LimparCampos(){
+        nome.setText("");
+        sobreNome.setText("");
+        nacionalidade.setText("");
+        indentidade.setText("");
+        cpf.setText("");
+        dataNascimeto.setText("");
+        escolaridade.setText("");
+        instituicao.setText("");
+        rua.setText("");
+        numero.setText("");
+        bairro.setText("");
+        cidade.setText("");
+        complemento.setText("");
+        cep.setText("");
+        categoria.setText("");
+        nomeEmpresario.setText("");
+        telefoneFixo.setText("");
+        celular.setText("");
+        email.setText("");
+        posicao.setText("");
+        peso.setText("");
+        altura.setText("");
+   }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
          TelaJogador jog = new TelaJogador();
          jog.setVisible(true);
