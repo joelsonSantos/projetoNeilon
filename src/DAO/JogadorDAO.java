@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import static jdk.internal.org.objectweb.asm.commons.GeneratorAdapter.AND;
 import persistencia.Conexao;
 import visao.TelaJogador;
 
@@ -31,7 +32,7 @@ public class JogadorDAO {
             
             st.executeUpdate("insert into pessoa(nome, sobrenome,"
                     + "nacionalidade, rg, cpf, dataNascimento, escolaridade,"
-                    + "instituicao) "
+                    + "instituicao, sexo) "
                     + "values('" + jogador.getNome()+ "','"
                             + jogador.getSobreNome() +"','"
                             + jogador.getNacionalidade() +"','"
@@ -39,7 +40,8 @@ public class JogadorDAO {
                             + jogador.getCpf() +"','"
                             + jogador.getDataNascimento() +"','"
                             + jogador.getEscolaridade() +"','"
-                            + jogador.getInstituicao()
+                            + jogador.getInstituicao() +"','"
+                            + jogador.getSexo()
                     +"')", Statement.RETURN_GENERATED_KEYS);  
             JOptionPane.showMessageDialog(null, "pessoa gravada...  ");
             final ResultSet rs = st.getGeneratedKeys();
@@ -105,14 +107,15 @@ public class JogadorDAO {
             if(rs.next()){
                 jogador = new Jogador();
                 jogador.setIdPessoa(rs.getInt("idPessoa"));
-                jogador.setNome(rs.getString("nome"));
+                /*jogador.setNome(rs.getString("nome"));
                 jogador.setSobreNome(rs.getString("sobrenome"));
                 jogador.setNacionalidade(rs.getString("nacionalidade"));
                 jogador.setRg(rs.getString("rg"));
                 jogador.setCpf(rs.getString("cpf"));
                 jogador.setDataNascimento(rs.getString("dataNascimento"));
                 jogador.setEscolaridade(rs.getString("escolaridade"));
-                jogador.setInstituicao(rs.getString("instituicao"));
+                jogador.setInstituicao(rs.getString("instituicao"));*/
+                pesquisaID(jogador.getIdPessoa());
             }
             
         }catch (Exception e) {
@@ -123,6 +126,30 @@ public class JogadorDAO {
         }
         return jogador;
         
+    }
+    public static Jogador pesquisaID(int idPessoa) throws Exception{
+        Jogador jogador = null;
+        try{
+            Conexao conect = new Conexao();
+            PreparedStatement st = conect.getConnection().prepareStatement("SELECT pessoa.nome, pessoa.sobrenome, pessoa.nacionalidade, pessoa.rg,"
+                    + "pessoa.cpf, pessoa.dataNascimento, pessoa.escolaridade, pessoa.instituicao, pessoa.sexo, contatos.telefoneResidencial,"
+                    + "contatos.celular, contatos.email, endereco.rua, endereco.numero, endereco.bairro, endereco.cidade, endereco.estado,"
+                    + "endereco.pais, endereco.complemento, endereco.cep, jogagor.categoria, jogador.nomeEmpresario, jogador.posicao, "
+                    + "jogador.peso, jogador.altura "
+                    + "FROM pessoa, contatos, endereco, jogador "
+                    + "WHERE pessoa.idPessoa = contatos.idPessoa_fk AND "
+                    + " pessoa.idPessoa = endereco.idPessoa_fk AND pessoa.idPessoa = jogador.idPessoa_fk");
+            st.setInt(1, idPessoa);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                
+            }
+        }catch(Exception e){
+            System.out.println("Problemas Ocorreram");
+            e.printStackTrace();
+            throw new Exception("Erro na pesquisa.");
+        }
+        return jogador;
     }
    
     

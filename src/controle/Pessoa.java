@@ -22,11 +22,15 @@ public class Pessoa {
       private Endereco endereco;
       private String escolaridade;
       private String instituicao;
+      private String sexo;
      
       public Pessoa(){
       }
      
-      public Pessoa(int idPessoa, String nome, String sobreNome, String nacionalidade, String rg, String cpf, String dataNascimento, Contato contato, Conta conta, Endereco endereco, String escolaridade, String instituicao) {
+      public Pessoa(int idPessoa, String nome, String sobreNome, 
+              String nacionalidade, String rg, String cpf, String dataNascimento,
+              Contato contato, Conta conta, Endereco endereco, 
+              String escolaridade, String instituicao, String sexo) {
         this.idPessoa=idPessoa;
         this.nome = nome;
         this.sobreNome = sobreNome;
@@ -38,6 +42,7 @@ public class Pessoa {
         this.endereco = endereco;
         this.escolaridade= escolaridade;
         this.instituicao= instituicao;
+        this.sexo = sexo;
     }
     
     public void setIdPessoa(int idPessoa) {
@@ -88,6 +93,10 @@ public class Pessoa {
         this.instituicao = instituicao;
     }
     
+    public void setSexo(String sexo){
+        this.sexo= sexo;
+    }
+    
     public int getIdPessoa() {
         return idPessoa;
     }
@@ -135,13 +144,18 @@ public class Pessoa {
     public String getInstituicao() {
         return instituicao;
     }
-
-   
     
+    public String getSexo(){
+        return sexo;
+    }
 
     @Override
     public String toString() {
-        return "Pessoa{" + "idPessoa" + "nome=" + nome + ", sobreNome=" + sobreNome + ", nacionalidade=" + nacionalidade + ", rg=" + rg + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", contato=" + contato + ", conta=" + conta + ", endereco=" + endereco +", escolaridade=" + escolaridade +"instituicao="+ instituicao+'}';
+        return "Pessoa{" + "idPessoa" + "nome=" + nome + ", sobreNome=" + sobreNome + 
+                ", nacionalidade=" + nacionalidade + ", rg=" + rg + ", cpf=" + cpf + 
+                ", dataNascimento=" + dataNascimento + ", contato=" + contato + 
+                ", conta=" + conta + ", endereco=" + endereco +", escolaridade=" 
+                + escolaridade +", instituicao="+ instituicao+ ", sexo= "+ sexo + '}';
     }
 
 
