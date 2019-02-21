@@ -12,6 +12,7 @@ import controle.Pessoa;
 import controle.Jogador;
 import controle.Contato;
 import controle.Endereco;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -627,7 +628,12 @@ public class CadastroJogador extends javax.swing.JFrame {
         altura.setText("");
    }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         TelaJogador jog = new TelaJogador();
+         TelaJogador jog = null;
+        try {
+            jog = new TelaJogador();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
+        }
          jog.setVisible(true);
          dispose();
         // TODO add your handling code here:

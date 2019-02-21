@@ -5,6 +5,10 @@
  */
 package visao;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author laiender.morais
@@ -259,7 +263,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemJogadorActionPerformed
-        TelaJogador jogador = new TelaJogador();
+        TelaJogador jogador = null;
+        try {
+            jogador = new TelaJogador();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jogador.setVisible(true);
         dispose();
 // TODO add your handling code here:

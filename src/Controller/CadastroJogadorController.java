@@ -18,4 +18,8 @@ public class CadastroJogadorController {
         JOptionPane.showMessageDialog(null, "Comtroler");
         return JogadorDAO.persistir(jogador);
     }
+    
+    public static Jogador pesquisa (String nome) throws Exception{
+        return JogadorDAO.pesquisa(nome);
+    }
 }
