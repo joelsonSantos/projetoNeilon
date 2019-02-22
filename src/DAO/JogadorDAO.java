@@ -102,16 +102,19 @@ public class JogadorDAO {
     
     public static Jogador pesquisa(String nome) throws Exception{
         Jogador jogador = null;
+        Pessoa pessoa = null;
         
         try{
             Conexao conect = new Conexao();
-            PreparedStatement st = conect.getConnection().prepareStatement("SELECT nome FROM pessoa where nome = ?");
+            PreparedStatement st = conect.getConnection().prepareStatement("SELECT * FROM pessoa where nome = ?");
             st.setString(1, nome);
             ResultSet rs = st.executeQuery();
             
             if(rs.next()){
                 jogador = new Jogador();
-                jogador.setIdPessoa(rs.getInt("pessoa.idPessoa"));
+                pessoa =new Pessoa();
+                jogador.setIdPessoa(rs.getInt("idPessoa"));
+                //pessoa.setIdPessoa(rs.getInt("idPessoa"));
                 /*jogador.setNome(rs.getString("nome"));
                 jogador.setSobreNome(rs.getString("sobrenome"));
                 jogador.setNacionalidade(rs.getString("nacionalidade"));
@@ -120,7 +123,9 @@ public class JogadorDAO {
                 jogador.setDataNascimento(rs.getString("dataNascimento"));
                 jogador.setEscolaridade(rs.getString("escolaridade"));
                 jogador.setInstituicao(rs.getString("instituicao"));*/
+                JOptionPane.showMessageDialog(null, "idPessoa"+ jogador.getIdPessoa());
                 pesquisaID(jogador.getIdPessoa());
+                
             }
             
         }catch (Exception e) {
@@ -136,31 +141,39 @@ public class JogadorDAO {
         Jogador jogador = null;
         Endereco endereco = null;
         Contato contatos = null;
+        Pessoa pessoa = null;
+        JOptionPane.showMessageDialog(null, "idPessoa segunda pesquisa"+ idPessoa);
         try{
             Conexao conect = new Conexao();
-            PreparedStatement st = conect.getConnection().prepareStatement("SELECT pessoa.nome, pessoa.sobrenome, pessoa.nacionalidade, pessoa.rg,"
+            PreparedStatement st = conect.getConnection().prepareStatement("SELECT *"
+                    + "FROM pessoa, contatos, endereco, jogador "
+                    + "WHERE idPessoa = ? AND idPessoa = contatos.idPessoa_fk AND " +
+"                    +  idPessoa = endereco.idPessoa_fk AND idPessoa = jogador.idPessoa_fk");
+            
+            /*pessoa.nome, pessoa.sobrenome, pessoa.nacionalidade, pessoa.rg,"
                     + "pessoa.cpf, pessoa.dataNascimento, pessoa.escolaridade, pessoa.instituicao, pessoa.sexo, contatos.telefoneResidencial,"
                     + "contatos.celular, contatos.email, endereco.rua, endereco.numero, endereco.bairro, endereco.cidade, endereco.estado,"
                     + "endereco.pais, endereco.complemento, endereco.cep, jogagor.categoria, jogador.nomeEmpresario, jogador.posicao, "
-                    + "jogador.peso, jogador.altura "
-                    + "FROM pessoa, contatos, endereco, jogador "
-                    + "WHERE pessoa.idPessoa = contatos.idPessoa_fk AND "
-                    + " pessoa.idPessoa = endereco.idPessoa_fk AND pessoa.idPessoa = jogador.idPessoa_fk");
+                    + "jogador.peso, jogador.altura 
+            idPessoa = contatos.idPessoa_fk AND "
+                    + " idPessoa = endereco.idPessoa_fk AND idPessoa = jogador.idPessoa_fk
+            */
             st.setInt(1, idPessoa);
             ResultSet rs = st.executeQuery();
             if(rs.next()){
+                pessoa = new Pessoa();
                 jogador = new Jogador();
                 endereco = new Endereco();
                 contatos = new Contato();
-                jogador.setNome(rs.getString("pessoa.nome"));
-                jogador.setSobreNome(rs.getString("pessoa.sobrenome"));
-                jogador.setNacionalidade(rs.getString("pessoa.nacionalidade"));
-                jogador.setRg(rs.getString("pessoa.rg"));
-                jogador.setCpf(rs.getString("pessoa.cpf"));
-                jogador.setDataNascimento(rs.getString("pessoa.dataNascimento"));
-                jogador.setEscolaridade(rs.getString("pessoa.escolaridade"));
-                jogador.setInstituicao(rs.getString("pessoa.intituicao"));
-                jogador.setSexo(rs.getString("pessoa.sexo"));
+                pessoa.setNome(rs.getString("pessoa.nome"));
+                pessoa.setSobreNome(rs.getString("pessoa.sobrenome"));
+                pessoa.setNacionalidade(rs.getString("pessoa.nacionalidade"));
+                pessoa.setRg(rs.getString("pessoa.rg"));
+                pessoa.setCpf(rs.getString("pessoa.cpf"));
+                pessoa.setDataNascimento(rs.getString("pessoa.dataNascimento"));
+                pessoa.setEscolaridade(rs.getString("pessoa.escolaridade"));
+                pessoa.setInstituicao(rs.getString("pessoa.instituicao"));
+                pessoa.setSexo(rs.getString("pessoa.sexo"));
                 contatos.setTelefoneResidencial(rs.getString("contatos.telefoneResidencial"));
                 contatos.setCelular(rs.getString("contatos.celular"));
                 contatos.setEmail(rs.getString("contatos.email"));
@@ -178,9 +191,10 @@ public class JogadorDAO {
                 jogador.setPeso(rs.getDouble("jogador.peso"));
                 jogador.setAltura(rs.getDouble("jogador.altura"));
                 
-                jogador.toString();
-                contatos.toString();
-                endereco.toString();
+                System.out.println(pessoa.toString());
+                System.out.println(jogador.toString());
+                System.out.println(contatos.toString());
+                System.out.println(endereco.toString());
                 
             }
         }catch(Exception e){

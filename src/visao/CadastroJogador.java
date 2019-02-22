@@ -209,6 +209,12 @@ public class CadastroJogador extends javax.swing.JFrame {
 
         jLabel29.setText("Posição:");
 
+        posicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                posicaoActionPerformed(evt);
+            }
+        });
+
         jLabel13.setText("Bairro:");
 
         jLabel8.setText("Celular:");
@@ -676,6 +682,10 @@ public class CadastroJogador extends javax.swing.JFrame {
     private void pesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pesoActionPerformed
+
+    private void posicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posicaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_posicaoActionPerformed
 
     /**
      * @param args the command line arguments

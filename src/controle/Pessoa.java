@@ -17,7 +17,7 @@ public class Pessoa {
       private String rg;
       private String cpf;
       private String dataNascimento; // DD/MM/AAAA
-      private Contato contato;
+      public Contato contato;
       private Conta conta;
       private Endereco endereco;
       private String escolaridade;

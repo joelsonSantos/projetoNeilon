@@ -68,7 +68,7 @@ public class Jogador extends Pessoa {
         this.nomeEmpresario = nomeEmpresario;
     }
     
-    public void setPosicao(String posisao){
+    public void setPosicao(String posicao){
         this.posicao = posicao;
     }
     
