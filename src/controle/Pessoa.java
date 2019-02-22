@@ -19,7 +19,7 @@ public class Pessoa {
       private String dataNascimento; // DD/MM/AAAA
       public Contato contato;
       private Conta conta;
-      private Endereco endereco;
+      public Endereco endereco;
       private String escolaridade;
       private String instituicao;
       private String sexo;

@@ -205,12 +205,47 @@ public class JogadorDAO {
         return jogador;
     }
     
-   /*public static ArrayList<Jogador> listar() throws SQLException{
+   public static ArrayList<Jogador> listar() throws SQLException{
        Conexao conect = new Conexao();
        ArrayList<Jogador> jogadorLista = new ArrayList<>();
        try{
-           PreparedStatement st = conect.getConnection().prepareStatement(sql)
+           System.out.println("listar dados na tabela 4.");
+           PreparedStatement st = conect.getConnection().prepareStatement("SELECT pessoa.nome, pessoa.sobrenome, pessoa.dataNascimento,"
+                   + "jogador.categoria, contatos.email, endereco.cidade "
+                   + "FROM pessoa, contatos, endereco, jogador "
+                    + "WHERE idPessoa = contatos.idPessoa_fk AND " +
+"                    +  idPessoa = endereco.idPessoa_fk AND idPessoa = jogador.idPessoa_fk");
+           System.out.println("listar dados na tabela 5.");
+           ResultSet rs = st.executeQuery();
+                while(rs.next()){
+                    System.out.println("listar dados na tabela 6.");
+                    Jogador jogador = new Jogador();
+                    Contato contato = new Contato();
+                    Endereco endereco = new Endereco();
+                    jogador.setNome(rs.getString("pessoa.nome"));
+                    System.out.println("pessoa.nome"+jogador.getNome());
+                    jogador.setSobreNome(rs.getString("pessoa.sobrenome"));
+                    System.out.println("pessoa.sobrenome"+jogador.getSobreNome());
+                    jogador.setDataNascimento(rs.getString("pessoa.dataNascimento"));
+                    System.out.println("pessoa.dataNascimento"+ jogador.getDataNascimento());
+                    jogador.setCategoria(rs.getString("jogador.categoria"));
+                    System.out.println("jogador.categoria " +jogador.getCategoria());
+                    contato.setEmail(rs.getString("contatos.email"));
+                    System.out.println("jogador.contato.email" + contato.getEmail());
+                    endereco.setCidade(rs.getString("endereco.cidade"));
+                    System.out.println("jogador.endereco.cidade " + endereco.getCidade());
+                    System.out.println("listar dados na tabela 9.");
+                    System.out.println("jogador.setNome "+jogador.getNome()+ "jogador.setSobrenome "+ jogador.getSobreNome()
+                    +"jogador.setDataNascimento"+jogador.getDataNascimento()+"jogador.setCategoria"+jogador.getCategoria()
+                    +"jogador.contato.setEmail"+contato.getEmail()+"jogador.endereco.setCidade"+endereco.getCidade());
+                    
+                    
+                    jogadorLista.add(jogador);
+                }
+       }catch(SQLException e){
+           
        }
-   }*/
+        return null;
+   }
     
 }

@@ -28,15 +28,30 @@ public class TelaJogador extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) TabalaJogadores.getModel();
         TabalaJogadores.setRowSorter(new TableRowSorter(modelo));
         
-        //listarTabela();
+        System.out.println("listar dados na tabela.");
+        
+        listarTabela();
     }
     
-    /*public void listarTabela() throws SQLException{
+    public void listarTabela() throws SQLException{
+        System.out.println("listar dados na tabela 1.");
         DefaultTableModel modelo = (DefaultTableModel) TabalaJogadores.getModel();
-        JogadorDAO jogador = new JogadorDAO();
+        System.out.println("listar dados na tabela 2.");
+        JogadorDAO jogadorDao = new JogadorDAO();
+        System.out.println("listar dados na tabela 3.");
         
-        for (Jogador m: jogador.pesquisa(nome))
-    }*/
+        for (Jogador m: jogadorDao.listar()){
+            System.out.println("listar dados na tabela 10.");
+            modelo.addRow(new Object[]{m.getNome(),
+            m.getSobreNome(),
+            m.getDataNascimento(),
+            m.getCategoria(),
+            //m.contato.getEmail(),
+            //m.endereco.getCidade()
+            });
+            
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
