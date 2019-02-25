@@ -583,6 +583,7 @@ public class CadastroJogador extends javax.swing.JFrame {
             p.setNome(nome.getText());
             p.setSobreNome(sobreNome.getText());
             p.setNacionalidade(nacionalidade.getText());
+            p.setSexo(((String)(sexo.getSelectedItem())));
             p.setRg(indentidade.getText());
             p.setCpf(cpf.getText());
             p.setDataNascimento(dataNascimeto.getText());

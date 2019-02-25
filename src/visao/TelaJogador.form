@@ -161,7 +161,7 @@
                   <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <EmptySpace pref="24" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -178,12 +178,12 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="6" rowCount="4">
-                    <Column editable="true" title="Nome:" type="java.lang.Object"/>
-                    <Column editable="true" title="Sobrenome:" type="java.lang.Object"/>
-                    <Column editable="true" title="Data de Nascimento:" type="java.lang.Object"/>
-                    <Column editable="true" title="Categoria:" type="java.lang.Object"/>
-                    <Column editable="true" title="Email:" type="java.lang.Object"/>
-                    <Column editable="true" title="Cidade:" type="java.lang.Object"/>
+                    <Column editable="false" title="Nome:" type="java.lang.Object"/>
+                    <Column editable="false" title="Sobrenome:" type="java.lang.Object"/>
+                    <Column editable="false" title="Data de Nascimento:" type="java.lang.Object"/>
+                    <Column editable="false" title="Categoria:" type="java.lang.Object"/>
+                    <Column editable="false" title="Email:" type="java.lang.Object"/>
+                    <Column editable="false" title="Cidade:" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -224,6 +224,12 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="TabalaJogadoresAncestorAdded"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TabalaJogadoresMouseClicked"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TabalaJogadoresKeyPressed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TabalaJogadoresKeyReleased"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -249,6 +255,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jTextField1"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PesquisaNomeActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

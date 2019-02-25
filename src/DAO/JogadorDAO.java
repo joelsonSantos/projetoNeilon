@@ -147,8 +147,8 @@ public class JogadorDAO {
             Conexao conect = new Conexao();
             PreparedStatement st = conect.getConnection().prepareStatement("SELECT *"
                     + "FROM pessoa, contatos, endereco, jogador "
-                    + "WHERE idPessoa = ? AND idPessoa = contatos.idPessoa_fk AND " +
-"                    +  idPessoa = endereco.idPessoa_fk AND idPessoa = jogador.idPessoa_fk");
+                    + "WHERE idPessoa = ? AND idPessoa = contatos.idPessoa_fk AND " 
+                    + " idPessoa = endereco.idPessoa_fk AND idPessoa = jogador.idPessoa_fk");
             
             /*pessoa.nome, pessoa.sobrenome, pessoa.nacionalidade, pessoa.rg,"
                     + "pessoa.cpf, pessoa.dataNascimento, pessoa.escolaridade, pessoa.instituicao, pessoa.sexo, contatos.telefoneResidencial,"
@@ -165,15 +165,15 @@ public class JogadorDAO {
                 jogador = new Jogador();
                 endereco = new Endereco();
                 contatos = new Contato();
-                pessoa.setNome(rs.getString("pessoa.nome"));
-                pessoa.setSobreNome(rs.getString("pessoa.sobrenome"));
-                pessoa.setNacionalidade(rs.getString("pessoa.nacionalidade"));
-                pessoa.setRg(rs.getString("pessoa.rg"));
-                pessoa.setCpf(rs.getString("pessoa.cpf"));
-                pessoa.setDataNascimento(rs.getString("pessoa.dataNascimento"));
-                pessoa.setEscolaridade(rs.getString("pessoa.escolaridade"));
-                pessoa.setInstituicao(rs.getString("pessoa.instituicao"));
-                pessoa.setSexo(rs.getString("pessoa.sexo"));
+                jogador.setNome(rs.getString("pessoa.nome"));
+                jogador.setSobreNome(rs.getString("pessoa.sobrenome"));
+                jogador.setNacionalidade(rs.getString("pessoa.nacionalidade"));
+                jogador.setRg(rs.getString("pessoa.rg"));
+                jogador.setCpf(rs.getString("pessoa.cpf"));
+                jogador.setDataNascimento(rs.getString("pessoa.dataNascimento"));
+                jogador.setEscolaridade(rs.getString("pessoa.escolaridade"));
+                jogador.setInstituicao(rs.getString("pessoa.instituicao"));
+                jogador.setSexo(rs.getString("pessoa.sexo"));
                 contatos.setTelefoneResidencial(rs.getString("contatos.telefoneResidencial"));
                 contatos.setCelular(rs.getString("contatos.celular"));
                 contatos.setEmail(rs.getString("contatos.email"));
@@ -205,16 +205,16 @@ public class JogadorDAO {
         return jogador;
     }
     
-   public static ArrayList<Jogador> listar() throws SQLException{
-       Conexao conect = new Conexao();
-       ArrayList<Jogador> jogadorLista = new ArrayList<>();
+   public ArrayList<Jogador> listar() throws SQLException{
+       
+       ArrayList<Jogador> jogadorLista = new ArrayList<Jogador>();
        try{
+           Conexao conect = new Conexao();
            System.out.println("listar dados na tabela 4.");
-           PreparedStatement st = conect.getConnection().prepareStatement("SELECT pessoa.nome, pessoa.sobrenome, pessoa.dataNascimento,"
-                   + "jogador.categoria, contatos.email, endereco.cidade "
-                   + "FROM pessoa, contatos, endereco, jogador "
-                    + "WHERE idPessoa = contatos.idPessoa_fk AND " +
-"                    +  idPessoa = endereco.idPessoa_fk AND idPessoa = jogador.idPessoa_fk");
+           PreparedStatement st = conect.getConnection().prepareStatement("SELECT *"
+                    + "FROM pessoa, contatos, endereco, jogador "
+                    + "WHERE   pessoa.idPessoa = contatos.idPessoa_fk AND " 
+                    + " idPessoa = endereco.idPessoa_fk AND idPessoa = jogador.idPessoa_fk");
            System.out.println("listar dados na tabela 5.");
            ResultSet rs = st.executeQuery();
                 while(rs.next()){
@@ -235,7 +235,8 @@ public class JogadorDAO {
                     endereco.setCidade(rs.getString("endereco.cidade"));
                     System.out.println("jogador.endereco.cidade " + endereco.getCidade());
                     System.out.println("listar dados na tabela 9.");
-                    System.out.println("jogador.setNome "+jogador.getNome()+ "jogador.setSobrenome "+ jogador.getSobreNome()
+                    System.out.println("listar o jogadores na tabela de jogador:  "
+                            + "jogador.setNome "+jogador.getNome()+ "jogador.setSobrenome "+ jogador.getSobreNome()
                     +"jogador.setDataNascimento"+jogador.getDataNascimento()+"jogador.setCategoria"+jogador.getCategoria()
                     +"jogador.contato.setEmail"+contato.getEmail()+"jogador.endereco.setCidade"+endereco.getCidade());
                     
@@ -245,7 +246,7 @@ public class JogadorDAO {
        }catch(SQLException e){
            
        }
-        return null;
+        return jogadorLista;
    }
     
 }

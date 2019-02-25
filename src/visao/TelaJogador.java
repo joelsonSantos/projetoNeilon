@@ -42,12 +42,13 @@ public class TelaJogador extends javax.swing.JFrame {
         
         for (Jogador m: jogadorDao.listar()){
             System.out.println("listar dados na tabela 10.");
-            modelo.addRow(new Object[]{m.getNome(),
-            m.getSobreNome(),
-            m.getDataNascimento(),
-            m.getCategoria(),
-            //m.contato.getEmail(),
-            //m.endereco.getCidade()
+            modelo.addRow(new Object[]{
+                m.getNome(),
+                m.getSobreNome(),
+                m.getDataNascimento(),
+                m.getCategoria()
+                //m.contato.getEmail(),
+                //m.endereco.getCidade()
             });
             
         }
@@ -123,7 +124,37 @@ public class TelaJogador extends javax.swing.JFrame {
             new String [] {
                 "Nome:", "Sobrenome:", "Data de Nascimento:", "Categoria:", "Email:", "Cidade:"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TabalaJogadores.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                TabalaJogadoresAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        TabalaJogadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabalaJogadoresMouseClicked(evt);
+            }
+        });
+        TabalaJogadores.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TabalaJogadoresKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TabalaJogadoresKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(TabalaJogadores);
 
         jButton2.setText("Voltar");
@@ -162,6 +193,11 @@ public class TelaJogador extends javax.swing.JFrame {
         });
 
         PesquisaNome.setText("jTextField1");
+        PesquisaNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PesquisaNomeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -232,6 +268,27 @@ public class TelaJogador extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void PesquisaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisaNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PesquisaNomeActionPerformed
+
+    private void TabalaJogadoresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabalaJogadoresKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TabalaJogadoresKeyPressed
+
+    private void TabalaJogadoresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabalaJogadoresKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TabalaJogadoresKeyReleased
+
+    private void TabalaJogadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabalaJogadoresMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_TabalaJogadoresMouseClicked
+
+    private void TabalaJogadoresAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TabalaJogadoresAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TabalaJogadoresAncestorAdded
 
     /**
      * @param args the command line arguments
