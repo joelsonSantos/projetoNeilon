@@ -8,6 +8,8 @@ package visao;
 import Controller.CadastroJogadorController;
 import DAO.JogadorDAO;
 import controle.Jogador;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +27,9 @@ public class TelaJogador extends javax.swing.JFrame {
      */
     public TelaJogador() throws SQLException {
         initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        pegarResolucao();
         DefaultTableModel modelo = (DefaultTableModel) TabalaJogadores.getModel();
         TabalaJogadores.setRowSorter(new TableRowSorter(modelo));
         
@@ -52,6 +57,11 @@ public class TelaJogador extends javax.swing.JFrame {
             });
             
         }
+    }
+    private void pegarResolucao(){
+        Toolkit t = Toolkit.getDefaultToolkit();
+        Dimension dimensao = t.getScreenSize();
+        this.setSize((dimensao.width +5), (dimensao.height -38));
     }
 
     /**
@@ -174,7 +184,8 @@ public class TelaJogador extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1))
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +193,7 @@ public class TelaJogador extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jButton3.setText("Pesquisa");
@@ -192,7 +203,6 @@ public class TelaJogador extends javax.swing.JFrame {
             }
         });
 
-        PesquisaNome.setText("jTextField1");
         PesquisaNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PesquisaNomeActionPerformed(evt);
@@ -204,7 +214,7 @@ public class TelaJogador extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(806, Short.MAX_VALUE)
                 .addComponent(PesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
@@ -214,9 +224,7 @@ public class TelaJogador extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -283,6 +291,10 @@ public class TelaJogador extends javax.swing.JFrame {
 
     private void TabalaJogadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabalaJogadoresMouseClicked
         // TODO add your handling code here:
+        if(evt.getClickCount()>1){
+            int row = this.TabalaJogadores.rowAtPoint(evt.getPoint());
+            //showEditForm(TelaJogador.get(row));
+        }
         
     }//GEN-LAST:event_TabalaJogadoresMouseClicked
 
@@ -290,25 +302,30 @@ public class TelaJogador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TabalaJogadoresAncestorAdded
 
+    
+    public void setaTextFilds(){
+        int linha = TabalaJogadores.getSelectedRow();
+        
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    //public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaJogador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(TelaJogador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -324,14 +341,14 @@ public class TelaJogador extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            try {
-                new TelaJogador().setVisible(true);
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaJogador.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-    }
+     //   java.awt.EventQueue.invokeLater(() -> {
+      //      try {
+       //         new TelaJogador().setVisible(true);
+       //     } catch (SQLException ex) {
+        //        Logger.getLogger(TelaJogador.class.getName()).log(Level.SEVERE, null, ex);
+      //      }
+        //});
+    //}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField PesquisaNome;

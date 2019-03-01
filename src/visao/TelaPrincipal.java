@@ -5,6 +5,8 @@
  */
 package visao;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +22,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        pegarResolucao();
+    }
+    
+    private void pegarResolucao(){
+        Toolkit t = Toolkit.getDefaultToolkit();
+        Dimension dimensao = t.getScreenSize();
+        this.setSize((dimensao.width +5), (dimensao.height -38));
     }
 
     /**
