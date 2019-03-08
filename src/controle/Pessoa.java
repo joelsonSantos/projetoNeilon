@@ -153,8 +153,8 @@ public class Pessoa {
     public String toString() {
         return "Pessoa{" + "idPessoa" + "nome=" + nome + ", sobreNome=" + sobreNome + 
                 ", nacionalidade=" + nacionalidade + ", rg=" + rg + ", cpf=" + cpf + 
-                ", dataNascimento=" + dataNascimento + ", contato=" + contato + 
-                ", conta=" + conta + ", endereco=" + endereco +", escolaridade=" 
+                ", dataNascimento=" + dataNascimento + ", contato=" + contato.toString() + 
+                ", conta=" + conta.toString() + ", endereco=" + endereco.toString() +", escolaridade=" 
                 + escolaridade +", instituicao="+ instituicao+ ", sexo= "+ sexo + '}';
     }
 

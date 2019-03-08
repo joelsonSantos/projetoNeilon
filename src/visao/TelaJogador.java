@@ -6,6 +6,7 @@
 package visao;
 
 import Controller.CadastroJogadorController;
+import visao.CadastroJogador;
 import DAO.JogadorDAO;
 import controle.Jogador;
 import java.awt.Dimension;
@@ -13,6 +14,7 @@ import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -29,24 +31,19 @@ public class TelaJogador extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
-        pegarResolucao();
-        DefaultTableModel modelo = (DefaultTableModel) TabalaJogadores.getModel();
-        TabalaJogadores.setRowSorter(new TableRowSorter(modelo));
-        
-        System.out.println("listar dados na tabela.");
-        
+        //pegarResolucao();
+        DefaultTableModel modelo = (DefaultTableModel) TabelaJogadores.getModel();
+        TabelaJogadores.setRowSorter(new TableRowSorter(modelo));
+                
         listarTabela();
     }
     
     public void listarTabela() throws SQLException{
-        System.out.println("listar dados na tabela 1.");
-        DefaultTableModel modelo = (DefaultTableModel) TabalaJogadores.getModel();
-        System.out.println("listar dados na tabela 2.");
+        
+        DefaultTableModel modelo = (DefaultTableModel) TabelaJogadores.getModel();
         JogadorDAO jogadorDao = new JogadorDAO();
-        System.out.println("listar dados na tabela 3.");
         
         for (Jogador m: jogadorDao.listar()){
-            System.out.println("listar dados na tabela 10.");
             modelo.addRow(new Object[]{
                 m.getNome(),
                 m.getSobreNome(),
@@ -78,9 +75,9 @@ public class TelaJogador extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TabalaJogadores = new javax.swing.JTable();
+        TabelaJogadores = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botaoPesquisa = new javax.swing.JButton();
         PesquisaNome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -124,7 +121,7 @@ public class TelaJogador extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.setPreferredSize(new java.awt.Dimension(1370, 600));
 
-        TabalaJogadores.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaJogadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -143,29 +140,29 @@ public class TelaJogador extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TabalaJogadores.addAncestorListener(new javax.swing.event.AncestorListener() {
+        TabelaJogadores.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                TabalaJogadoresAncestorAdded(evt);
+                TabelaJogadoresAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        TabalaJogadores.addMouseListener(new java.awt.event.MouseAdapter() {
+        TabelaJogadores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TabalaJogadoresMouseClicked(evt);
+                TabelaJogadoresMouseClicked(evt);
             }
         });
-        TabalaJogadores.addKeyListener(new java.awt.event.KeyAdapter() {
+        TabelaJogadores.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                TabalaJogadoresKeyPressed(evt);
+                TabelaJogadoresKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                TabalaJogadoresKeyReleased(evt);
+                TabelaJogadoresKeyReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(TabalaJogadores);
+        jScrollPane1.setViewportView(TabelaJogadores);
 
         jButton2.setText("Voltar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -196,10 +193,10 @@ public class TelaJogador extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jButton3.setText("Pesquisa");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botaoPesquisa.setText("Pesquisa");
+        botaoPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botaoPesquisaActionPerformed(evt);
             }
         });
 
@@ -217,14 +214,14 @@ public class TelaJogador extends javax.swing.JFrame {
                 .addContainerGap(806, Short.MAX_VALUE)
                 .addComponent(PesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(botaoPesquisa)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(39, 39, 39))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1334, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -241,7 +238,7 @@ public class TelaJogador extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton3)
+                    .addComponent(botaoPesquisa)
                     .addComponent(PesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -264,47 +261,77 @@ public class TelaJogador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botaoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPesquisaActionPerformed
         Jogador jogador;
-        String nomeJogador = PesquisaNome.getText();
+        
         try{
+            String nomeJogador = PesquisaNome.getText();
             jogador = CadastroJogadorController.pesquisa(nomeJogador);
+            
+            jogador = CadastroJogadorController.pesquisaID(jogador.getIdPessoa());
+            
+            if(jogador != null){
+                
+                CadastroJogador cadastroJogador =new CadastroJogador ();
+                cadastroJogador.setVisible(true);
+                JOptionPane.showMessageDialog(null, "idPessoa tela jogador"+ jogador.getIdPessoa());
+                JOptionPane.showMessageDialog(null, "pesquisa nome tela jogador"+ jogador.getNome());
+                CadastroJogadorController.preencherTelaJogador(jogador);
+                //cadastroJogador.preencherTelaJogador(nomeJogador);
+                
+                dispose();
+            }else{
+                System.out.println("Jogador nao encontrado....");
+                JOptionPane.showMessageDialog(this, "Jogador nao encontrado.");
+            }
             
         } catch (Exception ex) {
             Logger.getLogger(TelaJogador.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botaoPesquisaActionPerformed
 
+    /*private void preencherTelaJogador(Jogador jogador){
+        
+        CadastroJogador cadastroJogador =new CadastroJogador ();
+        cadastroJogador.setVisible(true);
+        //cadastroJogador.preencherTelaJogador(jogador);
+        dispose();
+    }*/
     private void PesquisaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisaNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PesquisaNomeActionPerformed
 
-    private void TabalaJogadoresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabalaJogadoresKeyPressed
+    private void TabelaJogadoresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabelaJogadoresKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TabalaJogadoresKeyPressed
-
-    private void TabalaJogadoresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabalaJogadoresKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TabalaJogadoresKeyReleased
-
-    private void TabalaJogadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabalaJogadoresMouseClicked
-        // TODO add your handling code here:
-        if(evt.getClickCount()>1){
-            int row = this.TabalaJogadores.rowAtPoint(evt.getPoint());
-            //showEditForm(TelaJogador.get(row));
-        }
         
-    }//GEN-LAST:event_TabalaJogadoresMouseClicked
+        
+    }//GEN-LAST:event_TabelaJogadoresKeyPressed
 
-    private void TabalaJogadoresAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TabalaJogadoresAncestorAdded
+    private void TabelaJogadoresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabelaJogadoresKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_TabalaJogadoresAncestorAdded
+        setaTextFilds();
+    }//GEN-LAST:event_TabelaJogadoresKeyReleased
+
+    private void TabelaJogadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaJogadoresMouseClicked
+        // TODO add your handling code here:
+        //if(evt.getClickCount()>1){
+            //int row = this.TabelaJogadores.rowAtPoint(evt.getPoint());
+            //showEditForm(TelaJogador.get(row));
+        //}
+        setaTextFilds();
+        
+    }//GEN-LAST:event_TabelaJogadoresMouseClicked
+
+    private void TabelaJogadoresAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TabelaJogadoresAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TabelaJogadoresAncestorAdded
 
     
     public void setaTextFilds(){
-        int linha = TabalaJogadores.getSelectedRow();
+        int linha = TabelaJogadores.getSelectedRow();
+        PesquisaNome.setText(TabelaJogadores.getValueAt(linha,0).toString());
         
     }
     /**
@@ -352,10 +379,10 @@ public class TelaJogador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField PesquisaNome;
-    private javax.swing.JTable TabalaJogadores;
+    private javax.swing.JTable TabelaJogadores;
+    private javax.swing.JButton botaoPesquisa;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

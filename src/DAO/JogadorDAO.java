@@ -102,7 +102,7 @@ public class JogadorDAO {
     
     public static Jogador pesquisa(String nome) throws Exception{
         Jogador jogador = null;
-        Pessoa pessoa = null;
+        //Pessoa pessoa = null;
         
         try{
             Conexao conect = new Conexao();
@@ -112,7 +112,7 @@ public class JogadorDAO {
             
             if(rs.next()){
                 jogador = new Jogador();
-                pessoa =new Pessoa();
+                //pessoa =new Pessoa();
                 jogador.setIdPessoa(rs.getInt("idPessoa"));
                 //pessoa.setIdPessoa(rs.getInt("idPessoa"));
                 /*jogador.setNome(rs.getString("nome"));
@@ -123,7 +123,7 @@ public class JogadorDAO {
                 jogador.setDataNascimento(rs.getString("dataNascimento"));
                 jogador.setEscolaridade(rs.getString("escolaridade"));
                 jogador.setInstituicao(rs.getString("instituicao"));*/
-                JOptionPane.showMessageDialog(null, "idPessoa"+ jogador.getIdPessoa());
+                JOptionPane.showMessageDialog(null, "idPessoa primenra pesquisa  "+ jogador.getIdPessoa());
                 pesquisaID(jogador.getIdPessoa());
                 
             }
@@ -141,11 +141,16 @@ public class JogadorDAO {
         Jogador jogador = null;
         Endereco endereco = null;
         Contato contatos = null;
-        Pessoa pessoa = null;
+        //Pessoa pessoa = null;
         JOptionPane.showMessageDialog(null, "idPessoa segunda pesquisa"+ idPessoa);
         try{
             Conexao conect = new Conexao();
-            PreparedStatement st = conect.getConnection().prepareStatement("SELECT *"
+            PreparedStatement st = conect.getConnection().prepareStatement("SELECT pessoa.nome, pessoa.sobrenome,"
+                    + "pessoa.nacionalidade, pessoa.rg, pessoa.cpf, pessoa.dataNascimento, pessoa.escolaridade,"
+                    + "pessoa.instituicao, pessoa.sexo, contatos.telefoneResidencial, contatos.celular, contatos.email,"
+                    + "endereco.rua, endereco.numero, endereco.bairro, endereco.cidade, endereco.estado, endereco.pais,"
+                    + "endereco.complemento, endereco.cep, jogador.categoria, jogador.nomeEmpresario, jogador.posicao,"
+                    + "jogador.peso, jogador.altura "
                     + "FROM pessoa, contatos, endereco, jogador "
                     + "WHERE idPessoa = ? AND idPessoa = contatos.idPessoa_fk AND " 
                     + " idPessoa = endereco.idPessoa_fk AND idPessoa = jogador.idPessoa_fk");
@@ -161,7 +166,7 @@ public class JogadorDAO {
             st.setInt(1, idPessoa);
             ResultSet rs = st.executeQuery();
             if(rs.next()){
-                pessoa = new Pessoa();
+                //pessoa = new Pessoa();
                 jogador = new Jogador();
                 endereco = new Endereco();
                 contatos = new Contato();
@@ -174,27 +179,52 @@ public class JogadorDAO {
                 jogador.setEscolaridade(rs.getString("pessoa.escolaridade"));
                 jogador.setInstituicao(rs.getString("pessoa.instituicao"));
                 jogador.setSexo(rs.getString("pessoa.sexo"));
-                contatos.setTelefoneResidencial(rs.getString("contatos.telefoneResidencial"));
-                contatos.setCelular(rs.getString("contatos.celular"));
-                contatos.setEmail(rs.getString("contatos.email"));
-                endereco.setRua(rs.getString("endereco.rua"));
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getNome());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getSobreNome());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getNacionalidade());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getRg());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getCpf());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getDataNascimento());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getEscolaridade());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getInstituicao());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getSexo());
+                
+                jogador.setContato(new Contato(rs.getString("contatos.telefoneResidencial"), rs.getString("contatos.celular"),
+                rs.getString("contatos.email")));
+                //contatos.setTelefoneResidencial(rs.getString("contatos.telefoneResidencial"));
+                JOptionPane.showMessageDialog(null, "telefone residencial apos a pesquisa   "+ jogador.contato.getTelefoneResidencial());
+                //contatos.setCelular(rs.getString("contatos.celular"));
+                //contatos.setEmail(rs.getString("contatos.email"));
+                
+                jogador.setEndereco(new Endereco((rs.getString("endereco.rua")),
+                (rs.getString("endereco.numero")),
+                (rs.getString("endereco.bairro")),
+                (rs.getString("endereco.cidade")),
+                (rs.getString("endereco.estado")),
+                (rs.getString("endereco.pais")),
+                (rs.getString("endereco.complemento")),
+                (rs.getString("endereco.cep"))));
+                JOptionPane.showMessageDialog(null, "rua apos a pesquisa   "+ jogador.endereco.getRua());
+                
+                /*endereco.setRua(rs.getString("endereco.rua"));
                 endereco.setNumero(rs.getString("endereco.numero"));
                 endereco.setBairro(rs.getString("endereco.bairro"));
                 endereco.setCidade(rs.getString("endereco.cidade"));
                 endereco.setEstado(rs.getString("endereco.estado"));
                 endereco.setPais(rs.getString("endereco.pais"));
                 endereco.setComplemento(rs.getString("endereco.complemento"));
-                endereco.setCep(rs.getString("endereco.cep"));
+                endereco.setCep(rs.getString("endereco.cep"));*/
                 jogador.setCategoria(rs.getString("jogador.categoria"));
                 jogador.setNomeEmpresario(rs.getString("jogador.nomeEmpresario"));
                 jogador.setPosicao(rs.getString("jogador.posicao"));
                 jogador.setPeso(rs.getDouble("jogador.peso"));
                 jogador.setAltura(rs.getDouble("jogador.altura"));
                 
-                System.out.println(pessoa.toString());
+                //System.out.println(pessoa.toString());
                 System.out.println(jogador.toString());
-                System.out.println(contatos.toString());
-                System.out.println(endereco.toString());
+                JOptionPane.showMessageDialog(null,"toString jogador, "+jogador.toString());
+                //System.out.println(contatos.toString());
+                //System.out.println(endereco.toString());
                 
             }
         }catch(Exception e){
@@ -202,6 +232,8 @@ public class JogadorDAO {
             e.printStackTrace();
             throw new Exception("Erro na pesquisa.");
         }
+        JOptionPane.showMessageDialog(null, "idPessoa segunda pesquisa"+ jogador.getIdJogador());
+        JOptionPane.showMessageDialog(null, "nome segunda pesquisa"+ jogador.getNome());
         return jogador;
     }
     

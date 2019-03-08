@@ -87,7 +87,7 @@ public class CadastroJogador extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         cep = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        Voltar = new javax.swing.JButton();
         Salvar = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         pais = new javax.swing.JComboBox<>();
@@ -231,10 +231,10 @@ public class CadastroJogador extends javax.swing.JFrame {
 
         jLabel15.setText("CEP:");
 
-        jButton3.setText("Voltar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Voltar.setText("Voltar");
+        Voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                VoltarActionPerformed(evt);
             }
         });
 
@@ -323,7 +323,7 @@ public class CadastroJogador extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Salvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)))
+                        .addComponent(Voltar)))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
@@ -505,7 +505,7 @@ public class CadastroJogador extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
+                            .addComponent(Voltar)
                             .addComponent(Salvar)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -589,7 +589,8 @@ public class CadastroJogador extends javax.swing.JFrame {
             p.setDataNascimento(dataNascimeto.getText());
             p.setEscolaridade(escolaridade.getText());
             p.setInstituicao(instituicao.getText());
-            p.setEndereco(new Endereco(rua.getText(), numero.getText(), bairro.getText(), cidade.getText(), ((String)(estado.getSelectedItem())), ((String)(pais.getSelectedItem())), complemento.getText(), cep.getText() ));
+            p.setEndereco(new Endereco(rua.getText(), numero.getText(), bairro.getText(), cidade.getText(), 
+                    ((String)(estado.getSelectedItem())), ((String)(pais.getSelectedItem())), complemento.getText(), cep.getText() ));
             p.setCategoria(categoria.getText());
             p.setNomeEmpresario(nomeEmpresario.getText());
             p.setContato(new Contato( telefoneFixo.getText(),celular.getText(), email.getText()));
@@ -634,7 +635,7 @@ public class CadastroJogador extends javax.swing.JFrame {
         peso.setText("");
         altura.setText("");
    }
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
          TelaJogador jog = null;
         try {
             jog = new TelaJogador();
@@ -644,8 +645,35 @@ public class CadastroJogador extends javax.swing.JFrame {
          jog.setVisible(true);
          dispose();
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_VoltarActionPerformed
 
+    public void preencherTelaJogador(Jogador jogador){
+        nome.setText(jogador.getNome());
+        sobreNome.setText(jogador.getSobreNome());
+        nacionalidade.setText(jogador.getNacionalidade());
+        indentidade.setText(jogador.getRg());
+        cpf.setText(jogador.getCpf());
+        dataNascimeto.setText(jogador.getDataNascimento());
+        escolaridade.setText(jogador.getEscolaridade());
+        instituicao.setText(jogador.getInstituicao());
+        telefoneFixo.setText(jogador.getContato().getTelefoneResidencial());
+        celular.setText(jogador.getContato().getCelular());
+        email.setText(jogador.getContato().getEmail());
+        rua.setText(jogador.getEndereco().getRua());
+        numero.setText(jogador.getEndereco().getNumero());
+        bairro.setText(jogador.getEndereco().getBairro());
+        cidade.setText(jogador.getEndereco().getCidade());
+        complemento.setText(jogador.getEndereco().getComplemento());
+        cep.setText(jogador.getEndereco().getCep());
+        categoria.setText(jogador.getCategoria());
+        nomeEmpresario.setText(jogador.getNomeEmpresario());
+        posicao.setText(jogador.getPosicao());
+        //peso.setText(jogador.getPeso());
+        //altura.setText(jogador.getAltura());
+        
+        
+        
+    }
     private void InformacoesMedicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InformacoesMedicasActionPerformed
         CadastroInformaçõesMedicas medico = new CadastroInformaçõesMedicas();
         medico.setVisible(true);
@@ -728,6 +756,7 @@ public class CadastroJogador extends javax.swing.JFrame {
     private javax.swing.JButton Contrato;
     private javax.swing.JButton InformacoesMedicas;
     private javax.swing.JButton Salvar;
+    private javax.swing.JButton Voltar;
     private javax.swing.JTextField altura;
     private javax.swing.JTextField bairro;
     private javax.swing.JTextField categoria;
@@ -744,7 +773,6 @@ public class CadastroJogador extends javax.swing.JFrame {
     private javax.swing.JComboBox estado;
     private javax.swing.JTextField indentidade;
     private javax.swing.JTextField instituicao;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
