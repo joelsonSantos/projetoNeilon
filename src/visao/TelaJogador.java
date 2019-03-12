@@ -262,13 +262,15 @@ public class TelaJogador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void botaoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPesquisaActionPerformed
-        Jogador jogador;
+        
         
         try{
+            Jogador jogador =new Jogador();
             String nomeJogador = PesquisaNome.getText();
-            jogador = CadastroJogadorController.pesquisa(nomeJogador);
+            jogador.setNome(nomeJogador);
+            jogador = CadastroJogadorController.pesquisa(jogador);
             
-            jogador = CadastroJogadorController.pesquisaID(jogador.getIdPessoa());
+            //jogador = CadastroJogadorController.pesquisaID(jogador.getIdPessoa());
             
             if(jogador != null){
                 
@@ -276,8 +278,8 @@ public class TelaJogador extends javax.swing.JFrame {
                 cadastroJogador.setVisible(true);
                 JOptionPane.showMessageDialog(null, "idPessoa tela jogador"+ jogador.getIdPessoa());
                 JOptionPane.showMessageDialog(null, "pesquisa nome tela jogador"+ jogador.getNome());
-                CadastroJogadorController.preencherTelaJogador(jogador);
-                //cadastroJogador.preencherTelaJogador(nomeJogador);
+                //CadastroJogador.preencherTelaJogador(jogador);
+                cadastroJogador.preencherTelaJogador(jogador);
                 
                 dispose();
             }else{

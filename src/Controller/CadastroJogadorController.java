@@ -20,13 +20,13 @@ public class CadastroJogadorController {
         return JogadorDAO.persistir(jogador);
     }
     
-    public static Jogador pesquisa (String nome) throws Exception{
+    public static Jogador pesquisa (Jogador nome) throws Exception{
         return JogadorDAO.pesquisa(nome);
     }
-    public static Jogador pesquisaID(int idPessoa) throws Exception{
+    public static Jogador pesquisaID(Jogador idPessoa) throws Exception{
         return JogadorDAO.pesquisaID(idPessoa);
     }
-    public static void preencherTelaJogador(Jogador jogador) throws Exception{
-        return ;
+    public  Jogador preencherTelaJogador(Jogador jogador) throws Exception{       
+        return jogador;
     }
 }

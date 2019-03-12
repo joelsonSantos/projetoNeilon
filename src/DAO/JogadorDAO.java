@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import Controller.CadastroJogadorController;
 import com.mysql.jdbc.CharsetMapping;
 import com.sun.org.apache.xalan.internal.xsltc.cmdline.getopt.GetOpt;
 import controle.Contato;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static jdk.internal.org.objectweb.asm.commons.GeneratorAdapter.AND;
 import persistencia.Conexao;
+import visao.CadastroJogador;
 import visao.TelaJogador;
 
 
@@ -48,6 +50,7 @@ public class JogadorDAO {
                             + jogador.getSexo()
                     +"')", Statement.RETURN_GENERATED_KEYS);  
             JOptionPane.showMessageDialog(null, "pessoa gravada...  ");
+            JOptionPane.showMessageDialog(null, "idJogador gerado  " +jogador.getIdPessoa());
             final ResultSet rs = st.getGeneratedKeys();
             
             if (rs.next()){
@@ -100,14 +103,14 @@ public class JogadorDAO {
         
     }
     
-    public static Jogador pesquisa(String nome) throws Exception{
+    public static Jogador pesquisa(Jogador nome) throws Exception{
         Jogador jogador = null;
         //Pessoa pessoa = null;
-        
+        String nomeJogador= nome.getNome();
         try{
             Conexao conect = new Conexao();
             PreparedStatement st = conect.getConnection().prepareStatement("SELECT * FROM pessoa where nome = ?");
-            st.setString(1, nome);
+            st.setString(1, nomeJogador);
             ResultSet rs = st.executeQuery();
             
             if(rs.next()){
@@ -124,7 +127,7 @@ public class JogadorDAO {
                 jogador.setEscolaridade(rs.getString("escolaridade"));
                 jogador.setInstituicao(rs.getString("instituicao"));*/
                 JOptionPane.showMessageDialog(null, "idPessoa primenra pesquisa  "+ jogador.getIdPessoa());
-                pesquisaID(jogador.getIdPessoa());
+                pesquisaID(jogador);
                 
             }
             
@@ -137,11 +140,12 @@ public class JogadorDAO {
         return jogador;
         
     }
-    public static Jogador pesquisaID(int idPessoa) throws Exception{
-        Jogador jogador = null;
-        Endereco endereco = null;
-        Contato contatos = null;
+    public static Jogador pesquisaID(Jogador jogadorPesquisa) throws Exception{
+        //Jogador jogador = null;
+        //Endereco endereco = null;
+        //Contato contatos = null;
         //Pessoa pessoa = null;
+        int idPessoa = jogadorPesquisa.getIdPessoa();
         JOptionPane.showMessageDialog(null, "idPessoa segunda pesquisa"+ idPessoa);
         try{
             Conexao conect = new Conexao();
@@ -167,36 +171,36 @@ public class JogadorDAO {
             ResultSet rs = st.executeQuery();
             if(rs.next()){
                 //pessoa = new Pessoa();
-                jogador = new Jogador();
-                endereco = new Endereco();
-                contatos = new Contato();
-                jogador.setNome(rs.getString("pessoa.nome"));
-                jogador.setSobreNome(rs.getString("pessoa.sobrenome"));
-                jogador.setNacionalidade(rs.getString("pessoa.nacionalidade"));
-                jogador.setRg(rs.getString("pessoa.rg"));
-                jogador.setCpf(rs.getString("pessoa.cpf"));
-                jogador.setDataNascimento(rs.getString("pessoa.dataNascimento"));
-                jogador.setEscolaridade(rs.getString("pessoa.escolaridade"));
-                jogador.setInstituicao(rs.getString("pessoa.instituicao"));
-                jogador.setSexo(rs.getString("pessoa.sexo"));
-                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getNome());
-                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getSobreNome());
-                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getNacionalidade());
-                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getRg());
-                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getCpf());
-                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getDataNascimento());
-                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getEscolaridade());
-                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getInstituicao());
-                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogador.getSexo());
+                //jogador = new Jogador();
+                //endereco = new Endereco();
+                //contatos = new Contato();
+                jogadorPesquisa.setNome(rs.getString("pessoa.nome"));
+                jogadorPesquisa.setSobreNome(rs.getString("pessoa.sobrenome"));
+                jogadorPesquisa.setNacionalidade(rs.getString("pessoa.nacionalidade"));
+                jogadorPesquisa.setRg(rs.getString("pessoa.rg"));
+                jogadorPesquisa.setCpf(rs.getString("pessoa.cpf"));
+                jogadorPesquisa.setDataNascimento(rs.getString("pessoa.dataNascimento"));
+                jogadorPesquisa.setEscolaridade(rs.getString("pessoa.escolaridade"));
+                jogadorPesquisa.setInstituicao(rs.getString("pessoa.instituicao"));
+                jogadorPesquisa.setSexo(rs.getString("pessoa.sexo"));
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogadorPesquisa.getNome());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogadorPesquisa.getSobreNome());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogadorPesquisa.getNacionalidade());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogadorPesquisa.getRg());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogadorPesquisa.getCpf());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogadorPesquisa.getDataNascimento());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogadorPesquisa.getEscolaridade());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogadorPesquisa.getInstituicao());
+                JOptionPane.showMessageDialog(null, "nome do jogador apos a pesquisa   "+ jogadorPesquisa.getSexo());
                 
-                jogador.setContato(new Contato(rs.getString("contatos.telefoneResidencial"), rs.getString("contatos.celular"),
+                jogadorPesquisa.setContato(new Contato(rs.getString("contatos.telefoneResidencial"), rs.getString("contatos.celular"),
                 rs.getString("contatos.email")));
                 //contatos.setTelefoneResidencial(rs.getString("contatos.telefoneResidencial"));
-                JOptionPane.showMessageDialog(null, "telefone residencial apos a pesquisa   "+ jogador.contato.getTelefoneResidencial());
+                JOptionPane.showMessageDialog(null, "telefone residencial apos a pesquisa   "+ jogadorPesquisa.contato.getTelefoneResidencial());
                 //contatos.setCelular(rs.getString("contatos.celular"));
                 //contatos.setEmail(rs.getString("contatos.email"));
                 
-                jogador.setEndereco(new Endereco((rs.getString("endereco.rua")),
+                jogadorPesquisa.setEndereco(new Endereco((rs.getString("endereco.rua")),
                 (rs.getString("endereco.numero")),
                 (rs.getString("endereco.bairro")),
                 (rs.getString("endereco.cidade")),
@@ -204,7 +208,7 @@ public class JogadorDAO {
                 (rs.getString("endereco.pais")),
                 (rs.getString("endereco.complemento")),
                 (rs.getString("endereco.cep"))));
-                JOptionPane.showMessageDialog(null, "rua apos a pesquisa   "+ jogador.endereco.getRua());
+                JOptionPane.showMessageDialog(null, "rua apos a pesquisa   "+ jogadorPesquisa.endereco.getRua());
                 
                 /*endereco.setRua(rs.getString("endereco.rua"));
                 endereco.setNumero(rs.getString("endereco.numero"));
@@ -214,15 +218,15 @@ public class JogadorDAO {
                 endereco.setPais(rs.getString("endereco.pais"));
                 endereco.setComplemento(rs.getString("endereco.complemento"));
                 endereco.setCep(rs.getString("endereco.cep"));*/
-                jogador.setCategoria(rs.getString("jogador.categoria"));
-                jogador.setNomeEmpresario(rs.getString("jogador.nomeEmpresario"));
-                jogador.setPosicao(rs.getString("jogador.posicao"));
-                jogador.setPeso(rs.getDouble("jogador.peso"));
-                jogador.setAltura(rs.getDouble("jogador.altura"));
+                jogadorPesquisa.setCategoria(rs.getString("jogador.categoria"));
+                jogadorPesquisa.setNomeEmpresario(rs.getString("jogador.nomeEmpresario"));
+                jogadorPesquisa.setPosicao(rs.getString("jogador.posicao"));
+                jogadorPesquisa.setPeso(rs.getDouble("jogador.peso"));
+                jogadorPesquisa.setAltura(rs.getDouble("jogador.altura"));
                 
                 //System.out.println(pessoa.toString());
-                System.out.println(jogador.toString());
-                JOptionPane.showMessageDialog(null,"toString jogador, "+jogador.toString());
+                System.out.println(jogadorPesquisa.toString());
+                JOptionPane.showMessageDialog(null,"toString jogador, "+jogadorPesquisa.toString());
                 //System.out.println(contatos.toString());
                 //System.out.println(endereco.toString());
                 
@@ -232,9 +236,10 @@ public class JogadorDAO {
             e.printStackTrace();
             throw new Exception("Erro na pesquisa.");
         }
-        JOptionPane.showMessageDialog(null, "idPessoa segunda pesquisa"+ jogador.getIdJogador());
-        JOptionPane.showMessageDialog(null, "nome segunda pesquisa"+ jogador.getNome());
-        return jogador;
+        JOptionPane.showMessageDialog(null, "idPessoa segunda pesquisa"+ jogadorPesquisa.getIdJogador());
+        JOptionPane.showMessageDialog(null, "nome segunda pesquisa"+ jogadorPesquisa.getNome());
+        //CadastroJogador.preencherTelaJogador(jogadorPesquisa);
+        return jogadorPesquisa;
     }
     
    public ArrayList<Jogador> listar() throws SQLException{

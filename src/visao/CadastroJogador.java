@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import sun.text.resources.FormatData;
 
 /**
  *
@@ -23,6 +24,7 @@ import javax.swing.JOptionPane;
  */
 public class CadastroJogador extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form cadastro
      */
@@ -95,7 +97,7 @@ public class CadastroJogador extends javax.swing.JFrame {
         categoria = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         nomeEmpresario = new javax.swing.JTextField();
-        dataNascimeto = new datechooser.beans.DateChooserCombo();
+        dataNascimento = new com.toedter.calendar.JDateChooser();
         InformacoesMedicas = new javax.swing.JButton();
         Contrato = new javax.swing.JButton();
 
@@ -275,8 +277,8 @@ public class CadastroJogador extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(dataNascimeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel4)
@@ -435,14 +437,17 @@ public class CadastroJogador extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(dataNascimeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel3)
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -586,7 +591,7 @@ public class CadastroJogador extends javax.swing.JFrame {
             p.setSexo(((String)(sexo.getSelectedItem())));
             p.setRg(indentidade.getText());
             p.setCpf(cpf.getText());
-            p.setDataNascimento(dataNascimeto.getText());
+            p.setDataNascimento(dataNascimento.getDateFormatString());
             p.setEscolaridade(escolaridade.getText());
             p.setInstituicao(instituicao.getText());
             p.setEndereco(new Endereco(rua.getText(), numero.getText(), bairro.getText(), cidade.getText(), 
@@ -596,8 +601,8 @@ public class CadastroJogador extends javax.swing.JFrame {
             p.setContato(new Contato( telefoneFixo.getText(),celular.getText(), email.getText()));
             //p.setConta(new Conta());
             p.setPosicao(posicao.getText());
-            p.setPeso(Double.parseDouble(peso.getText()));
-            p.setAltura(Double.parseDouble(altura.getText()));
+            p.setPeso(Double.parseDouble(peso.getText().replace(',', '.')));
+            p.setAltura(Double.parseDouble(altura.getText().replace(',', '.')));
             
 
             LimparCampos();
@@ -617,7 +622,7 @@ public class CadastroJogador extends javax.swing.JFrame {
         nacionalidade.setText("");
         indentidade.setText("");
         cpf.setText("");
-        dataNascimeto.setText("");
+        dataNascimento.setDateFormatString("");
         escolaridade.setText("");
         instituicao.setText("");
         rua.setText("");
@@ -647,29 +652,59 @@ public class CadastroJogador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_VoltarActionPerformed
 
-    public void preencherTelaJogador(Jogador jogador){
+    
+    /*public static void preencher(Jogador jogador) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                preencherTelaJogador(jogador);
+    }*/
+
+    public void preencherTelaJogador(Jogador jogadorp){
+        Jogador jogador = jogadorp;
+        
         nome.setText(jogador.getNome());
+        nome.setEditable(false);
         sobreNome.setText(jogador.getSobreNome());
+        sobreNome.setEditable(false);
         nacionalidade.setText(jogador.getNacionalidade());
+        nacionalidade.setEditable(false);
         indentidade.setText(jogador.getRg());
+        indentidade.setEditable(false);
         cpf.setText(jogador.getCpf());
-        dataNascimeto.setText(jogador.getDataNascimento());
+        cpf.setEditable(false);
+        dataNascimento.setDateFormatString(jogador.getDataNascimento());
+        dataNascimento.setEnabled(false);
         escolaridade.setText(jogador.getEscolaridade());
+        escolaridade.setEditable(false);
         instituicao.setText(jogador.getInstituicao());
+        instituicao.setEditable(false);
         telefoneFixo.setText(jogador.getContato().getTelefoneResidencial());
+        telefoneFixo.setEditable(false);
         celular.setText(jogador.getContato().getCelular());
+        celular.setEditable(false);
         email.setText(jogador.getContato().getEmail());
+        email.setEditable(false);
         rua.setText(jogador.getEndereco().getRua());
+        rua.setEditable(false);
         numero.setText(jogador.getEndereco().getNumero());
+        numero.setEditable(false);
         bairro.setText(jogador.getEndereco().getBairro());
+        bairro.setEditable(false);
         cidade.setText(jogador.getEndereco().getCidade());
+        cidade.setEditable(false);
         complemento.setText(jogador.getEndereco().getComplemento());
+        complemento.setEditable(false);
         cep.setText(jogador.getEndereco().getCep());
+        cep.setEditable(false);
         categoria.setText(jogador.getCategoria());
+        categoria.setEditable(false);
         nomeEmpresario.setText(jogador.getNomeEmpresario());
+        nomeEmpresario.setEditable(false);
         posicao.setText(jogador.getPosicao());
-        //peso.setText(jogador.getPeso());
-        //altura.setText(jogador.getAltura());
+        posicao.setEditable(false);
+        peso.setText(String.valueOf(jogador.getPeso()));
+        peso.setEditable(false);
+        altura.setText(String.valueOf(jogador.getAltura()));
+        altura.setEditable(false);
         
         
         
@@ -765,7 +800,7 @@ public class CadastroJogador extends javax.swing.JFrame {
     private javax.swing.JTextField cidade;
     private javax.swing.JTextField complemento;
     private javax.swing.JTextField cpf;
-    private datechooser.beans.DateChooserCombo dataNascimeto;
+    private com.toedter.calendar.JDateChooser dataNascimento;
     private javax.swing.JTextField dddCelular;
     private javax.swing.JTextField dddFixo;
     private javax.swing.JTextField email;
