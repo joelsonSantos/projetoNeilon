@@ -50,15 +50,14 @@ public class JogadorDAO {
                             + jogador.getSexo()
                     +"')", Statement.RETURN_GENERATED_KEYS);  
             JOptionPane.showMessageDialog(null, "pessoa gravada...  ");
-            JOptionPane.showMessageDialog(null, "idJogador gerado  " +jogador.getIdPessoa());
             final ResultSet rs = st.getGeneratedKeys();
             
             if (rs.next()){
                 ///final int idResult = rs.getInt(1);
                 jogador.setIdPessoa(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "idPessao "+jogador.getIdPessoa());
+                JOptionPane.showMessageDialog(null, "idPessoa gerado    "+jogador.getIdPessoa());
             }
-            st.execute("insert into endereco(rua, numero, bairro, cidade, "
+            st.execute("insert into endereco (rua, numero, bairro, cidade, "
                     + "estado, pais, complemento, cep, idPessoa_fk)"
                     + " values('"+jogador.getEndereco().getRua()+"','"
                         +jogador.getEndereco().getNumero() +"','"
@@ -250,8 +249,8 @@ public class JogadorDAO {
            System.out.println("listar dados na tabela 4.");
            PreparedStatement st = conect.getConnection().prepareStatement("SELECT *"
                     + "FROM pessoa, contatos, endereco, jogador "
-                    + "WHERE   pessoa.idPessoa = contatos.idPessoa_fk AND " 
-                    + " idPessoa = endereco.idPessoa_fk AND idPessoa = jogador.idPessoa_fk");
+                    + "WHERE pessoa.idPessoa = contatos.idPessoa_fk AND " 
+                    + " pessoa.idPessoa = endereco.idPessoa_fk AND pessoa.idPessoa = jogador.idPessoa_fk");
            System.out.println("listar dados na tabela 5.");
            ResultSet rs = st.executeQuery();
                 while(rs.next()){

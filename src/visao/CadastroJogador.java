@@ -605,7 +605,7 @@ public class CadastroJogador extends javax.swing.JFrame {
             p.setAltura(Double.parseDouble(altura.getText().replace(',', '.')));
             
 
-            LimparCampos();
+            //LimparCampos();
             if (CadastroJogadorController.persistir(p)==true){
                 JOptionPane.showMessageDialog(this, "Jogador gravado com sucesso");
                 dispose();
