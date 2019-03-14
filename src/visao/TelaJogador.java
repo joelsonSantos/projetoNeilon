@@ -22,10 +22,11 @@ import javax.swing.table.TableRowSorter;
  *
  * @author laiender.morais
  */
-public class TelaJogador extends javax.swing.JFrame {
+public final class TelaJogador extends javax.swing.JFrame {
 
     /**
      * Creates new form Jogador1
+     * @throws java.sql.SQLException
      */
     public TelaJogador() throws SQLException {
         initComponents();
@@ -34,7 +35,7 @@ public class TelaJogador extends javax.swing.JFrame {
         //pegarResolucao();
         DefaultTableModel modelo = (DefaultTableModel) TabelaJogadores.getModel();
         TabelaJogadores.setRowSorter(new TableRowSorter(modelo));
-                
+        JOptionPane.showMessageDialog(null, "listar tabela....");
         listarTabela();
     }
     

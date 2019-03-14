@@ -13,6 +13,8 @@ import controle.Jogador;
 import controle.Contato;
 import controle.Endereco;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -138,7 +140,6 @@ public class CadastroJogador extends javax.swing.JFrame {
 
         nome.setColumns(2);
         nome.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        nome.setText("Digite o seu nome");
         nome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomeActionPerformed(evt);
@@ -277,8 +278,8 @@ public class CadastroJogador extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel4)
@@ -439,15 +440,15 @@ public class CadastroJogador extends javax.swing.JFrame {
                             .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel3)
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(14, 14, 14)
+                                .addComponent(jLabel3))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -591,7 +592,11 @@ public class CadastroJogador extends javax.swing.JFrame {
             p.setSexo(((String)(sexo.getSelectedItem())));
             p.setRg(indentidade.getText());
             p.setCpf(cpf.getText());
-            p.setDataNascimento(dataNascimento.getDateFormatString());
+            //SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            //data = formato.parse(dataNascimento.getDate().toString());
+            //java.sql.Date datasql = new java.sql.Date(data.getTime());
+            p.setDataNascimento(dataNascimento.getDate().toString());
+            //p.setDataNascimento(dataNascimento.setDate(new SimpleDateFormat("dd/MM/yyyy").parse((dataNascimento))));
             p.setEscolaridade(escolaridade.getText());
             p.setInstituicao(instituicao.getText());
             p.setEndereco(new Endereco(rua.getText(), numero.getText(), bairro.getText(), cidade.getText(), 
@@ -658,8 +663,8 @@ public class CadastroJogador extends javax.swing.JFrame {
                 preencherTelaJogador(jogador);
     }*/
 
-    public void preencherTelaJogador(Jogador jogadorp){
-        Jogador jogador = jogadorp;
+    public void preencherTelaJogador(Jogador jogador) throws ParseException{
+        //Jogador jogador = jogadorp;
         
         nome.setText(jogador.getNome());
         nome.setEditable(false);
@@ -671,7 +676,7 @@ public class CadastroJogador extends javax.swing.JFrame {
         indentidade.setEditable(false);
         cpf.setText(jogador.getCpf());
         cpf.setEditable(false);
-        dataNascimento.setDateFormatString(jogador.getDataNascimento());
+        dataNascimento.setDateFormatString((jogador.getDataNascimento()));
         dataNascimento.setEnabled(false);
         escolaridade.setText(jogador.getEscolaridade());
         escolaridade.setEditable(false);
@@ -705,6 +710,12 @@ public class CadastroJogador extends javax.swing.JFrame {
         peso.setEditable(false);
         altura.setText(String.valueOf(jogador.getAltura()));
         altura.setEditable(false);
+        sexo.setSelectedItem(jogador.getSexo());
+        sexo.setEnabled(false);
+        pais.setSelectedItem(jogador.endereco.getPais());
+        pais.setEnabled(false);
+        estado.setSelectedItem(jogador.endereco.getEstado());
+        estado.setEnabled(false);
         
         
         
