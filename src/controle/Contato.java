@@ -33,6 +33,11 @@ public class Contato {
         this.email = email;
     }
 
+    public Contato(String emal) {
+        this.email = emal;
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getIdContato() {
         return idContato;
     }

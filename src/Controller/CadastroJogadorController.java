@@ -7,6 +7,7 @@ package Controller;
 
 import DAO.JogadorDAO;
 import controle.Jogador;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import visao.CadastroJogador;
 
@@ -28,5 +29,11 @@ public class CadastroJogadorController {
     }
     public  Jogador preencherTelaJogador(Jogador jogador) throws Exception{       
         return jogador;
+    }
+    public static void atualizar(Jogador jogadorAtualizar) throws SQLException{
+         JogadorDAO.atualizar(jogadorAtualizar);
+    }
+    public static void deletar(int jogadorDeletar) throws SQLException{
+        JogadorDAO.delete(jogadorDeletar);
     }
 }

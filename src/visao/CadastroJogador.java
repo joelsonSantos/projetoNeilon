@@ -13,8 +13,11 @@ import controle.Jogador;
 import controle.Contato;
 import controle.Endereco;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -26,14 +29,19 @@ import sun.text.resources.FormatData;
  */
 public class CadastroJogador extends javax.swing.JFrame {
 
-    
+    boolean atualizar = true;
+
     /**
      * Creates new form cadastro
      */
     public CadastroJogador() {
         initComponents();
+
+        Atualizar.setEnabled(false);
+        Excluir.setEnabled(false);
+        HabilitarCampos.setEnabled(true);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -99,9 +107,13 @@ public class CadastroJogador extends javax.swing.JFrame {
         categoria = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         nomeEmpresario = new javax.swing.JTextField();
-        dataNascimento = new com.toedter.calendar.JDateChooser();
+        dataNascimento = new javax.swing.JFormattedTextField();
         InformacoesMedicas = new javax.swing.JButton();
         Contrato = new javax.swing.JButton();
+        Atualizar = new javax.swing.JButton();
+        Excluir = new javax.swing.JButton();
+        HabilitarCampos = new javax.swing.JButton();
+        idPessoa = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Jogador");
@@ -262,6 +274,12 @@ public class CadastroJogador extends javax.swing.JFrame {
 
         jLabel18.setText("Empresario:");
 
+        dataNascimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dataNascimentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -278,8 +296,8 @@ public class CadastroJogador extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel4)
@@ -365,7 +383,7 @@ public class CadastroJogador extends javax.swing.JFrame {
                                                 .addComponent(jLabel5)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(nacionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 126, Short.MAX_VALUE)))
+                                        .addGap(0, 138, Short.MAX_VALUE)))
                                 .addGap(172, 172, 172))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -441,15 +459,17 @@ public class CadastroJogador extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
-                                .addComponent(jLabel3))
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -535,6 +555,33 @@ public class CadastroJogador extends javax.swing.JFrame {
             }
         });
 
+        Atualizar.setText("Atualizar");
+        Atualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AtualizarActionPerformed(evt);
+            }
+        });
+
+        Excluir.setText("Excluir");
+        Excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExcluirActionPerformed(evt);
+            }
+        });
+
+        HabilitarCampos.setText("Habilitar Campos");
+        HabilitarCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HabilitarCamposActionPerformed(evt);
+            }
+        });
+
+        idPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idPessoaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -542,18 +589,25 @@ public class CadastroJogador extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(idPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Contrato)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(InformacoesMedicas)
-                        .addGap(54, 54, 54)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Atualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(HabilitarCampos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Excluir)
+                        .addGap(13, 13, 13)))
                 .addContainerGap())
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -565,7 +619,11 @@ public class CadastroJogador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(InformacoesMedicas)
-                    .addComponent(Contrato))
+                    .addComponent(Contrato)
+                    .addComponent(Atualizar)
+                    .addComponent(Excluir)
+                    .addComponent(HabilitarCampos)
+                    .addComponent(idPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -584,50 +642,80 @@ public class CadastroJogador extends javax.swing.JFrame {
 
     private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
         // TODO add your handling code here:
-        try {
-            Jogador p = new Jogador();
-            p.setNome(nome.getText());
-            p.setSobreNome(sobreNome.getText());
-            p.setNacionalidade(nacionalidade.getText());
-            p.setSexo(((String)(sexo.getSelectedItem())));
-            p.setRg(indentidade.getText());
-            p.setCpf(cpf.getText());
-            //SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            //data = formato.parse(dataNascimento.getDate().toString());
-            //java.sql.Date datasql = new java.sql.Date(data.getTime());
-            p.setDataNascimento(dataNascimento.getDate().toString());
-            //p.setDataNascimento(dataNascimento.setDate(new SimpleDateFormat("dd/MM/yyyy").parse((dataNascimento))));
-            p.setEscolaridade(escolaridade.getText());
-            p.setInstituicao(instituicao.getText());
-            p.setEndereco(new Endereco(rua.getText(), numero.getText(), bairro.getText(), cidade.getText(), 
-                    ((String)(estado.getSelectedItem())), ((String)(pais.getSelectedItem())), complemento.getText(), cep.getText() ));
-            p.setCategoria(categoria.getText());
-            p.setNomeEmpresario(nomeEmpresario.getText());
-            p.setContato(new Contato( telefoneFixo.getText(),celular.getText(), email.getText()));
-            //p.setConta(new Conta());
-            p.setPosicao(posicao.getText());
-            p.setPeso(Double.parseDouble(peso.getText().replace(',', '.')));
-            p.setAltura(Double.parseDouble(altura.getText().replace(',', '.')));
-            
+        Jogador p = new Jogador();
+        JOptionPane.showMessageDialog(null, "atualizar ao salvar   " + atualizar);
+        if (atualizar == true) {
+            try {
 
-            //LimparCampos();
-            if (CadastroJogadorController.persistir(p)==true){
-                JOptionPane.showMessageDialog(this, "Jogador gravado com sucesso");
-                dispose();
+                p.setNome(nome.getText());
+                p.setSobreNome(sobreNome.getText());
+                p.setNacionalidade(nacionalidade.getText());
+                p.setSexo(((String) (sexo.getSelectedItem())));
+                p.setRg(indentidade.getText());
+                p.setCpf(cpf.getText());
+                //SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                //data = formato.parse(dataNascimento.getDate().toString());
+                //java.sql.Date datasql = new java.sql.Date(data.getTime());
+                //Calendar dataNascimento= Calendar.getInstance();
+                p.setDataNascimento(dataNascimento.getText());
+                JOptionPane.showMessageDialog(null, "data nacsimento ao inserir" + p.getDataNascimento());
+                //p.setDataNascimento(dataNascimento.setDate(new SimpleDateFormat("dd/MM/yyyy").parse((dataNascimento))));
+                p.setEscolaridade(escolaridade.getText());
+                p.setInstituicao(instituicao.getText());
+                p.setEndereco(new Endereco(rua.getText(), numero.getText(), bairro.getText(), cidade.getText(),
+                        ((String) (estado.getSelectedItem())), ((String) (pais.getSelectedItem())), complemento.getText(), cep.getText()));
+                p.setContato(new Contato(telefoneFixo.getText(), celular.getText(), email.getText()));
+                p.setCategoria(categoria.getText());
+                p.setNomeEmpresario(nomeEmpresario.getText());
+
+                //p.setConta(new Conta());
+                p.setPosicao(posicao.getText());
+                p.setPeso(Double.parseDouble(peso.getText().replace(',', '.')));
+                p.setAltura(Double.parseDouble(altura.getText().replace(',', '.')));
+
+                //LimparCampos();
+                //if (atualizar== true){
+                //    CadastroJogadorController.atualizar(p);
+                //   JOptionPane.showMessageDialog(null, "atualizar jogador CadastroJogador.... ");
+                //}else
+                if (CadastroJogadorController.persistir(p) == true) {
+                    JOptionPane.showMessageDialog(this, "Jogador gravado com sucesso");
+                    dispose();
+                }
+
+            } catch (Exception ex) {
+                Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        } catch (Exception ex) {
-            Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            JOptionPane.showMessageDialog(null, "Atualizar ao modificar  " + atualizar);
+            try {
+                CadastroJogadorController.atualizar(p);
+                JOptionPane.showMessageDialog(null, "Cadastro atualizado...");
+                dispose();
+            } catch (SQLException ex) {
+                Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
+        /*
+            try {
+                atualizarCadastro();
+            } catch (ParseException ex) {
+                Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         */
+
     }//GEN-LAST:event_SalvarActionPerformed
 
-    public void LimparCampos(){
+    public void LimparCampos() {
         nome.setText("");
         sobreNome.setText("");
         nacionalidade.setText("");
         indentidade.setText("");
         cpf.setText("");
-        dataNascimento.setDateFormatString("");
+        dataNascimento.setText("");
         escolaridade.setText("");
         instituicao.setText("");
         rua.setText("");
@@ -644,28 +732,29 @@ public class CadastroJogador extends javax.swing.JFrame {
         posicao.setText("");
         peso.setText("");
         altura.setText("");
-   }
+    }
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
-         TelaJogador jog = null;
+        TelaJogador jog = null;
         try {
             jog = new TelaJogador();
         } catch (SQLException ex) {
             Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
         }
-         jog.setVisible(true);
-         dispose();
+        jog.setVisible(true);
+        dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_VoltarActionPerformed
 
-    
     /*public static void preencher(Jogador jogador) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 preencherTelaJogador(jogador);
     }*/
-
-    public void preencherTelaJogador(Jogador jogador) throws ParseException{
+    public void preencherTelaJogador(Jogador jogador) throws ParseException {
         //Jogador jogador = jogadorp;
-        
+        Atualizar.setEnabled(false);
+        Excluir.setEnabled(true);
+        idPessoa.setText(String.valueOf(jogador.getIdPessoa()));
+        idPessoa.setEditable(false);
         nome.setText(jogador.getNome());
         nome.setEditable(false);
         sobreNome.setText(jogador.getSobreNome());
@@ -676,7 +765,8 @@ public class CadastroJogador extends javax.swing.JFrame {
         indentidade.setEditable(false);
         cpf.setText(jogador.getCpf());
         cpf.setEditable(false);
-        dataNascimento.setDateFormatString((jogador.getDataNascimento()));
+        JOptionPane.showMessageDialog(null, "Data de nascimento no preencher Tela " + jogador.getDataNascimento());
+        dataNascimento.setText(jogador.getDataNascimento());
         dataNascimento.setEnabled(false);
         escolaridade.setText(jogador.getEscolaridade());
         escolaridade.setEditable(false);
@@ -716,10 +806,90 @@ public class CadastroJogador extends javax.swing.JFrame {
         pais.setEnabled(false);
         estado.setSelectedItem(jogador.endereco.getEstado());
         estado.setEnabled(false);
-        
-        
-        
     }
+
+    public Jogador atualizarCadastro() throws ParseException, SQLException {
+        Jogador jogador = new Jogador();
+        atualizar = false;
+        Atualizar.setEnabled(true);
+        Excluir.setEnabled(true);
+        //jogador.setNome(nome.getText());
+        nome.setEditable(true);
+        //jogador.setSobreNome(sobreNome.getText());
+        sobreNome.setEditable(true);
+        //jogador.setNacionalidade(nacionalidade.getText());
+        nacionalidade.setEditable(true);
+        //jogador.setRg(indentidade.getText());
+        indentidade.setEditable(true);
+        //jogador.setCpf(cpf.getText());
+        cpf.setEditable(true);
+        //jogador.setDataNascimento(dataNascimento.getText());
+        dataNascimento.setEnabled(true);
+        //jogador.setEscolaridade(escolaridade.getText());
+        escolaridade.setEditable(true);
+        //jogador.setInstituicao(instituicao.getText());
+        instituicao.setEditable(true);
+        //jogador.setEndereco(new Endereco(rua.getText(), numero.getText(), bairro.getText(), cidade.getText(), 
+        //            ((String)(estado.getSelectedItem())), ((String)(pais.getSelectedItem())), complemento.getText(), cep.getText() ));
+        //jogador.setContato(new Contato( telefoneFixo.getText(),celular.getText(), email.getText()));
+        //jogador.contato.setTelefoneResidencial(telefoneFixo.getText());
+        telefoneFixo.setEditable(true);
+        //jogador.contato.setCelular(celular.getText());
+        celular.setEditable(true);
+        //jogador.contato.setEmail(email.getText());
+        email.setEditable(true);
+        //jogador.endereco.setRua(rua.getText());
+        rua.setEditable(true);
+        //jogador.endereco.setNumero(numero.getText());
+        numero.setEditable(true);
+        //jogador.endereco.setBairro(bairro.getText());
+        bairro.setEditable(true);
+        //jogador.endereco.setCidade(cidade.getText());
+        cidade.setEditable(true);
+        //jogador.endereco.setComplemento(complemento.getText());
+        complemento.setEditable(true);
+        //jogador.endereco.setCep(cep.getText());
+        cep.setEditable(true);
+        //jogador.setCategoria(categoria.getText());
+        categoria.setEditable(true);
+        //jogador.setNomeEmpresario(nomeEmpresario.getText());
+        nomeEmpresario.setEditable(true);
+        //jogador.setPosicao(posicao.getText());
+        posicao.setEditable(true);
+        //jogador.setPeso(Double.parseDouble(peso.getText().replace(',', '.')));
+        peso.setEditable(true);
+        //jogador.setAltura(Double.parseDouble(peso.getText().replace(',', '.')));
+        altura.setEditable(true);
+        //jogador.setSexo((String)sexo.getSelectedItem());
+        sexo.setEnabled(true);
+        //jogador.endereco.setPais((String)pais.getSelectedItem());
+        pais.setEnabled(true);
+        //jogador.endereco.setEstado((String) estado.getSelectedItem());
+        estado.setEnabled(true);
+
+        //CadastroJogadorController.atualizar(jogador);
+        //JOptionPane.showMessageDialog(this, "Jogador gravado com sucesso");
+        /*try {
+            CadastroJogadorController.atualizar(jogador);
+            JOptionPane.showMessageDialog(this, "Jogador gravado com sucesso");
+            //try {
+            //atualizarCadastro(jogador);
+            //CadastroJogadorController.atualizar(jogador);
+            
+            //JOptionPane.showMessageDialog(this, "Jogador gravado com sucesso");
+            //} catch (ParseException ex) {
+            //   Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
+            //} catch (SQLException ex) {
+            //   Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
+            //}
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        //dispose();
+        return jogador;
+
+    }
+
     private void InformacoesMedicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InformacoesMedicasActionPerformed
         CadastroInformaçõesMedicas medico = new CadastroInformaçõesMedicas();
         medico.setVisible(true);
@@ -762,15 +932,133 @@ public class CadastroJogador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_posicaoActionPerformed
 
+    private void AtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarActionPerformed
+        HabilitarCampos.setEnabled(true);
+        atualizar = true;
+//        Jogador jogador= new Jogador();
+//        jogador=atualizarCadastro();
+//        JOptionPane.showMessageDialog(null, "Dados atualizados");
+//        JOptionPane.showMessageDialog(null, "nome do jagador atualizado : "+ jogador.getNome());
+//CadastroJogadorController.atualizar(jogador);
+        Jogador jogador = new Jogador();
+        /*Atualizar.setEnabled(true);
+Excluir.setEnabled(true);
+nome.setEditable(true);
+sobreNome.setEditable(true);
+nacionalidade.setEditable(true);
+indentidade.setEditable(true);
+cpf.setEditable(true);
+dataNascimento.setEnabled(true);
+escolaridade.setEditable(true);
+instituicao.setEditable(true);
+telefoneFixo.setEditable(true);
+celular.setEditable(true);
+email.setEditable(true);
+rua.setEditable(true);
+numero.setEditable(true);
+bairro.setEditable(true);
+cidade.setEditable(true);
+complemento.setEditable(true);
+cep.setEditable(true);
+categoria.setEditable(true);
+nomeEmpresario.setEditable(true);
+posicao.setEditable(true);
+peso.setEditable(true);
+altura.setEditable(true);
+sexo.setEnabled(true);
+pais.setEnabled(true);
+estado.setEnabled(true);*/
+
+        jogador.setNome(nome.getText());
+        jogador.setSobreNome(sobreNome.getText());
+        jogador.setNacionalidade(nacionalidade.getText());
+        jogador.setRg(indentidade.getText());
+        jogador.setCpf(cpf.getText());
+        jogador.setDataNascimento((String) dataNascimento.getText());
+        jogador.setEscolaridade(escolaridade.getText());
+        jogador.setInstituicao(instituicao.getText());
+        jogador.setEndereco(new Endereco(rua.getText(), numero.getText(), bairro.getText(), cidade.getText(),
+                ((String) (estado.getSelectedItem())), ((String) (pais.getSelectedItem())), complemento.getText(), cep.getText()));
+        jogador.setContato(new Contato(telefoneFixo.getText(), celular.getText(), email.getText()));
+        jogador.setCategoria(categoria.getText());
+        jogador.setNomeEmpresario(nomeEmpresario.getText());
+        jogador.setPosicao(posicao.getText());
+        jogador.setPeso(Double.parseDouble(peso.getText().replace(',', '.')));
+        jogador.setAltura(Double.parseDouble(peso.getText().replace(',', '.')));
+        jogador.setSexo((String) sexo.getSelectedItem());
+
+        try {
+            CadastroJogadorController.atualizar(jogador);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_AtualizarActionPerformed
+
+    private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
+        try {
+            // TODO add your handling code here:
+            int idpessoa;
+            
+            idpessoa=Integer.parseInt(idPessoa.getText());
+            JOptionPane.showMessageDialog(null, "IdPessoa para deletar  "+ idpessoa);
+            CadastroJogadorController.deletar(idpessoa);
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao deletar  " + ex);
+            Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ExcluirActionPerformed
+
+    private void dataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataNascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dataNascimentoActionPerformed
+
+    private void HabilitarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HabilitarCamposActionPerformed
+        atualizar = true;
+        Atualizar.setEnabled(true);
+        Excluir.setEnabled(true);
+        nome.setEditable(true);
+        sobreNome.setEditable(true);
+        nacionalidade.setEditable(true);
+        indentidade.setEditable(true);
+        cpf.setEditable(true);
+        dataNascimento.setEnabled(true);
+        escolaridade.setEditable(true);
+        instituicao.setEditable(true);
+        telefoneFixo.setEditable(true);
+        celular.setEditable(true);
+        email.setEditable(true);
+        rua.setEditable(true);
+        numero.setEditable(true);
+        bairro.setEditable(true);
+        cidade.setEditable(true);
+        complemento.setEditable(true);
+        cep.setEditable(true);
+        categoria.setEditable(true);
+        nomeEmpresario.setEditable(true);
+        posicao.setEditable(true);
+        peso.setEditable(true);
+        altura.setEditable(true);
+        sexo.setEnabled(true);
+        pais.setEnabled(true);
+        estado.setEnabled(true);
+
+    }//GEN-LAST:event_HabilitarCamposActionPerformed
+
+    private void idPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idPessoaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idPessoaActionPerformed
+
     /**
      * @param args the command line arguments
      */
 //    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+     */
 //        try {
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 //                if ("Nimbus".equals(info.getName())) {
@@ -781,15 +1069,14 @@ public class CadastroJogador extends javax.swing.JFrame {
 //        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
 //            java.util.logging.Logger.getLogger(CadastroJogador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        
-        //</editor-fold>
-        //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
 
-        /* Create and display the form */
+    /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            @Override
 //            public void run() {
@@ -799,7 +1086,10 @@ public class CadastroJogador extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Atualizar;
     private javax.swing.JButton Contrato;
+    private javax.swing.JButton Excluir;
+    private javax.swing.JButton HabilitarCampos;
     private javax.swing.JButton InformacoesMedicas;
     private javax.swing.JButton Salvar;
     private javax.swing.JButton Voltar;
@@ -811,12 +1101,13 @@ public class CadastroJogador extends javax.swing.JFrame {
     private javax.swing.JTextField cidade;
     private javax.swing.JTextField complemento;
     private javax.swing.JTextField cpf;
-    private com.toedter.calendar.JDateChooser dataNascimento;
+    private javax.swing.JFormattedTextField dataNascimento;
     private javax.swing.JTextField dddCelular;
     private javax.swing.JTextField dddFixo;
     private javax.swing.JTextField email;
     private javax.swing.JTextField escolaridade;
     private javax.swing.JComboBox estado;
+    private javax.swing.JTextField idPessoa;
     private javax.swing.JTextField indentidade;
     private javax.swing.JTextField instituicao;
     private javax.swing.JLabel jLabel1;

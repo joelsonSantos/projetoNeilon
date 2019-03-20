@@ -49,9 +49,9 @@ public final class TelaJogador extends javax.swing.JFrame {
                 m.getNome(),
                 m.getSobreNome(),
                 m.getDataNascimento(),
-                m.getCategoria()
-                //m.contato.getEmail(),
-                //m.endereco.getCidade()
+                m.getCategoria(),
+                m.getContato().getEmail(),
+                m.getEndereco().getCidade()
             });
             
         }
@@ -277,10 +277,12 @@ public final class TelaJogador extends javax.swing.JFrame {
                 
                 CadastroJogador cadastroJogador =new CadastroJogador ();
                 cadastroJogador.setVisible(true);
-                JOptionPane.showMessageDialog(null, "idPessoa tela jogador"+ jogador.getIdPessoa());
-                JOptionPane.showMessageDialog(null, "pesquisa nome tela jogador"+ jogador.getNome());
+                JOptionPane.showMessageDialog(null, "idPessoa tela jogador  "+ jogador.getIdPessoa());
+                JOptionPane.showMessageDialog(null, "pesquisa nome tela jogador  "+ jogador.getNome());
+                JOptionPane.showMessageDialog(null, "Data de nascimento na pesquisa  "+jogador.getDataNascimento());
                 //CadastroJogador.preencherTelaJogador(jogador);
                 cadastroJogador.preencherTelaJogador(jogador);
+                
                 
                 dispose();
             }else{
