@@ -12,10 +12,12 @@ import controle.Contato;
 import controle.Endereco;
 import controle.Jogador;
 import controle.Pessoa;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -37,7 +39,7 @@ public class JogadorDAO {
         try{
             Conexao conect = new Conexao();
             Statement st = conect.getSt();
-            
+            java.sql.Date data = new java.sql.Date(jogador.getDataNascimento().getTime());
             st.executeUpdate("insert into pessoa(nome, sobrenome,"
                     + "nacionalidade, rg, cpf, dataNascimento, escolaridade,"
                     + "instituicao, sexo) "
@@ -46,12 +48,12 @@ public class JogadorDAO {
                             + jogador.getNacionalidade() +"','"
                             + jogador.getRg() +"','"
                             + jogador.getCpf() +"','"
-                            + jogador.getDataNascimento() +"','"
+                            + data +"','"
                             + jogador.getEscolaridade() +"','"
                             + jogador.getInstituicao() +"','"
                             + jogador.getSexo()
                     +"')", Statement.RETURN_GENERATED_KEYS);  
-            JOptionPane.showMessageDialog(null, "pessoa gravada...  ");
+            JOptionPane.showMessageDialog(null, "pessoa gravada... data ne nascimento  " + jogador.getDataNascimento());
             final ResultSet rs = st.getGeneratedKeys();
             
             if (rs.next()){
@@ -96,6 +98,9 @@ public class JogadorDAO {
             System.out.println("Problemas Ocorreram ao salvar");
             e.printStackTrace();
             throw new Exception ("Erro ao Salvar Dados!");
+        }finally{
+           
+           
         }
         
         
@@ -154,7 +159,7 @@ public class JogadorDAO {
                 jogadorPesquisa.setNacionalidade(rs.getString("pessoa.nacionalidade"));
                 jogadorPesquisa.setRg(rs.getString("pessoa.rg"));
                 jogadorPesquisa.setCpf(rs.getString("pessoa.cpf"));
-                jogadorPesquisa.setDataNascimento(rs.getString("pessoa.dataNascimento"));
+                jogadorPesquisa.setDataNascimento(rs.getDate("pessoa.dataNascimento"));
                 jogadorPesquisa.setEscolaridade(rs.getString("pessoa.escolaridade"));
                 jogadorPesquisa.setInstituicao(rs.getString("pessoa.instituicao"));
                 jogadorPesquisa.setSexo(rs.getString("pessoa.sexo"));              
@@ -200,6 +205,7 @@ public class JogadorDAO {
        ArrayList<Jogador> jogadorLista = new ArrayList<Jogador>();
        try{
            Conexao conect = new Conexao();
+           
            PreparedStatement st = conect.getConnection().prepareStatement("SELECT *"
                     + "FROM pessoa INNER JOIN contatos ON  pessoa.idPessoa = contatos.idPessoa_fk"
                    + " INNER JOIN endereco ON pessoa.idPessoa= endereco.idPessoa_fk "
@@ -207,12 +213,16 @@ public class JogadorDAO {
            ResultSet rs = st.executeQuery();
                 while(rs.next()){
                     Jogador jogador = new Jogador();
+                    
                     jogador.setNome(rs.getString("pessoa.nome"));
                     jogador.setSobreNome(rs.getString("pessoa.sobrenome"));
-                    jogador.setDataNascimento(rs.getString("pessoa.dataNascimento"));
+                    //jogador.setDataNascimento(rs.getDate("pessoa.dataNascimento"));
+                    //JOptionPane.showMessageDialog(null,"data de nascimento   " +jogador.getDataNascimento()); 
+                    //Date data = rs.getDate("pessoa.dataNascimento");
                     jogador.setCategoria(rs.getString("jogador.categoria"));
                     jogador.setContato(new Contato((rs.getString("contatos.email"))));
                     jogador.setEndereco(new Endereco((rs.getString("endereco.cidade"))) );
+                    jogador.setPosicao(rs.getString("jogador.posicao"));
 
                     jogadorLista.add(jogador);
                 }
@@ -256,7 +266,7 @@ public class JogadorDAO {
             st.setString(3, jogador.getNacionalidade());
             st.setString(4, jogador.getRg());
             st.setString(5, jogador.getCpf());
-            st.setString(6, jogador.getDataNascimento());
+            st.setDate(6, (Date) jogador.getDataNascimento());
             st.setString(7, jogador.getEscolaridade());
             st.setString(8, jogador.getInstituicao());
             st.setString(9, jogador.getSexo());

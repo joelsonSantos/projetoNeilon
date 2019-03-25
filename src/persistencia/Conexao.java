@@ -44,17 +44,18 @@ public class Conexao {
             //st.close();
         }
     }
-    /*public static void fecharConexao(Connection conn) throws SQLException{
+    public static void fecharConexao(Connection con) throws SQLException{
         try {
-            if (conn != null){
-                conn.close();
+            if (con != null){
+                con.close();
                 System.out.println("Fechada a conexao como banco de dados.");
-            }catch(Exception e){
-                    System.out.println("Nao foi possive fechar a conexao com o banco e dados"+e.getMessge());
             }
+            }catch(Exception e){
+                    System.out.println("Nao foi possive fechar a conexao com o banco e dados"+e.getMessage());
+            
         }
     
-    }*/
+    }
     public com.mysql.jdbc.Connection getCon(){
         return this.con;
     }

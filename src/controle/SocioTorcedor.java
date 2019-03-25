@@ -24,9 +24,33 @@ public class SocioTorcedor extends Pessoa {
                 this.dataFiliacao = dataFiliacao;
                 this.formaPagamento = formaPagamento;
             }
-    
-           
-            
-            
-            
+
+    public String getModalidadePlano() {
+        return modalidadePlano;
+    }
+
+    public void setModalidadePlano(String modalidadePlano) {
+        this.modalidadePlano = modalidadePlano;
+    }
+
+    public Date getDataFiliacao() {
+        return dataFiliacao;
+    }
+
+    public void setDataFiliacao(Date dataFiliacao) {
+        this.dataFiliacao = dataFiliacao;
+    }
+
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+
+    @Override
+    public String toString() {
+        return "SocioTorcedor{" + "modalidadePlano=" + modalidadePlano + ", dataFiliacao=" + dataFiliacao + ", formaPagamento=" + formaPagamento + '}';
+    }            
 }

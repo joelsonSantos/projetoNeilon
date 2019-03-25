@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -107,7 +108,7 @@ public class CadastroJogador extends javax.swing.JFrame {
         categoria = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         nomeEmpresario = new javax.swing.JTextField();
-        dataNascimento = new javax.swing.JFormattedTextField();
+        dataNascimento = new com.toedter.calendar.JDateChooser();
         InformacoesMedicas = new javax.swing.JButton();
         Contrato = new javax.swing.JButton();
         Atualizar = new javax.swing.JButton();
@@ -274,12 +275,6 @@ public class CadastroJogador extends javax.swing.JFrame {
 
         jLabel18.setText("Empresario:");
 
-        dataNascimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dataNascimentoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -296,8 +291,8 @@ public class CadastroJogador extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel4)
@@ -460,16 +455,14 @@ public class CadastroJogador extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addComponent(jLabel3)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -657,7 +650,7 @@ public class CadastroJogador extends javax.swing.JFrame {
                 //data = formato.parse(dataNascimento.getDate().toString());
                 //java.sql.Date datasql = new java.sql.Date(data.getTime());
                 //Calendar dataNascimento= Calendar.getInstance();
-                p.setDataNascimento(dataNascimento.getText());
+                p.setDataNascimento( dataNascimento.getDate());
                 JOptionPane.showMessageDialog(null, "data nacsimento ao inserir" + p.getDataNascimento());
                 //p.setDataNascimento(dataNascimento.setDate(new SimpleDateFormat("dd/MM/yyyy").parse((dataNascimento))));
                 p.setEscolaridade(escolaridade.getText());
@@ -715,7 +708,7 @@ public class CadastroJogador extends javax.swing.JFrame {
         nacionalidade.setText("");
         indentidade.setText("");
         cpf.setText("");
-        dataNascimento.setText("");
+        dataNascimento.setDate(Date.from(Instant.MIN));
         escolaridade.setText("");
         instituicao.setText("");
         rua.setText("");
@@ -766,7 +759,7 @@ public class CadastroJogador extends javax.swing.JFrame {
         cpf.setText(jogador.getCpf());
         cpf.setEditable(false);
         JOptionPane.showMessageDialog(null, "Data de nascimento no preencher Tela " + jogador.getDataNascimento());
-        dataNascimento.setText(jogador.getDataNascimento());
+        dataNascimento.setDate(jogador.getDataNascimento());
         dataNascimento.setEnabled(false);
         escolaridade.setText(jogador.getEscolaridade());
         escolaridade.setEditable(false);
@@ -974,7 +967,7 @@ estado.setEnabled(true);*/
         jogador.setNacionalidade(nacionalidade.getText());
         jogador.setRg(indentidade.getText());
         jogador.setCpf(cpf.getText());
-        jogador.setDataNascimento((String) dataNascimento.getText());
+        jogador.setDataNascimento( dataNascimento.getDate());
         jogador.setEscolaridade(escolaridade.getText());
         jogador.setInstituicao(instituicao.getText());
         jogador.setEndereco(new Endereco(rua.getText(), numero.getText(), bairro.getText(), cidade.getText(),
@@ -1009,10 +1002,6 @@ estado.setEnabled(true);*/
             Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ExcluirActionPerformed
-
-    private void dataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataNascimentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dataNascimentoActionPerformed
 
     private void HabilitarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HabilitarCamposActionPerformed
         atualizar = true;
@@ -1101,7 +1090,7 @@ estado.setEnabled(true);*/
     private javax.swing.JTextField cidade;
     private javax.swing.JTextField complemento;
     private javax.swing.JTextField cpf;
-    private javax.swing.JFormattedTextField dataNascimento;
+    private com.toedter.calendar.JDateChooser dataNascimento;
     private javax.swing.JTextField dddCelular;
     private javax.swing.JTextField dddFixo;
     private javax.swing.JTextField email;

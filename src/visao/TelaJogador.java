@@ -11,7 +11,11 @@ import DAO.JogadorDAO;
 import controle.Jogador;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -37,21 +41,23 @@ public final class TelaJogador extends javax.swing.JFrame {
         TabelaJogadores.setRowSorter(new TableRowSorter(modelo));
         JOptionPane.showMessageDialog(null, "listar tabela....");
         listarTabela();
+        
     }
     
     public void listarTabela() throws SQLException{
         
         DefaultTableModel modelo = (DefaultTableModel) TabelaJogadores.getModel();
-        JogadorDAO jogadorDao = new JogadorDAO();
+        JogadorDAO jogadorDao = new JogadorDAO();      
         
         for (Jogador m: jogadorDao.listar()){
             modelo.addRow(new Object[]{
                 m.getNome(),
                 m.getSobreNome(),
-                m.getDataNascimento(),
+                //m.getDataNascimento(),
                 m.getCategoria(),
                 m.getContato().getEmail(),
-                m.getEndereco().getCidade()
+                m.getEndereco().getCidade(),
+                m.getPosicao()
             });
             
         }
@@ -130,7 +136,7 @@ public final class TelaJogador extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Nome:", "Sobrenome:", "Data de Nascimento:", "Categoria:", "Email:", "Cidade:"
+                "Nome:", "Sobrenome:", "Categoria:", "Email:", "Cidade:", "posiçao"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -191,7 +197,7 @@ public final class TelaJogador extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         botaoPesquisa.setText("Pesquisa");

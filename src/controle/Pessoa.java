@@ -19,7 +19,7 @@ public class Pessoa {
       private String nacionalidade;
       private String rg;
       private String cpf;
-      private String dataNascimento; // DD/MM/AAAA
+      private Date dataNascimento= new Date(); // DD/MM/AAAA
       public Contato contato;
       private Conta conta;
       public Endereco endereco;
@@ -31,7 +31,7 @@ public class Pessoa {
       }
      
       public Pessoa(int idPessoa, String nome, String sobreNome, 
-              String nacionalidade, String rg, String cpf, String dataNascimento,
+              String nacionalidade, String rg, String cpf, Date dataNascimento,
               Contato contato, Conta conta, Endereco endereco, 
               String escolaridade, String instituicao, String sexo) {
         this.idPessoa=idPessoa;
@@ -72,7 +72,7 @@ public class Pessoa {
         this.cpf = cpf;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -124,7 +124,7 @@ public class Pessoa {
         return cpf;
     }
 
-    public String getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
