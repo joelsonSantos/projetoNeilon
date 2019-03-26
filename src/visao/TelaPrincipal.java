@@ -297,7 +297,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        TelaSocioTorcedor torcedor = new TelaSocioTorcedor();
+        TelaSocioTorcedor torcedor = null;
+        try {
+            torcedor = new TelaSocioTorcedor();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         torcedor.setVisible(true);
         dispose();
         // TODO add your handling code here:

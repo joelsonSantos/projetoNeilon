@@ -53,11 +53,12 @@ public final class TelaJogador extends javax.swing.JFrame {
             modelo.addRow(new Object[]{
                 m.getNome(),
                 m.getSobreNome(),
-                //m.getDataNascimento(),
+                m.getDataNascimento(),
                 m.getCategoria(),
                 m.getContato().getEmail(),
                 m.getEndereco().getCidade(),
                 m.getPosicao()
+                
             });
             
         }
@@ -130,17 +131,14 @@ public final class TelaJogador extends javax.swing.JFrame {
 
         TabelaJogadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Nome:", "Sobrenome:", "Categoria:", "Email:", "Cidade:", "posiçao"
+                "Nome:", "Sobrenome:", "Data de Nascimento", "Categoria:", "Email:", "Cidade:", "posiçao"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -148,12 +146,12 @@ public final class TelaJogador extends javax.swing.JFrame {
             }
         });
         TabelaJogadores.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 TabelaJogadoresAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         TabelaJogadores.addMouseListener(new java.awt.event.MouseAdapter() {

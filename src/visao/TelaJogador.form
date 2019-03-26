@@ -175,9 +175,10 @@
             <Component class="javax.swing.JTable" name="TabelaJogadores">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="4">
+                  <Table columnCount="7" rowCount="0">
                     <Column editable="false" title="Nome:" type="java.lang.Object"/>
                     <Column editable="false" title="Sobrenome:" type="java.lang.Object"/>
+                    <Column editable="false" title="Data de Nascimento" type="java.lang.Object"/>
                     <Column editable="false" title="Categoria:" type="java.lang.Object"/>
                     <Column editable="false" title="Email:" type="java.lang.Object"/>
                     <Column editable="false" title="Cidade:" type="java.lang.Object"/>

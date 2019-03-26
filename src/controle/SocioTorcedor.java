@@ -12,6 +12,7 @@ import java.util.Date;
  * @author joelson
  */
 public class SocioTorcedor extends Pessoa {
+            private int idSocioTorcedor;
             private String modalidadePlano; // (básico, intermadiário, avançado)
             private Date dataFiliacao;
             private String formaPagamento;
@@ -19,12 +20,22 @@ public class SocioTorcedor extends Pessoa {
             public SocioTorcedor(){
             }
 
-            public SocioTorcedor(String modalidadePlano, Date dataFiliacao, String formaPagamento) {
+            public SocioTorcedor(int idSocioTorcedor ,String modalidadePlano, Date dataFiliacao, String formaPagamento) {
+                this.idSocioTorcedor = idSocioTorcedor;
                 this.modalidadePlano = modalidadePlano;
                 this.dataFiliacao = dataFiliacao;
                 this.formaPagamento = formaPagamento;
             }
 
+    public int getIdSocioTorcedor() {
+        return idSocioTorcedor;
+    }
+
+    public void setIdSocioTorcedor(int idSocioTorcedor) {
+        this.idSocioTorcedor = idSocioTorcedor;
+    }
+
+    
     public String getModalidadePlano() {
         return modalidadePlano;
     }

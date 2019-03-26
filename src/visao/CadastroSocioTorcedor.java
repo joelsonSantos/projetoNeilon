@@ -10,6 +10,8 @@ import controle.Contato;
 import controle.Endereco;
 import controle.SocioTorcedor;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -150,7 +152,7 @@ public class CadastroSocioTorcedor extends javax.swing.JFrame {
             }
         });
 
-        modalidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        modalidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "básico ", "intermadiário", "avançado" }));
 
         formaPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -442,7 +444,11 @@ public class CadastroSocioTorcedor extends javax.swing.JFrame {
 
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
         TelaSocioTorcedor socio = null;
-        socio = new TelaSocioTorcedor();
+        try {
+            socio = new TelaSocioTorcedor();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroSocioTorcedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
         socio.setVisible(true);
         dispose();
 
@@ -453,6 +459,24 @@ public class CadastroSocioTorcedor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ruaActionPerformed
 
+    void preencherTelaSocio(SocioTorcedor socio) {
+        nome.setText(socio.getNome());
+        sobrenome.setText(socio.getSobreNome());
+        cpf.setText(socio.getCpf());
+        rua.setText(socio.getEndereco().getRua());
+        numero.setText(socio.getEndereco().getNumero());
+        complemento.setText(socio.getEndereco().getComplemento());
+        cep.setText(socio.getEndereco().getCep());
+        bairro.setText(socio.getEndereco().getBairro());
+        cidade.setText(socio.getEndereco().getCidade());
+        telefone.setText(socio.getContato().getTelefoneComercial());
+        celular.setText(socio.getContato().getCelular());
+        email.setText(socio.getContato().getEmail());
+        dataNascimento.setDate(socio.getDataNascimento());
+        dataFiliacao.setDate(socio.getDataFiliacao());
+        modalidade.setSelectedItem(socio.getModalidadePlano());
+        formaPagamento.setSelectedItem(socio.getFormaPagamento());
+    }
     /**
      * @param args the command line arguments
      */
@@ -531,4 +555,6 @@ public class CadastroSocioTorcedor extends javax.swing.JFrame {
     private javax.swing.JTextField sobrenome;
     private javax.swing.JTextField telefone;
     // End of variables declaration//GEN-END:variables
+
+    
 }

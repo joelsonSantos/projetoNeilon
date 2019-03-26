@@ -216,9 +216,7 @@ public class JogadorDAO {
                     
                     jogador.setNome(rs.getString("pessoa.nome"));
                     jogador.setSobreNome(rs.getString("pessoa.sobrenome"));
-                    //jogador.setDataNascimento(rs.getDate("pessoa.dataNascimento"));
-                    //JOptionPane.showMessageDialog(null,"data de nascimento   " +jogador.getDataNascimento()); 
-                    //Date data = rs.getDate("pessoa.dataNascimento");
+                    jogador.setDataNascimento(rs.getDate("pessoa.dataNascimento"));
                     jogador.setCategoria(rs.getString("jogador.categoria"));
                     jogador.setContato(new Contato((rs.getString("contatos.email"))));
                     jogador.setEndereco(new Endereco((rs.getString("endereco.cidade"))) );
@@ -226,7 +224,8 @@ public class JogadorDAO {
 
                     jogadorLista.add(jogador);
                 }
-       }catch(SQLException e){
+       }catch(SQLException erro){
+           System.out.println("Erro ao listar jogadores " + erro);
            
        }
         return jogadorLista;

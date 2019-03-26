@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.SocioTorcedorDAO;
+import controle.SocioTorcedor;
 import javax.swing.JOptionPane;
 import visao.TelaSocioTorcedor;
 
@@ -23,6 +24,12 @@ public class SocioTorcedorController {
         
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         return SocioTorcedorDAO.persistir(socio);
+    }
+
+    public static SocioTorcedor pesquisaSocio(SocioTorcedor socio) throws Exception {
+        
+        SocioTorcedorDAO.pesquisaSocio(socio);
+        return socio;
     }
     
 
