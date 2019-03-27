@@ -39,14 +39,14 @@ public class TelaSocioTorcedor extends javax.swing.JFrame {
     
     
     public void listaSocio() throws SQLException{
-        JOptionPane.showMessageDialog(null, "metodo listar socio....");
+        //JOptionPane.showMessageDialog(null, "metodo listar socio....");
         DefaultTableModel modeloSocio = (DefaultTableModel) TabelaSocioTorcedor.getModel();
-        JOptionPane.showMessageDialog(null, "metodo listar socio 1....");
+        //JOptionPane.showMessageDialog(null, "metodo listar socio 1....");
         SocioTorcedorDAO socioDAO = new SocioTorcedorDAO();
-        JOptionPane.showMessageDialog(null, "metodo listar socio 2....");
+        //JOptionPane.showMessageDialog(null, "metodo listar socio 2....");
         
         for(SocioTorcedor s: socioDAO.listarSocio()){
-            JOptionPane.showMessageDialog(null, "metodo listar socio 3....");
+            //JOptionPane.showMessageDialog(null, "metodo listar socio 3....");
             modeloSocio.addRow(new Object[]{
                 s.getIdSocioTorcedor(),
                 s.getNome(),
@@ -236,9 +236,10 @@ public class TelaSocioTorcedor extends javax.swing.JFrame {
             SocioTorcedor socio = new SocioTorcedor();
             String CpfPesquisa = pesquisaCpf.getText();
             socio.setCpf(CpfPesquisa);
-            socio = SocioTorcedorController.pesquisaSocio(socio);
-            
-            if (socio != null){
+            JOptionPane.showMessageDialog(null, "cpf para pesquisa.  " + socio.getCpf());
+            socio = SocioTorcedorController.pesquisaCPF(socio);
+            JOptionPane.showMessageDialog(null, "cpf para pesquisa apos o metodo de pesquisa.  " + socio.getCpf());
+            if (socio.getCpf() != null){
                 CadastroSocioTorcedor cadastroSocio = new CadastroSocioTorcedor();
                 cadastroSocio.setVisible(true);
                 cadastroSocio.preencherTelaSocio(socio);

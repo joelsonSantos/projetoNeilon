@@ -85,23 +85,65 @@ public class SocioTorcedorDAO {
 
     }
 
+     public static SocioTorcedor pesquisaCPF(SocioTorcedor cpf) throws Exception{
+        SocioTorcedor socio = null;
+        String cpfSocio= cpf.getCpf();
+        try{
+            Conexao conect = new Conexao();
+            JOptionPane.showMessageDialog(null, "cpf para pesquisa no metodo pesquisa .  " + cpfSocio);
+            PreparedStatement st = conect.getConnection().prepareStatement("SELECT * FROM pessoa where cpf = ?");
+            JOptionPane.showMessageDialog(null, "apos o select  ");
+            st.setString(1, cpfSocio);
+            JOptionPane.showMessageDialog(null, "apos st.setString  ");
+            ResultSet rs = st.executeQuery();
+            JOptionPane.showMessageDialog(null, "apos o resultSet  ");
+            
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null, "apos o rs.next  ");
+                socio = new SocioTorcedor();
+                socio.setIdPessoa(rs.getInt("idPessoa"));
+                JOptionPane.showMessageDialog(null, "idPessoa primenra pesquisa  "+ socio.getIdPessoa());
+                pesquisaSocio(socio);
+            }
+            
+        }catch (Exception e) {
+            System.out.println("Problemas Ocorreram  na pesquisa do idPessoa" + e);
+            e.printStackTrace();
+            throw new Exception("Erro na pesquisa");
+    
+        }
+        return socio;
+        
+    }
     public static SocioTorcedor pesquisaSocio(SocioTorcedor socio) throws Exception{
-        String cpfPesquisa =socio.getCpf();
+        int cpfPesquisa =socio.getIdPessoa();
         try {
             Conexao conect = new Conexao();
-            PreparedStatement st = conect.getConnection().prepareStatement("SELECT pessoa.nome, pessoa.sobrenome, pessoa.dataNascimento"
-                    + "endereco.rua, endereco.numero, endereco.complemento, endereco.cep, endereco.bairro,"
-                    + "endereco.cidade, contatos.telefoneResidencial, contatos.celular, contatos.email,"
-                    + "socioTorcedor.modalidadeTorcedor, socioTorcedor.dataFiliacao, socioTorcedor.formaPagamento"
-                    + "FROM pessoa, contatos, endereco, socioTorcedor WHERE pessoa.cpf = ? AND "
-                    + " pessoa.idPessoa = endereco.idPessoa_fk AND pessoa.idPessoa = contatos.idPessoa_fk"
-                    + " AND pessoa.idPessoa = socioTorcedor.idPessoa_fk");
-            st.setString(1, cpfPesquisa);
+            /*PreparedStatement st = conect.getConnection().prepareStatement("SELECT pessoa.nome, pessoa.sobrenome, "
+                    + " pessoa.dataNascimento, pessoa.cpf, "
+                    + "endereco.rua, endereco.numero, endereco.complemento, endereco.cep, endereco.bairro, "
+                    + "endereco.cidade, contatos.telefoneResidencial, contatos.celular, contatos.email, "
+                    + "socioTorcedor.modalidadeTorcedor, socioTorcedor.dataFiliacao, socioTorcedor.formaPagamento "
+                    + "FROM pessoa, contatos, endereco, socioTorcedor WHERE idPessoa = ? AND "
+                    + " pessoa.idPessoa = endereco.idPessoa_fk AND pessoa.idPessoa = contatos.idPessoa_fk "
+                    + " AND pessoa.idPessoa = socioTorcedor.idPessoa_fk ");*/
+            PreparedStatement st = conect.getConnection().prepareStatement("SELECT pessoa.nome, pessoa.sobrenome,"
+                    + " pessoa.cpf, pessoa.dataNascimento, "
+                    + " contatos.telefoneResidencial, contatos.celular, contatos.email,"
+                    + "endereco.rua, endereco.numero, endereco.bairro, endereco.cidade, endereco.estado, endereco.pais,"
+                    + "endereco.complemento, endereco.cep, socioTorcedor.modalidadeTorcedor, socioTorcedor.dataFiliacao, "
+                    + "socioTorcedor.formaPagamento, socioTorcedor.idSocioTorcedor "
+                    + "FROM pessoa, contatos, endereco, socioTorcedor "
+                    + "WHERE idPessoa = ? AND idPessoa = contatos.idPessoa_fk AND " 
+                    + " idPessoa = endereco.idPessoa_fk AND idPessoa = socioTorcedor.idPessoa_fk");
+            st.setInt(1, cpfPesquisa);
             ResultSet rs = st.executeQuery();
             if(rs.next()){
+                
                 socio.setNome(rs.getString("pessoa.nome"));
                 socio.setSobreNome(rs.getString("pessoa.sobrenome"));
                 socio.setDataNascimento(rs.getDate("pessoa.dataNascimento"));
+                socio.setCpf(rs.getString("pessoa.cpf"));
                 socio.setEndereco(new Endereco((rs.getString("endereco.rua")),
                     (rs.getString("endereco.numero")),
                     (rs.getString("endereco.bairro")),
@@ -113,9 +155,11 @@ public class SocioTorcedorDAO {
                 socio.setContato(new Contato(rs.getString("contatos.telefoneResidencial"), 
                         rs.getString("contatos.celular"),
                         rs.getString("contatos.email")));
+                JOptionPane.showMessageDialog(null, "telefone residencial apos a pesquisa   "+socio.contato.getTelefoneResidencial());
                 socio.setModalidadePlano(rs.getString("socioTorcedor.modalidadeTorcedor"));
                 socio.setFormaPagamento(rs.getString("socioTorcedor.formaPagamento"));
                 socio.setDataFiliacao(rs.getDate("socioTorcedor.dataFiliacao"));
+                socio.setIdSocioTorcedor(rs.getInt("socioTorcedor.idSocioTorcedor"));
             }
         } catch (Exception e) {
             System.err.println("Erro na pesquisa" + e);

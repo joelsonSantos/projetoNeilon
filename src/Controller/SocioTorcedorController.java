@@ -26,10 +26,8 @@ public class SocioTorcedorController {
         return SocioTorcedorDAO.persistir(socio);
     }
 
-    public static SocioTorcedor pesquisaSocio(SocioTorcedor socio) throws Exception {
-        
-        SocioTorcedorDAO.pesquisaSocio(socio);
-        return socio;
+    public static SocioTorcedor pesquisaCPF(SocioTorcedor socio) throws Exception {
+        return SocioTorcedorDAO.pesquisaCPF(socio);
     }
     
 
