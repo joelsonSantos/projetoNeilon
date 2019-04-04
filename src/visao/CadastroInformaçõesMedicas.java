@@ -49,8 +49,10 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
         idJogador = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         tipoSangue = new javax.swing.JComboBox<>();
-        restricaoMedicamento = new javax.swing.JTextField();
-        comentariosMedico = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        restricaoMedicamento = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        comentariosMedico = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro Informações Medidas");
@@ -121,11 +123,13 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
 
         tipoSangue.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "+A", "-A", "+B", "-B", "+AB", "-AB", "+O", "-O" }));
 
-        restricaoMedicamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                restricaoMedicamentoActionPerformed(evt);
-            }
-        });
+        restricaoMedicamento.setColumns(20);
+        restricaoMedicamento.setRows(5);
+        jScrollPane1.setViewportView(restricaoMedicamento);
+
+        comentariosMedico.setColumns(20);
+        comentariosMedico.setRows(5);
+        jScrollPane2.setViewportView(comentariosMedico);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -148,7 +152,7 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addGap(18, 18, 18)
-                        .addComponent(dataRevisao, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                        .addComponent(dataRevisao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(424, 424, 424))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,8 +164,8 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tipoSangue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(proximaRevisao, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                            .addComponent(restricaoMedicamento)
-                            .addComponent(comentariosMedico))
+                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane2))
                         .addGap(424, 424, 424))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -177,17 +181,18 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel17)
                     .addComponent(proximaRevisao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
                         .addComponent(jLabel18)
                         .addGap(101, 101, 101)
                         .addComponent(jLabel19)
                         .addGap(61, 61, 61))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(restricaoMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1)
                         .addGap(18, 18, 18)
-                        .addComponent(comentariosMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -244,16 +249,15 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
        Jogador jogador = new Jogador();
         JOptionPane.showMessageDialog(null, "salvar os dados de informações medicas.");
         
-        jogador.setInformacoa(new InformacoesMedicas(((String) (idJogador.getText())), dataRevisao.getDate(), proximaRevisao.getDate(),
+        jogador.setInformacoa(new InformacoesMedicas(Integer.parseInt(idJogador.getText()), dataRevisao.getDate(), proximaRevisao.getDate(),
         restricaoMedicamento.getText(), comentariosMedico.getText(), ((String)(tipoSangue.getSelectedItem()))));
        
-        //if (InformacoesMedicasController.persistir(jogador) == true){
         if(InformacoesMedicasController.persistir(jogador) == true){
             JOptionPane.showMessageDialog(null, "Salvando as informacoes medicas.");
             dispose();
         }
        }catch(Exception e){
-           System.err.println("Erro ao salvar as informçeos medicas" + e);
+           System.err.println("tela de cadastro Erro ao salvar as informçeos medicas" + e);
        }
     }//GEN-LAST:event_SalvarActionPerformed
 
@@ -261,13 +265,14 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idJogadorActionPerformed
 
-    private void restricaoMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restricaoMedicamentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_restricaoMedicamentoActionPerformed
-
     
     public Jogador  preencherTela(Jogador jogador){
         idJogador.setText((String.valueOf(jogador.getIdJogador())));
+        dataRevisao.setDate(jogador.getInformacoa().getDataRevisao());
+        proximaRevisao.setDate(jogador.getInformacoa().getProximaRevisao());
+        restricaoMedicamento.setText(jogador.getInformacoa().getRestricaoMedicamento());
+        comentariosMedico.setText(jogador.getInformacoa().getComentarioMedico());
+        tipoSangue.setSelectedItem(jogador.getInformacoa().getTipoSanguineo());
         return null;
         
     }
@@ -308,7 +313,7 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
     private javax.swing.JButton Altarar;
     private javax.swing.JButton Salvar;
     private javax.swing.JButton Voltar;
-    private javax.swing.JTextField comentariosMedico;
+    private javax.swing.JTextArea comentariosMedico;
     private com.toedter.calendar.JDateChooser dataRevisao;
     private javax.swing.JButton deletar;
     private javax.swing.JTextField idJogador;
@@ -320,8 +325,10 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private com.toedter.calendar.JDateChooser proximaRevisao;
-    private javax.swing.JTextField restricaoMedicamento;
+    private javax.swing.JTextArea restricaoMedicamento;
     private javax.swing.JComboBox<String> tipoSangue;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,8 +17,13 @@ import java.sql.SQLException;
  */
 public class InformacoesMedicasController {
     
-    public static boolean persistir(Jogador informcoes) throws SQLException{
+    public static boolean persistir(Jogador informcoes) throws SQLException, Exception{
         return InformacoesMedicasDAO.persistir(informcoes);
+    }
+
+    public Jogador pesquisa(Jogador informacoes) throws Exception {
+        return InformacoesMedicasDAO.pesquisar(informacoes);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

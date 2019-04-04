@@ -6,6 +6,8 @@
 package visao;
 
 import Controller.CadastroJogadorController;
+import Controller.InformacoesMedicasController;
+import DAO.InformacoesMedicasDAO;
 //import DAO.JogadorDAO;
 //import com.sun.xml.internal.bind.v2.model.core.ID;
 //import controle.Conta;
@@ -774,6 +776,12 @@ public class CadastroJogador extends javax.swing.JFrame {
         Jogador jogador = new Jogador();
         jogador.setIdJogador(Integer.parseInt(idPessoa.getText()));
         CadastroInformaçõesMedicas medico = new CadastroInformaçõesMedicas();
+        InformacoesMedicasController medicoController = new InformacoesMedicasController();
+        try {
+            medicoController.pesquisa(jogador);
+        } catch (Exception ex) {
+            Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
+        }
         medico.preencherTela(jogador);
         medico.setVisible(true);
         dispose();
