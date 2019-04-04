@@ -5,6 +5,12 @@
  */
 package visao;
 
+import Controller.InformacoesMedicasController;
+import DAO.InformacoesMedicasDAO;
+import controle.InformacoesMedicas;
+import controle.Jogador;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author laiender.morais
@@ -31,17 +37,20 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jLabel18 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        Voltar = new javax.swing.JButton();
+        Salvar = new javax.swing.JButton();
+        Altarar = new javax.swing.JButton();
+        deletar = new javax.swing.JButton();
+        dataRevisao = new com.toedter.calendar.JDateChooser();
+        proximaRevisao = new com.toedter.calendar.JDateChooser();
+        idJogador = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        tipoSangue = new javax.swing.JComboBox<>();
+        restricaoMedicamento = new javax.swing.JTextField();
+        comentariosMedico = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro Informações Medidas");
@@ -78,88 +87,117 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
 
         jLabel16.setText("Ultima Revisão Medica:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
         jLabel18.setText("Alergia e Intolerancia:");
 
         jLabel17.setText("Proxima Revisão Medica:");
 
         jLabel19.setText("Informações Medicas:");
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane4.setViewportView(jTextArea3);
-
-        jButton1.setText("Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Voltar.setText("Voltar");
+        Voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                VoltarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Salvar");
+        Salvar.setText("Salvar");
+        Salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalvarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Alterar");
+        Altarar.setText("Alterar");
 
-        jButton4.setText("Excluir");
+        deletar.setText("Deletar");
+
+        idJogador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idJogadorActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Tipo Sanguineo:");
+
+        tipoSangue.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "+A", "-A", "+B", "-B", "+AB", "-AB", "+O", "-O" }));
+
+        restricaoMedicamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restricaoMedicamentoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(539, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(idJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 484, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel19))
+                        .addComponent(deletar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Altarar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Salvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Voltar)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(18, 18, 18)
+                        .addComponent(dataRevisao, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                         .addGap(424, 424, 424))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addContainerGap())))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tipoSangue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(proximaRevisao, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                            .addComponent(restricaoMedicamento)
+                            .addComponent(comentariosMedico))
+                        .addGap(424, 424, 424))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(124, 124, 124)
-                .addComponent(jLabel16)
+                .addContainerGap()
+                .addComponent(idJogador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel16)
+                    .addComponent(dataRevisao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addComponent(jLabel17)
-                .addGap(45, 45, 45)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17)
+                    .addComponent(proximaRevisao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addComponent(jLabel18)
-                        .addGap(34, 34, 34)))
-                .addGap(45, 45, 45)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addGap(101, 101, 101)
                         .addComponent(jLabel19)
-                        .addGap(33, 33, 33))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                        .addGap(61, 61, 61))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(restricaoMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(comentariosMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jLabel1)
+                    .addComponent(tipoSangue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Voltar)
+                    .addComponent(Salvar)
+                    .addComponent(Altarar)
+                    .addComponent(deletar))
                 .addContainerGap())
         );
 
@@ -192,13 +230,47 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
         CadastroJogador jogador = new CadastroJogador();
         jogador.setVisible(true);
         dispose();
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_VoltarActionPerformed
 
+    private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
+        // TODO add your handling code here:
+       //InformacoesMedicas informacoe = new InformacoesMedicas();
+       try{
+       Jogador jogador = new Jogador();
+        JOptionPane.showMessageDialog(null, "salvar os dados de informações medicas.");
+        
+        jogador.setInformacoa(new InformacoesMedicas(((String) (idJogador.getText())), dataRevisao.getDate(), proximaRevisao.getDate(),
+        restricaoMedicamento.getText(), comentariosMedico.getText(), ((String)(tipoSangue.getSelectedItem()))));
+       
+        //if (InformacoesMedicasController.persistir(jogador) == true){
+        if(InformacoesMedicasController.persistir(jogador) == true){
+            JOptionPane.showMessageDialog(null, "Salvando as informacoes medicas.");
+            dispose();
+        }
+       }catch(Exception e){
+           System.err.println("Erro ao salvar as informçeos medicas" + e);
+       }
+    }//GEN-LAST:event_SalvarActionPerformed
+
+    private void idJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idJogadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idJogadorActionPerformed
+
+    private void restricaoMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restricaoMedicamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_restricaoMedicamentoActionPerformed
+
+    
+    public Jogador  preencherTela(Jogador jogador){
+        idJogador.setText((String.valueOf(jogador.getIdJogador())));
+        return null;
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -233,10 +305,14 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton Altarar;
+    private javax.swing.JButton Salvar;
+    private javax.swing.JButton Voltar;
+    private javax.swing.JTextField comentariosMedico;
+    private com.toedter.calendar.JDateChooser dataRevisao;
+    private javax.swing.JButton deletar;
+    private javax.swing.JTextField idJogador;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -244,9 +320,8 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea3;
+    private com.toedter.calendar.JDateChooser proximaRevisao;
+    private javax.swing.JTextField restricaoMedicamento;
+    private javax.swing.JComboBox<String> tipoSangue;
     // End of variables declaration//GEN-END:variables
 }

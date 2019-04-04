@@ -13,16 +13,19 @@ import java.util.Date;
  */
 public class InformacoesMedicas {
     
+    private int idJogador;
     private Date dataRevisao;
     private Date proximaRevisao;
     private String restricaoMedicamento;
     private String comentarioMedico; // informações médicas
     private String tipoSanguineo;
+   
 
     public InformacoesMedicas() {
     }
 
-    public InformacoesMedicas(Date dataRevisao, Date proximaRevisao, String restricaoMedicamento, String comentarioMedico, String tipoSanguineo) {
+    public InformacoesMedicas(int idJogador, Date dataRevisao, Date proximaRevisao, String restricaoMedicamento, String comentarioMedico, String tipoSanguineo) {
+        this.idJogador= idJogador;
         this.dataRevisao = dataRevisao;
         this.proximaRevisao = proximaRevisao;
         this.restricaoMedicamento = restricaoMedicamento;
@@ -69,6 +72,16 @@ public class InformacoesMedicas {
     public String getTipoSanguineo() {
         return tipoSanguineo;
     }
+
+    public int getIdJogador() {
+        return idJogador;
+    }
+
+    public void setIdJogador(int idJogador) {
+        this.idJogador = idJogador;
+    }
+    
+    
 
     @Override
     public String toString() {

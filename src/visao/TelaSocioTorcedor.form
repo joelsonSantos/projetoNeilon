@@ -165,9 +165,9 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="7" rowCount="0">
                     <Column editable="false" title="Numero de socio" type="java.lang.Object"/>
-                    <Column editable="false" title="CPF" type="java.lang.Object"/>
                     <Column editable="false" title="Nome" type="java.lang.Object"/>
                     <Column editable="false" title="Sobrenome" type="java.lang.Object"/>
+                    <Column editable="false" title="CPF" type="java.lang.Object"/>
                     <Column editable="false" title="Modalidade" type="java.lang.Object"/>
                     <Column editable="false" title="Forma de Pagamento" type="java.lang.Object"/>
                     <Column editable="false" title="Data de Filia&#xe7;&#xe3;o" type="java.lang.Object"/>
@@ -201,6 +201,10 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TabelaSocioTorcedorMouseClicked"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TabelaSocioTorcedorKeyReleased"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -231,6 +235,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="pesquisaCpf">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pesquisaCpfActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

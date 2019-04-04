@@ -92,11 +92,11 @@ public class SocioTorcedorDAO {
             Conexao conect = new Conexao();
             JOptionPane.showMessageDialog(null, "cpf para pesquisa no metodo pesquisa .  " + cpfSocio);
             PreparedStatement st = conect.getConnection().prepareStatement("SELECT * FROM pessoa where cpf = ?");
-            JOptionPane.showMessageDialog(null, "apos o select  ");
+            //JOptionPane.showMessageDialog(null, "apos o select  ");
             st.setString(1, cpfSocio);
-            JOptionPane.showMessageDialog(null, "apos st.setString  ");
+            //JOptionPane.showMessageDialog(null, "apos st.setString  ");
             ResultSet rs = st.executeQuery();
-            JOptionPane.showMessageDialog(null, "apos o resultSet  ");
+            //JOptionPane.showMessageDialog(null, "apos o resultSet  ");
             
             if(rs.next()){
                 JOptionPane.showMessageDialog(null, "apos o rs.next  ");
@@ -127,10 +127,11 @@ public class SocioTorcedorDAO {
                     + "FROM pessoa, contatos, endereco, socioTorcedor WHERE idPessoa = ? AND "
                     + " pessoa.idPessoa = endereco.idPessoa_fk AND pessoa.idPessoa = contatos.idPessoa_fk "
                     + " AND pessoa.idPessoa = socioTorcedor.idPessoa_fk ");*/
-            PreparedStatement st = conect.getConnection().prepareStatement("SELECT pessoa.nome, pessoa.sobrenome,"
-                    + " pessoa.cpf, pessoa.dataNascimento, "
-                    + " contatos.telefoneResidencial, contatos.celular, contatos.email,"
-                    + "endereco.rua, endereco.numero, endereco.bairro, endereco.cidade, endereco.estado, endereco.pais,"
+            PreparedStatement st = conect.getConnection().prepareStatement("SELECT pessoa.nome, pessoa.sobrenome, "
+                    + " pessoa.cpf, pessoa.dataNascimento, pessoa.rg, pessoa.nacionalidade, pessoa.escolaridade, "
+                    + "pessoa.instituicao, pessoa.sexo, "
+                    + "contatos.telefoneResidencial, contatos.celular, contatos.email,"
+                    + "endereco.rua, endereco.numero, endereco.bairro, endereco.cidade, endereco.estado, endereco.pais, "
                     + "endereco.complemento, endereco.cep, socioTorcedor.modalidadeTorcedor, socioTorcedor.dataFiliacao, "
                     + "socioTorcedor.formaPagamento, socioTorcedor.idSocioTorcedor "
                     + "FROM pessoa, contatos, endereco, socioTorcedor "
@@ -144,6 +145,11 @@ public class SocioTorcedorDAO {
                 socio.setSobreNome(rs.getString("pessoa.sobrenome"));
                 socio.setDataNascimento(rs.getDate("pessoa.dataNascimento"));
                 socio.setCpf(rs.getString("pessoa.cpf"));
+                socio.setRg(rs.getString("pessoa.rg"));
+                socio.setNacionalidade(rs.getString("pessoa.nacionalidade"));
+                socio.setEscolaridade(rs.getString("pessoa.escolaridade"));
+                socio.setInstituicao(rs.getString("pessoa.instituicao"));
+                socio.setSexo(rs.getString("pessoa.sexo"));
                 socio.setEndereco(new Endereco((rs.getString("endereco.rua")),
                     (rs.getString("endereco.numero")),
                     (rs.getString("endereco.bairro")),
@@ -196,6 +202,82 @@ public class SocioTorcedorDAO {
         return listaSocio;
     }
     
+public static void atualizar(SocioTorcedor socio) throws SQLException{
+    if(socio == null){
+        JOptionPane.showMessageDialog(null, "socio torcedor não encontrado. ");
+    }
+    try {
+        Conexao conexao = new Conexao();
+        String sql;
+        java.sql.Date dataNascimento = new java.sql.Date(socio.getDataNascimento().getTime());
+        java.sql.Date dataFiliacao = new java.sql.Date(socio.getDataFiliacao().getTime());
+        
+        sql = "UPDATE pessoa INNER JOIN contatos ON pessoa.idPessoa = contatos.idPessoa_fk "
+                + "INNER JOIN endereco ON pessoa.idPessoa = endereco.idPessoa_fk "
+                + "INNER JOIN socioTorcedor ON pessoa.idPessoa = socioTorcedor.idPessoa_fk "
+                + "SET pessoa.nome = ? , pessoa.sobrenome = ? , pessoa.nacionalidade = ? , pessoa.rg = ? ,"
+                + "pessoa.cpf = ? , pessoa.dataNascimento = ? , pessoa.escolaridade = ? , "
+                + "pessoa.instituicao = ? , pessoa.sexo = ? , "
+                + "contatos.telefoneResidencial = ? , contatos.celular = ? , contatos.email = ? ,"
+                + "endereco.rua = ? , endereco.numero = ? , endereco.bairro = ? , endereco.cidade = ? , endereco.estado = ? , endereco.pais = ? , "
+                + "endereco.complemento = ? , endereco.cep = ? , socioTorcedor.modalidadeTorcedor = ? , socioTorcedor.dataFiliacao = ? , "
+                + "socioTorcedor.formaPagamento = ? "
+                + "WHERE pessoa.idPessoa = ?";
+        
+        PreparedStatement st = conexao.getConnection().prepareStatement(sql);
+        st.setString(1, socio.getNome());
+        st.setString(2, socio.getSobreNome());
+        st.setString(3, socio.getNacionalidade());
+        st.setString(4, socio.getRg());
+        JOptionPane.showMessageDialog(null, "cpf alterado no metodo" + socio.getCpf());
+        st.setString(5, socio.getCpf());
+        st.setDate(6, dataNascimento);
+        st.setString(7, socio.getEscolaridade());
+        st.setString(8, socio.getInstituicao());
+        st.setString(9, socio.getSexo());
+        st.setString(10, socio.getContato().getTelefoneResidencial());
+        st.setString(11, socio.getContato().getCelular());
+        st.setString(12, socio.getContato().getEmail());
+        st.setString(13, socio.getEndereco().getRua());
+        st.setString(14, socio.getEndereco().getNumero());
+        st.setString(15, socio.getEndereco().getBairro());
+        st.setString(16, socio.getEndereco().getCidade());
+        st.setString(17, socio.getEndereco().getEstado());
+        st.setString(18, socio.getEndereco().getPais());
+        st.setString(19, socio.getEndereco().getComplemento());
+        st.setString(20, socio.getEndereco().getCep());
+        st.setString(21, socio.getModalidadePlano());
+        st.setDate(22, dataFiliacao);
+        st.setString(23, socio.getFormaPagamento());
+        st.setInt(24, socio.getIdPessoa());
+        st.executeUpdate();
+        
+        JOptionPane.showMessageDialog(null, "Cadastro do Socio Torcedor Atualizada com sucesso.");
+        conexao.fecharConexao();
+    }catch(SQLException u){
+        JOptionPane.showMessageDialog(null, "Erro SQL no atualizar o cadastro " + u);
+        System.err.println("ERRO SQL " + u.toString());
+    }catch (Exception e) {
+        JOptionPane.showMessageDialog(null," Erro ao atualizar o cadastro do socio torcedor  "+e);
+        System.err.println("ERRO " + e.toString());
+    }
+}
+
+public static void delete(String cpfSocio) throws SQLException{
+    try {
+        Conexao conexao = new Conexao();
+        
+        String sql = "DELETE FROM pessoa WHERE cpf = ?";
+        JOptionPane.showMessageDialog(null, "cpf para ser apagador.   " +cpfSocio);
+        PreparedStatement st = conexao.getConnection().prepareStatement(sql);
+            st.setString(1, cpfSocio);
+            st.executeUpdate();
+        conexao.fecharConexao();
+    } catch (Exception e) {
+        System.err.println("ERRO ao deleter " + e );
+    }
+    JOptionPane.showMessageDialog(null,"Socio Torcedor apagador com sucesso. " );
+}
     
     
 }

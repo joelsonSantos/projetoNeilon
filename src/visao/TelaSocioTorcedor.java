@@ -118,7 +118,7 @@ public class TelaSocioTorcedor extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Numero de socio", "CPF", "Nome", "Sobrenome", "Modalidade", "Forma de Pagamento", "Data de Filiação"
+                "Numero de socio", "Nome", "Sobrenome", "CPF", "Modalidade", "Forma de Pagamento", "Data de Filiação"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -127,6 +127,16 @@ public class TelaSocioTorcedor extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        TabelaSocioTorcedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelaSocioTorcedorMouseClicked(evt);
+            }
+        });
+        TabelaSocioTorcedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TabelaSocioTorcedorKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(TabelaSocioTorcedor);
@@ -172,6 +182,12 @@ public class TelaSocioTorcedor extends javax.swing.JFrame {
         pesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pesquisaActionPerformed(evt);
+            }
+        });
+
+        pesquisaCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesquisaCpfActionPerformed(evt);
             }
         });
 
@@ -254,6 +270,25 @@ public class TelaSocioTorcedor extends javax.swing.JFrame {
         
     }//GEN-LAST:event_pesquisaActionPerformed
 
+    private void TabelaSocioTorcedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabelaSocioTorcedorKeyReleased
+        // TODO add your handling code here:
+        setaTextFilds();
+    }//GEN-LAST:event_TabelaSocioTorcedorKeyReleased
+
+    private void TabelaSocioTorcedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaSocioTorcedorMouseClicked
+        // TODO add your handling code here:
+        setaTextFilds();
+    }//GEN-LAST:event_TabelaSocioTorcedorMouseClicked
+
+    private void pesquisaCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pesquisaCpfActionPerformed
+
+    public void setaTextFilds(){
+        int linha = TabelaSocioTorcedor.getSelectedRow();
+         pesquisaCpf.setText(TabelaSocioTorcedor.getValueAt(linha,3).toString());
+        
+    }
     /**
      * @param args the command line arguments
      */

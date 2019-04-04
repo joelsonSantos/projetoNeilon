@@ -276,7 +276,7 @@ public final class TelaJogador extends javax.swing.JFrame {
             jogador = CadastroJogadorController.pesquisa(jogador);
             
             //jogador = CadastroJogadorController.pesquisaID(jogador.getIdPessoa());
-            
+            CadastroInformaçõesMedicas informacoes= new CadastroInformaçõesMedicas();
             if(jogador != null){
                 
                 CadastroJogador cadastroJogador =new CadastroJogador ();
@@ -285,8 +285,9 @@ public final class TelaJogador extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "pesquisa nome tela jogador  "+ jogador.getNome());
                 JOptionPane.showMessageDialog(null, "Data de nascimento na pesquisa  "+jogador.getDataNascimento());
                 //CadastroJogador.preencherTelaJogador(jogador);
+                JOptionPane.showMessageDialog(null, "idjogador tabela jogador " + jogador.getIdJogador());
                 cadastroJogador.preencherTelaJogador(jogador);
-                
+                //informacoes.preencherTela(jogador);
                 
                 dispose();
             }else{

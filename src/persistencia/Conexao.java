@@ -21,7 +21,7 @@ public class Conexao {
     
     private com.mysql.jdbc.Connection con;
     public Statement st;
-    private String url = "jdbc:mysql://localhost:3306/projetoNeilon";
+    private String url = "jdbc:mysql://localhost:3306/projetoNeilon1";
     private String user = "root";
     private String pass = "";
     public ResultSet rs;
@@ -44,16 +44,16 @@ public class Conexao {
             //st.close();
         }
     }
-    public static void fecharConexao(Connection con) throws SQLException{
+    public boolean fecharConexao() throws SQLException{
         try {
-            if (con != null){
-                con.close();
-                System.out.println("Fechada a conexao como banco de dados.");
-            }
-            }catch(Exception e){
-                    System.out.println("Nao foi possive fechar a conexao com o banco e dados"+e.getMessage());
-            
+            con.close();
+            st.close();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Erro ao fechar a conexao do BD." + e);
+            return false;
         }
+        
     
     }
     public com.mysql.jdbc.Connection getCon(){

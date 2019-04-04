@@ -17,7 +17,7 @@ import visao.CadastroJogador;
  */
 public class CadastroJogadorController {
     public static boolean persistir(Jogador jogador) throws Exception{
-        JOptionPane.showMessageDialog(null, "Comtroler");
+        //JOptionPane.showMessageDialog(null, "Comtroler");
         return JogadorDAO.persistir(jogador);
     }
     

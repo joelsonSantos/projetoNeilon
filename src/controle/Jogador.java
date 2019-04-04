@@ -19,6 +19,7 @@ public class Jogador extends Pessoa {
     private String posicao;
     private double peso;
     private double altura;
+    InformacoesMedicas informacoa;
     
     public Jogador(){
     }
@@ -98,6 +99,15 @@ public class Jogador extends Pessoa {
     public double getPeso() {
         return peso;
     }
+
+    public InformacoesMedicas getInformacoa() {
+        return informacoa;
+    }
+
+    public void setInformacoa(InformacoesMedicas informacoa) {
+        this.informacoa = informacoa;
+    }
+    
 
     @Override
     public String toString() {
