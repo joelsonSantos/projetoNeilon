@@ -54,7 +54,7 @@ public class InformacoesMedicasDAO {
         
     }
     
-    public static Jogador pesquisar(Jogador informacao) throws Exception{
+    /*public static Jogador pesquisar(Jogador informacao) throws Exception{
         int idJogador = informacao.getInformacoa().getIdJogador();
         
         try {
@@ -85,7 +85,7 @@ public class InformacoesMedicasDAO {
         
         return informacao;
         
-    }
-
+    }*/
+}
     
     

@@ -259,7 +259,7 @@ public static void atualizar(SocioTorcedor socio) throws SQLException{
         System.err.println("ERRO SQL " + u.toString());
     }catch (Exception e) {
         JOptionPane.showMessageDialog(null," Erro ao atualizar o cadastro do socio torcedor  "+e);
-        System.err.println("ERRO " + e.toString());
+        System.err.println("ERRO no atualizar    " + e.toString());
     }
 }
 

@@ -11,22 +11,39 @@ package controle;
  */
 public class Patrocinador extends Pessoa {
     
+    private int idPatrocinador;
     private String razaoSocial;
     private String cnpj;
     private String inscricaoEstadual;
     private String inscricaoMunicipal;
     private Contato contato;
-    private Endereco endereco;
+    public Endereco endereco;
+    private String finalidadeLucrativa;
 
-    public Patrocinador(String razaoSocial, String cnpj, String inscricaoEstadual, String inscricaoMunicipal, Contato contato, Endereco endereco) {
+    public Patrocinador( int idPatrocinador,String razaoSocial, String cnpj, String inscricaoEstadual, 
+            String inscricaoMunicipal, Contato contato, Endereco endereco, String finalidadeLucrativa) {
+        this.idPatrocinador = idPatrocinador;
         this.razaoSocial = razaoSocial;
         this.cnpj = cnpj;
         this.inscricaoEstadual = inscricaoEstadual;
         this.inscricaoMunicipal = inscricaoMunicipal;
         this.contato = contato;
         this.endereco = endereco;
+        this.finalidadeLucrativa = finalidadeLucrativa;
     }
 
+    public Patrocinador() {
+    }
+
+    public int getIdPatrocinador() {
+        return idPatrocinador;
+    }
+
+    public void setIdPatrocinador(int idPatrocinador) {
+        this.idPatrocinador = idPatrocinador;
+    }
+
+    
     public void setRazaoSocial(String razaoSocial) {
         this.razaoSocial = razaoSocial;
     }
@@ -75,8 +92,20 @@ public class Patrocinador extends Pessoa {
         return endereco;
     }
 
+    public String getFinalidadeLucrativa() {
+        return finalidadeLucrativa;
+    }
+
+    public void setFinalidadeLucrativa(String finalidadeLucrativa) {
+        this.finalidadeLucrativa = finalidadeLucrativa;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return "Patrocinador{" + "razaoSocial=" + razaoSocial + ", cnpj=" + cnpj + ", inscricaoEstadual=" + inscricaoEstadual + ", inscricaoMunicipal=" + inscricaoMunicipal + ", contato=" + contato + ", endereco=" + endereco + '}';
+        return "Patrocinador{"+"idpatrocinador= " + idPatrocinador + "razaoSocial=" + razaoSocial + ", cnpj=" + cnpj + ", inscricaoEstadual=" 
+                + inscricaoEstadual + ", inscricaoMunicipal=" + inscricaoMunicipal + ", contato=" + contato 
+                + ", endereco=" + endereco + ", Finalidade Lucrativa"+finalidadeLucrativa + '}';
     }
 }

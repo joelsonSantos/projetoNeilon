@@ -268,11 +268,11 @@ public class CadastroInformaçõesMedicas extends javax.swing.JFrame {
     
     public Jogador  preencherTela(Jogador jogador){
         idJogador.setText((String.valueOf(jogador.getIdJogador())));
-        dataRevisao.setDate(jogador.getInformacoa().getDataRevisao());
-        proximaRevisao.setDate(jogador.getInformacoa().getProximaRevisao());
-        restricaoMedicamento.setText(jogador.getInformacoa().getRestricaoMedicamento());
-        comentariosMedico.setText(jogador.getInformacoa().getComentarioMedico());
-        tipoSangue.setSelectedItem(jogador.getInformacoa().getTipoSanguineo());
+        //dataRevisao.setDate(jogador.getInformacoa().getDataRevisao());
+        //proximaRevisao.setDate(jogador.getInformacoa().getProximaRevisao());
+        //restricaoMedicamento.setText(jogador.getInformacoa().getRestricaoMedicamento());
+        //comentariosMedico.setText(jogador.getInformacoa().getComentarioMedico());
+        //tipoSangue.setSelectedItem(jogador.getInformacoa().getTipoSanguineo());
         return null;
         
     }

@@ -21,9 +21,9 @@ public class InformacoesMedicasController {
         return InformacoesMedicasDAO.persistir(informcoes);
     }
 
-    public Jogador pesquisa(Jogador informacoes) throws Exception {
-        return InformacoesMedicasDAO.pesquisar(informacoes);
+    //public Jogador pesquisa(Jogador informacoes) throws Exception {
+        //return InformacoesMedicasDAO.pesquisar(informacoes);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   // }
     
 }

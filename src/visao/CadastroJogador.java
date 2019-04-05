@@ -777,11 +777,11 @@ public class CadastroJogador extends javax.swing.JFrame {
         jogador.setIdJogador(Integer.parseInt(idPessoa.getText()));
         CadastroInformaçõesMedicas medico = new CadastroInformaçõesMedicas();
         InformacoesMedicasController medicoController = new InformacoesMedicasController();
-        try {
-            medicoController.pesquisa(jogador);
-        } catch (Exception ex) {
-            Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //try {
+        //    medicoController.pesquisa(jogador);
+        //} catch (Exception ex) {
+        //    Logger.getLogger(CadastroJogador.class.getName()).log(Level.SEVERE, null, ex);
+        //}
         medico.preencherTela(jogador);
         medico.setVisible(true);
         dispose();

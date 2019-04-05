@@ -5,17 +5,21 @@
         <group>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/controle/Endereco.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/Controller/SocioTorcedorController.java</file>
+            <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/DAO/PatrocinadorDAO.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/visao/TelaJogador.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/DAO/JogadorDAO.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/Controller/CadastroJogadorController.java</file>
+            <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/visao/CadastroPatrocinador.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/controle/SocioTorcedor.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/controle/InformacoesMedicas.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/visao/CadastroInformaçõesMedicas.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/visao/TelaSocioTorcedor.java</file>
+            <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/Controller/CadastroPatrocinadorController.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/DAO/InformacoesMedicasDAO.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/Controller/InformacoesMedicasController.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/controle/Jogador.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/controle/Pessoa.java</file>
+            <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/controle/Patrocinador.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/visao/CadastroJogador.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/visao/TelaPrincipal.java</file>
             <file>file:/home/laiendercamargos/Área%20de%20Trabalho/gitClone/projetoNeilon/src/DAO/SocioTorcedorDAO.java</file>

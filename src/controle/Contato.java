@@ -15,6 +15,7 @@ public class Contato {
     private String telefoneComercial;
     private String celular;
     private String email;
+    private String webSite;
     
     public Contato(){
        this(null, null, null, null);
@@ -26,11 +27,12 @@ public class Contato {
         this.email=email;
     }
 
-    public Contato(String telefoneResidencial, String telefoneComercial, String celular, String email) {
-        this.telefoneResidencial = telefoneResidencial;
+    public Contato( String telefoneComercial, String celular, String email, String webSite) {
+        
         this.telefoneComercial = telefoneComercial;
         this.celular = celular;
         this.email = email;
+        this.webSite = webSite;
     }
 
     public Contato(String emal) {
@@ -79,9 +81,19 @@ public class Contato {
         return email;
     }
 
+    public String getWebSite() {
+        return webSite;
+    }
+
+    public void setWebSite(String webSite) {
+        this.webSite = webSite;
+    }
+    
     @Override
     public String toString() {
-        return "Contato{" + "idContato= " + idContato + "telefoneResidencial=" + telefoneResidencial + ", telefoneComercial=" + telefoneComercial + ", celular=" + celular + ", email=" + email + '}';
+        return "Contato{" + "idContato= " + idContato + "telefoneResidencial=" + telefoneResidencial + 
+                ", telefoneComercial=" + telefoneComercial + ", celular=" + celular + ", email=" + email +
+                ", WebSite= "+ webSite +'}';
     }
    
 }
