@@ -16,7 +16,7 @@ public class Patrocinador extends Pessoa {
     private String cnpj;
     private String inscricaoEstadual;
     private String inscricaoMunicipal;
-    private Contato contato;
+    public Contato contato;
     public Endereco endereco;
     private String finalidadeLucrativa;
 

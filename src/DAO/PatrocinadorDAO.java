@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import controle.Endereco;
 import controle.Patrocinador;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -22,21 +23,20 @@ public class PatrocinadorDAO {
             Conexao conect = new Conexao();
             Statement st = conect.getSt();
             
-            st.executeUpdate("INSERT INTO patrocinador (razaoSocial, cnpf, instricaoEstadual, inscricaoMunicipal, finalidadeLucrativa, idEndereco_fk)"
-                    + "values('"+patrocinador.getRazaoSocial()+ "','"
+            st.execute("insert into patrocinador (razaoSocial, cnpj, inscricaoEstadual, "
+                    + "inscricaoMunicipal, finalidadeLucrativa)"
+                    + " values('"+patrocinador.getRazaoSocial()+ "','"
                     + patrocinador.getCnpj()+ "','"
                     + patrocinador.getInscricaoEstadual() +"','"
                     + patrocinador.getInscricaoMunicipal() + "','"
-                    + patrocinador.getFinalidadeLucrativa() +"','"
-                    + patrocinador.getEndereco().getIdEndereco()+ "','"
+                    + patrocinador.getFinalidadeLucrativa() 
             + "')", Statement.RETURN_GENERATED_KEYS);
-            
             final ResultSet rs= st.getGeneratedKeys();
             if (rs.next()){
                 patrocinador.setIdPatrocinador(rs.getInt(1));
             }
-            st.executeUpdate("INSERT INTO endereco (rua, numero, bairro, cidade, estato, pais, "
-                    + "complemento, cep, webSite, idPatrocinador_fk) values ('" + patrocinador.getEndereco().getRua() + "','"
+            st.executeUpdate("INSERT INTO endereco (rua, numero, bairro, cidade, estado, pais, "
+                    + "complemento, cep, idPatrocinador_fk) values ('" + patrocinador.getEndereco().getRua() + "','"
                     + patrocinador.getEndereco().getNumero() + "','"
                     + patrocinador.getEndereco().getBairro() + "','"
                     + patrocinador.getEndereco().getCidade() + "','"
@@ -52,17 +52,19 @@ public class PatrocinadorDAO {
                     + patrocinador.getContato().getCelular() + "','"
                     + patrocinador.getContato().getEmail() + "','"
                     + patrocinador.getContato().getWebSite() +"','" 
-                    + patrocinador.getIdPatrocinador() + "','"
+                    + patrocinador.getIdPatrocinador()
                     +"')");
-            
-            
+
             conect.fecharConexao();
         } catch (Exception e) {
             System.err.println("Erro ao salvar o patrocinador " + e);
             e.printStackTrace();
         }
-//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         return false;
+    }
+    
+    public static void pesquisaCNPJ (){
+        
     }
     
 }

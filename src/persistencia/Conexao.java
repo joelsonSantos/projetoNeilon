@@ -21,7 +21,7 @@ public class Conexao {
     
     private com.mysql.jdbc.Connection con;
     public Statement st;
-    private String url = "jdbc:mysql://localhost:3306/projetoNeilon1";
+    private String url = "jdbc:mysql://localhost:3306/projetoNeilon";
     private String user = "root";
     private String pass = "";
     public ResultSet rs;
